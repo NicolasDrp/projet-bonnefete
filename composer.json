@@ -1,0 +1,17 @@
+{
+    "name": "sofip/projet-bonnefete",
+    "require": {
+        "twbs/bootstrap": "^5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sofip\\ProjetBonnefete\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "NicolasDrp",
+            "email": "drapier.nicolas07@gmail.com"
+        }
+    ]
+}

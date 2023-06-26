@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Ajoutez votre redirection ici
+RedirectMatch 301 ^/projet-bonnefete/$ /projet-bonnefete/user/index
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
