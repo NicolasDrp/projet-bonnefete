@@ -13,7 +13,10 @@
             <td><?= $post->getIdUtilisateur() ?></td>
             <td><?= $post->getContenuPost() ?></td>
             <td><?= $post->getDatePost() ?></td>
-            <td><a href="./delete/<?= $post->getIdPost() ?>">Supprimer</a></td>
+            <td>
+                <a href="./update/<?= $post->getIdPost() ?>">Modifier</a>
+                <a href="./delete/<?= $post->getIdPost() ?>">Supprimer</a>
+            </td>
         </tr>
     <?php endforeach; ?>
 </table>

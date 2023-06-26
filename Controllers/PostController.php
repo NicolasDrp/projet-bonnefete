@@ -33,4 +33,15 @@ class PostController {
         $this->postModel->delete($id);
         header('Location: ../../post/index');
     }
+
+    public function getUpdate($id) {
+        $post = $this->postModel->getPostById($id);
+        require_once 'Views/posts/create.php';
+    }
+
+    public function postUpdate($id) {
+        $post = $_POST;
+        $this->postModel->updatePost($id, $post);
+        header('Location: ../../post/index');
+    }
 }
