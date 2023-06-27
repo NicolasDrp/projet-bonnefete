@@ -17,18 +17,18 @@ class UserModel
   public function createUser($user)
   {
 
-    $password = password_hash($user['password_utilisateur'], PASSWORD_DEFAULT);
+    $password = password_hash($user['password'], PASSWORD_DEFAULT);
     try {
-      $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur) VALUES (:email, :name, :lastName, :password)');
+      $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur) VALUES (:email, :prenom, :nom, :passwordUser)');
       $query->execute([
-        'email_utilisateur' => $user['email'],
-        'nom_utilisateur' => $user['lastName'],
-        'prenom_utilisateur' => $user['name'],
-        'password_utilisateur' => $password,
+        'email' => $user['email'],
+        'nom' => $user['nom'],
+        'prenom' => $user['prenom'],
+        'passwordUser' => $password,
       ]);
       return " Bien Enregistré ";
     } catch (\PDOException $e) {
-      return " une erreur est survenue";
+      return 'Une erreur est survenue !';
     }
   }
 
