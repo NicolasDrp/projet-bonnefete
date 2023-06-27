@@ -34,7 +34,7 @@ class UserModel
 
   public function getOneByEmail($email)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur FROM utilisateur WHERE email_utilisateur = :email");
+    $query = $this->connection->getPdo()->prepare("SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur FROM utilisateur WHERE email_utilisateur = :email");
     $query->execute([
       'email' => $email,
     ]);
