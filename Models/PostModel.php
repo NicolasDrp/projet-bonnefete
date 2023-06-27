@@ -17,16 +17,17 @@ class PostModel {
     }
 
     public function getAllPost() {
-        $query = $this->connection->getPdo()->prepare("SELECT id_post,contenu_post,date_post,id_utilisateur FROM post");
+        $query = $this->connection->getPdo()->prepare("SELECT id_post,contenu_post,date_post,post.id_utilisateur,nom_utilisateur,prenom_utilisateur FROM post INNER JOIN utilisateur ON post.id_utilisateur = utilisateur.id_utilisateur;");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_CLASS, "App\Models\Post");
     }
 
 
     public function createPost($post) {
-        $query = $this->connection->getPdo()->prepare('INSERT INTO post (contenu_post,date_post,id_utilisateur) VALUES (:contenu_post, now(), 1);');
+        $query = $this->connection->getPdo()->prepare('INSERT INTO post (contenu_post,date_post,id_utilisateur) VALUES (:contenu_post, now(), :id);');
         $query->execute([
-            'contenu_post' => $post['contenu_post']
+            'contenu_post' => $post['contenu_post'],
+            'id' => $_SESSION['user']->id_utilisateur
         ]);
     }
 
