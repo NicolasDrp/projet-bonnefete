@@ -24,8 +24,6 @@ class Router {
         $segments = explode('/', trim($this->requestUri, '/'));
         $controllerName = ucfirst(array_shift($segments)).'Controller';
         $actionName = strtolower($this->requestMethod).ucfirst(array_shift($segments));
-        var_dump($actionName);
-        var_dump($controllerName);
 
         // Ajouter le namespace complet aux contrôleurs
         $controllerName = '\\App\\Controllers\\'.$controllerName;
@@ -33,8 +31,6 @@ class Router {
         if (!class_exists($controllerName) || !method_exists($controllerName, $actionName)) {
             header("HTTP/1.0 404 Not Found");
             echo "Page not found";
-            echo $controllerName;
-            echo $actionName;
             exit;
         }
 

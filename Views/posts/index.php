@@ -3,7 +3,7 @@
 <a href="./index">Retour</a>
 
 <div class="d-flex flex-row justify-content-between">
-    <div class="d-flex flex-column align-items-center card" style="width: 20%; height: max-content;" >
+    <div class="d-flex flex-column align-items-center card" style="width: 20%; height: max-content;">
         <div class="d-flex flex-row justify-content-around align-items-center">
             <div class="w-25">
                 <img src="../image/Profil_img.jpg" alt="photo de profil" style="width: 100%;">
@@ -15,7 +15,7 @@
         <div><?= $_SESSION['user']->bio_utilisateur ?></div>
         <div class="p-5">
             <img src="../image/sapin-bonmarche.png" alt="logo bonnefete" style="width: 100%;">
-        </div>:
+        </div>
     </div>
     <div class="d-flex flex-column align-items-center">
         <form action="../post/create" method="post" style="width: 32rem;">
