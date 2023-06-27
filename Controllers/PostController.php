@@ -15,6 +15,7 @@ class PostController {
 
     public function getIndex() {
         $posts = $this->postModel->getAllPost();
+        $post = null;
         require_once 'Views/posts/index.php';
     }
 
