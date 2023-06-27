@@ -35,9 +35,11 @@ class UserController
     {
       $this->userModel = new UserModel();
       $user = $this->userModel->getOneByEmail($_POST['email']);
-      if ($user && password_verify($_POST['password'], $user->password)) {
+      if ($user && password_verify($_POST['password'], $user->password_utilisateur)) {
         $_SESSION['user'] = $user;
-        header('Location: /projet-bonnefete/user/index');
+        header('Location: ../user/index');
+        
+        
       } 
     }
 
