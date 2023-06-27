@@ -37,7 +37,7 @@ class UserController
       $user = $this->userModel->getOneByEmail($_POST['email']);
       if ($user && password_verify($_POST['password'], $user->password_utilisateur)) {
         $_SESSION['user'] = $user;
-        header('Location: ../user/index');
+        header('Location: ../post/index');
         
         
       } 
