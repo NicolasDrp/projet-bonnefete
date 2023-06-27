@@ -47,4 +47,16 @@ class UserController
         session_destroy();
         header('Location: ../user/login');
     }
+
+    public function getCompteUser(){
+        require_once 'Views/user/compteUser.php';
+    }
+
+    public function getModifyUser($id){
+        $user = $this->userModel->getUserById($id);
+        require_once 'Views/user/modifyUser.php';
+    }
 }
+
+// $post = $this->postModel->getPostById($id);
+

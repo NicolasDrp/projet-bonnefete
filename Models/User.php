@@ -4,11 +4,12 @@ namespace App\Models;
 
 class User 
 {
-    protected int $id;
-    protected string $name;
-    protected string $lastName;
-    protected string $email;
-    protected string $password;
+    protected int $id_utilisateur;
+    protected string $prenom_utilisateur;
+    protected string $nom_utilisateur;
+    protected string $email_utilisateur;
+    protected string $password_utilisateur;
+    protected string $bio_utilisateur;  
 
 
     /**
@@ -16,15 +17,15 @@ class User
      */
     public function getId(): int
     {
-        return $this->id;
+        return $this->id_utilisateur;
     }
 
     /**
      * @param int $id
      */
-    public function setId(int $id): void
+    public function setId(int $id_utilisateur): void
     {
-        $this->id = $id;
+        $this->id_utilisateur = $id_utilisateur;
     }
 
     /**
@@ -32,15 +33,15 @@ class User
      */
     public function getEmail(): string
     {
-        return $this->email;
+        return $this->email_utilisateur;
     }
 
     /**
      * @param string $email
      */
-    public function setEmail(string $email): void
+    public function setEmail(string $email_utilisateur): void
     {
-        $this->email = $email;
+        $this->email_utilisateur = $email_utilisateur;
     }
 
     /**
@@ -48,15 +49,15 @@ class User
      */
     public function getName(): string
     {
-        return $this->name;
+        return $this->prenom_utilisateur;
     }
 
     /**
      * @param string $name
      */
-    public function setName(string $name): void
+    public function setName(string $prenom_utilisateur): void
     {
-        $this->name = $name;
+        $this->prenom_utilisateur = $prenom_utilisateur;
     }
 
     /**
@@ -64,15 +65,15 @@ class User
      */
     public function getLastName(): string
     {
-        return $this->lastName;
+        return $this->nom_utilisateur;
     }
 
     /**
      * @param string $lastName
      */
-    public function setLastName(string $lastName): void
+    public function setLastName(string $nom_utilisateur): void
     {
-        $this->lastName = $lastName;
+        $this->nom_utilisateur = $nom_utilisateur;
     }
 
     /**
@@ -80,15 +81,33 @@ class User
      */
     public function getPassword(): string
     {
-        return $this->password;
+        return $this->password_utilisateur;
     }
 
     /**
      * @param string $password
      */
-    public function setPassword(string $password): void
+    public function setPassword(string $password_utilisateur): void
     {
-        $this->password = $password;
+        $this->password_utilisateur = $password_utilisateur;
     }
+
+    /**
+     * @return string
+     */
+
+    public function getBio(): string
+    {
+        return $this->bio_utilisateur;
+    }
+
+     /**
+     * @param string $password
+     */
+
+     public function setBio(string $bio_utilisateur): void
+     {
+         $this->bio_utilisateur = $bio_utilisateur;
+     }
 
 }
