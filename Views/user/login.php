@@ -4,7 +4,7 @@
     <label for="email">Email</label>
     <input type="email" name="email" id="email" required>
 
-    <label for="passwrod">Mot de passe</label>
+    <label for="password">Mot de passe</label>
     <input type="password" name="password" id="password" required>
 
         <button>

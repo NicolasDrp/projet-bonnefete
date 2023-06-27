@@ -2,6 +2,8 @@
 
 <a href="./index">Retour</a>
 
+<?php var_dump($_SESSION['user']); ?>
+
 <div class="d-flex flex-row justify-content-between">
     <div class="d-flex flex-column align-items-center card" style="width: 20%; height: max-content;">
         <div class="d-flex flex-row justify-content-around align-items-center">
