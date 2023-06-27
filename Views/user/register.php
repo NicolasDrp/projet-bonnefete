@@ -13,6 +13,8 @@
     <label for="password">Mot de passe</label>
     <input type="password" name="password" required>
 
+    <button> S'inscrire </button>
+
 </form>
     
-<?php require_once 'Views/footer.php'; ?>
+<?php require_once 'Views/foot.php'; ?>

@@ -17,6 +17,5 @@
     <input type="password" name="password" id="password"  value="<?= $user->getPassword()?>">
 
     
-        <?php require_once 'Views/footer.php'; ?>
+        <?php require_once 'Views/foot.php'; ?>
 
-        

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+require_once 'Database.php';
 use App\Database;
 
 class UserModel
@@ -16,14 +17,14 @@ class UserModel
   public function createUser($user)
   {
 
-    $password = password_hash($user['password'], PASSWORD_DEFAULT);
+    $password = password_hash($user['password_utilisateur'], PASSWORD_DEFAULT);
     try {
-      $query = $this->connection->getPdo()->prepare('INSERT INTO user (email, prenom, nom, password) VALUES (:email, :prenom, :nom, :password)');
+      $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur) VALUES (:email, :name, :lastName, :password)');
       $query->execute([
-        'email' => $user['email'],
-        'prenom' => $user['prenom'],
-        'nom' => $user['nom'],
-        'password' => $password,
+        'email_utilisateur' => $user['email'],
+        'nom_utilisateur' => $user['lastName'],
+        'prenom_utilisateur' => $user['name'],
+        'password_utilisateur' => $password,
       ]);
       return " Bien Enregistré ";
     } catch (\PDOException $e) {
@@ -33,7 +34,7 @@ class UserModel
 
   public function getOneByEmail($email)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT * FROM user WHERE email = :email");
+    $query = $this->connection->getPdo()->prepare("SELECT email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur FROM utilisateur WHERE email_utilisateur = :email");
     $query->execute([
       'email' => $email,
     ]);

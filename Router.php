@@ -22,6 +22,8 @@ class Router {
         $segments = explode('/', trim($this->requestUri, '/'));
         $controllerName = ucfirst(array_shift($segments)).'Controller';
         $actionName = strtolower($this->requestMethod).ucfirst(array_shift($segments));
+        var_dump($actionName);
+        var_dump($controllerName);
 
         // Ajouter le namespace complet aux contrôleurs
         $controllerName = '\\App\\Controllers\\'.$controllerName;

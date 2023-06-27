@@ -24,4 +24,4 @@
         <?php endforeach; ?>
 </table>
 
-<?php require_once 'Views/footer.php'; ?>
+<?php require_once 'Views/foot.php'; ?>
