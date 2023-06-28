@@ -42,6 +42,15 @@ class UserModel
     }
   }
 
+  // public function deleteUser($user)
+  // {
+  //   $query = $this->connection->getPdo()->prepare('DELETE FROM utilisateur WHERE id_utilisateur = :id');
+  //   $query->execute([
+  //     'id' => $user['id'],
+  //   ]);
+  // }
+
+
   /**
    * Récupère un utilisateur de la base de données en fonction de son email.
    *

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+// Création de la classe User pour représenter l'utilisateur
+
 class User 
 {
     protected int $id_utilisateur;
@@ -11,6 +13,7 @@ class User
     protected string $password_utilisateur;
     protected string $bio_utilisateur;  
 
+    // getters et setters de la classe User
 
     /**
      * @return int

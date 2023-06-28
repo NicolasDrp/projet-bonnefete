@@ -27,6 +27,14 @@ class UserController
         echo '<a href="../user/login">Se connecter</a>';
     }
 
+
+    // public function deleteRegister()
+    // {
+    //     $user = $_POST;
+    //     $this->userModel->deleteUser($user);
+
+    // }
+
     public function getLogin(){
         require_once 'Views/user/login.php';
     }
@@ -52,11 +60,12 @@ class UserController
         require_once 'Views/user/compteUser.php';
     }
 
-    public function getModifyUser($id_utilisateur){
+    public function getModify($id_utilisateur){
         $user = $this->userModel->getUserById($id_utilisateur);
-        require_once 'Views/user/modifyUser.php';
+        require_once 'Views/user/modify.php';
         }
 }
+
 
 // $post = $this->postModel->getPostById($id);
 

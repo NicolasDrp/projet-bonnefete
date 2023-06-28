@@ -1,7 +1,7 @@
 <?php require_once 'Views/head.php'; ?>
 
 
-<form action=<?= !$user ? "../user/create" : "../../user/update/" .$id_utilisateur ?> method="post">
+<form action=<?= !$user ? "../user/create" : "../../user/modify/" .$id_utilisateur ?> method="post">
     <div class="form-group">
         <label for="nom">Nom</label>
         <input type="text" name="nom" id="nom" class="form-group" value="<?= $user ? $user->getName(): "" ?>">
