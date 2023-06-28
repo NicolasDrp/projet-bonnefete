@@ -19,7 +19,7 @@ class UserModel
 
     $password = password_hash($user['password'], PASSWORD_DEFAULT);
     try {
-      $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur) VALUES (:email, :prenom, :nom, :passwordUser)');
+      $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur) VALUES (:email, :prenom, :nom, :passwordUser, " ")');
       $query->execute([
         'email' => $user['email'],
         'nom' => $user['nom'],
@@ -42,11 +42,11 @@ class UserModel
     return $user;
   }
 
-  public function getUserById($id)
+  public function getUserById($id_utilisateur)
   {
     $query = $this->connection->getPdo()->prepare("SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur FROM utilisateur WHERE id_utilisateur = :id");
     $query->execute([
-      'id' => $id,
+      'id' => $id_utilisateur,
     ]);
     $query->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\User');
     return $query->fetch();

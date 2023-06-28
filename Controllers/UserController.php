@@ -52,8 +52,8 @@ class UserController
         require_once 'Views/user/compteUser.php';
     }
 
-    public function getModifyUser($id){
-        $user = $this->userModel->getUserById($id);
+    public function getModifyUser($id_utilisateur){
+        $user = $this->userModel->getUserById($id_utilisateur);
         require_once 'Views/user/modifyUser.php';
     }
 }
