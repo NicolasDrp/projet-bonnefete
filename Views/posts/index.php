@@ -1,9 +1,5 @@
 <?php require_once 'Views/head.php'; ?>
 
-<a href="./index">Retour</a>
-
-<?php var_dump($_SESSION['user']); ?>
-
 <div class="d-flex flex-row justify-content-between">
     <div class="d-flex flex-column align-items-center card" style="width: 20%; height: max-content;">
         <div class="d-flex flex-row justify-content-around align-items-center">
@@ -34,7 +30,7 @@
         <?php foreach ($posts as $post) : ?>
             <div class="card mb-4" style="width: 32rem;">
                 <div class="card-body">
-                    <h5 class="card-title"><?= $post->prenom_utilisateur . " " . $post->nom_utilisateur ?></h5>
+                    <h5 class="card-title"><?= $post->nom_utilisateur . " " . $post->prenom_utilisateur ?></h5>
                     <p class="card-text"><?= $post->getContenuPost() ?></p>
                 </div>
                 <ul class="list-group list-group-flush">
