@@ -14,7 +14,6 @@ class PostController {
     }
 
     public function getIndex() {
-        echo($_SESSION['user']->id_utilisateur) ;
         $posts = $this->postModel->getAllPost();
         $post = null;
         require_once 'Views/posts/index.php';
