@@ -51,5 +51,16 @@ class UserModel
     $query->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\User');
     return $query->fetch();
   }
-}
 
+  public function modifyUser($user)
+  {
+    $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET email_utilisateur = :email, nom_utilisateur = :nom, prenom_utilisateur = :prenom, bio_utilisateur = :bio WHERE id_utilisateur = :id');
+    $query->execute([
+      'id' => $_SESSION['user']->id_utilisateur,
+      'email' => $user['email'],
+      'nom' => $user['nom'],
+      'prenom' => $user['prenom'],
+      'bio' => $user['bio'],
+    ]); 
+  }
+}
