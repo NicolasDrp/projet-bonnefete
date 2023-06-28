@@ -9,6 +9,7 @@ class User
     protected string $lastName;
     protected string $email;
     protected string $password;
+    protected bool $is_moderateur;
 
 
     /**
@@ -89,6 +90,14 @@ class User
     public function setPassword(string $password): void
     {
         $this->password = $password;
+    }
+
+    public function isModerateur(){
+        return $this->is_moderateur;
+    }
+
+    public function setModerateur($is_moderateur){
+        $this->is_moderateur = $is_moderateur;
     }
 
 }

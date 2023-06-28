@@ -20,13 +20,15 @@
         </div>
     </div>
     <div class="d-flex flex-column align-items-center">
-        <form action="../post/create" method="post" style="width: 32rem;">
-            <div class="form-group mb-3">
-                <label for="contenu_post" class="form-label">Contenu de votre post</label>
-                <textarea class="form-control" name="contenu_post" id="contenu_post" rows="3" maxlength="200"></textarea>
-            </div>
-            <button class="btn btn-success btn-sm mb-3">Envoyer</button>
-        </form>
+    <?php if (!$_SESSION['user']->is_moderateur) { ?>
+            <form action="../post/create" method="post" style="width: 32rem;">
+                <div class="form-group mb-3">
+                    <label for="contenu_post" class="form-label">Contenu de votre post</label>
+                    <textarea class="form-control" name="contenu_post" id="contenu_post" rows="3" maxlength="200"></textarea>
+                </div>
+                <button class="btn btn-success btn-sm mb-3">Envoyer</button>
+            </form>
+        <?php } ?>
 
 
         <?php foreach ($posts as $post) : ?>
@@ -43,12 +45,15 @@
                         <a href="./update/<?= $post->getIdPost() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
                         <a href="./delete/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
                     </div>
-
+                <?php } elseif ($_SESSION['user']->is_moderateur) { ?>
+                    <div class="card-body">
+                        <a href="./delete/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                    </div>
                 <?php } ?>
             </div>
         <?php endforeach; ?>
-    </div>
-    <div class="w-25"></div>
+        </div>
+        <div class="w-25"></div>
 </div>
 
 
