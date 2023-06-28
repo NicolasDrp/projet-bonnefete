@@ -23,10 +23,10 @@ class PostController {
         require_once 'Views/posts/index.php';
     }
 
-    public function getCreate() {
-        $post = null;
-        require_once 'Views/posts/create.php';
-    }
+    // public function getCreate() {
+    //     $post = null;
+    //     require_once 'Views/posts/create.php';
+    // }
 
     public function postCreate() {
         $post = $_POST;

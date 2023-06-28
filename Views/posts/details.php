@@ -2,10 +2,8 @@
 
 use App\Models\Commentaire;
 
-require_once 'Views/headId.php'; ?>
-
-<?php var_dump($commentaires); ?>
-
+require_once 'Views/head.php'; ?>
+<?php var_dump($post->getIdPost()); ?>
 
 <div class="d-flex flex-row justify-content-between">
     <div class="d-flex flex-column align-items-center card" style="width: 20%; height: max-content;">
@@ -52,11 +50,11 @@ require_once 'Views/headId.php'; ?>
 
         <!-- Formulaire d'ajout de commentaire -->
         <div class="card-body">
-            <form action="../commentaire/create" method="post">
+            <form action="../../commentaire/create/<?= $post->getIdPost() ?>" method="post">
                 <div class="mb-3">
-                    <textarea class="form-control" rows="1" placeholder="Ajouter un commentaire" minlength="1" maxlength="200" required></textarea>
+                    <textarea class="form-control" name="contenu_commentaire" id="contenu_commentaire" rows="1" placeholder="Ajouter un commentaire" minlength="1" maxlength="200" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary btn-sm">Envoyer</button>
+                <button class="btn btn-primary btn-sm">Envoyer</button>
             </form>
         </div>
 
@@ -71,7 +69,8 @@ require_once 'Views/headId.php'; ?>
                     </div>
                     <div>
                         <div>
-                            <a href="#" class="text-primary text-decoration-none">J'aime</a>
+                            <a href="../../commentaire/delete/<?= $commentaire->getIdCommentaire() ?>/5" class="text-light text-decoration-none btn btn-sm btn-danger">Supprimer</a>
+                            <a href="#" class="text-primary text-decoration-none ">J'aime</a>
                             <span>5</span>
                         </div>
                     </div>
@@ -85,4 +84,4 @@ require_once 'Views/headId.php'; ?>
 
 
 
-<?php require_once 'Views/footId.php'; ?>
+<?php require_once 'Views/foot.php'; ?>
