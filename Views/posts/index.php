@@ -1,5 +1,9 @@
 <?php require_once 'Views/head.php'; ?>
 
+<?php if (empty($_SESSION)) :
+    header('Location: ../user/login');
+endif; ?>
+
 <div class="d-flex flex-row justify-content-between">
     <div class="d-flex flex-column align-items-center card" style="width: 20%; height: max-content;">
         <div class="d-flex flex-row justify-content-around align-items-center">
@@ -15,12 +19,13 @@
             <img src="../image/sapin-bonmarche.png" alt="logo bonnefete" style="width: 100%;">
         </div>
     </div>
+
     <div class="d-flex flex-column align-items-center">
-    <?php if (!$_SESSION['user']->is_moderateur) { ?>
+        <?php if (!$_SESSION['user']->is_moderateur) { ?>
             <form action="../post/create" method="post" style="width: 32rem;">
                 <div class="form-group mb-3">
                     <label for="contenu_post" class="form-label">Contenu de votre post</label>
-                    <textarea class="form-control" name="contenu_post" id="contenu_post" rows="3" maxlength="200"></textarea>
+                    <textarea class="form-control" name="contenu_post" id="contenu_post" rows="3" minlength="1" maxlength="200" required></textarea>
                 </div>
                 <button class="btn btn-success btn-sm mb-3">Envoyer</button>
             </form>
@@ -29,10 +34,12 @@
 
         <?php foreach ($posts as $post) : ?>
             <div class="card mb-4" style="width: 32rem;">
-                <div class="card-body">
-                    <h5 class="card-title"><?= $post->nom_utilisateur . " " . $post->prenom_utilisateur ?></h5>
-                    <p class="card-text"><?= $post->getContenuPost() ?></p>
-                </div>
+                <a href="./details/<?= $post->getIdPost() ?>">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $post->nom_utilisateur . " " . $post->prenom_utilisateur ?></h5>
+                        <p class="card-text"><?= $post->getContenuPost() ?></p>
+                    </div>
+                </a>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item text-secondary"><?= $post->getDatePost() ?></li>
                 </ul>
@@ -48,8 +55,8 @@
                 <?php } ?>
             </div>
         <?php endforeach; ?>
-        </div>
-        <div class="w-25"></div>
+    </div>
+    <div class="w-25"></div>
 </div>
 
 

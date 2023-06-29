@@ -4,6 +4,8 @@ namespace App;
 
 require_once 'Controllers/UserController.php';
 require_once 'Controllers/PostController.php';
+require_once 'Controllers/CommentaireController.php';
+require_once 'Controllers/JaimeController.php';
 
 
 class Router {
@@ -31,6 +33,8 @@ class Router {
         if (!class_exists($controllerName) || !method_exists($controllerName, $actionName)) {
             header("HTTP/1.0 404 Not Found");
             echo "Page not found";
+            echo $controllerName;
+            echo $actionName;
             exit;
         }
 
