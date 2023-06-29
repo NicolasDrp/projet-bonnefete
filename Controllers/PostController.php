@@ -4,17 +4,23 @@ namespace App\Controllers;
 
 require_once 'Models/PostModel.php';
 require_once 'Models/CommentaireModel.php';
+require_once 'Models/JaimeModel.php';
+
 
 use App\Models\PostModel;
 use App\Models\CommentaireModel;
+use App\Models\JaimeModel;
+
 
 class PostController {
     protected $postModel;
     protected $commentaireModel;
+    protected $jaimeModel;
 
     public function __construct() {
         $this->postModel = new PostModel();
         $this->commentaireModel = new CommentaireModel();
+        $this->jaimeModel = new JaimeModel();
     }
 
     public function getIndex() {
@@ -54,6 +60,8 @@ class PostController {
         $post = $this->postModel->getPostById($id);
         $commentaires = $this->commentaireModel->getAllCommentaire($id);
         $sousCommentaires = $this->commentaireModel->getAllSousCommentaire($id);
+        $nbrJaime = $this->jaimeModel->getNbrJaime($id);
+        $nomsJaime = $this->jaimeModel->getNomJaime($id);
         require_once 'Views/posts/details.php';
     }
 }

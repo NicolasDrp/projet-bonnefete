@@ -4,6 +4,10 @@
     header('Location: ../user/login');
 endif; ?>
 
+<?php var_dump($nbrJaime->nbrJaime)?>
+<?php var_dump($post)?>
+
+
 <div class="d-flex flex-row justify-content-between">
     <div class="d-flex flex-column align-items-center card" style="width: 20%; height: max-content;">
         <div class="d-flex flex-row justify-content-around align-items-center">
@@ -43,7 +47,7 @@ endif; ?>
         <div class="card-body">
             <div>
                 <a href="#" class="text-primary text-decoration-none">J'aime</a>
-                <span>5</span>
+                <span><?= $nbrJaime->nbrJaime ?></span>
             </div>
         </div>
 
