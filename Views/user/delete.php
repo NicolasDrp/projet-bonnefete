@@ -1,6 +1,6 @@
-<?php require_once 'Views/head.php'; ?>
+<!-- <?php require_once 'Views/head.php'; ?>
 
-<form action="../user/register" method="post">
+<form action="../user/delete" method="post">
     <label for="nom">Nom</label>
     <input type="text" name="nom" id="nom" required>
 
@@ -13,9 +13,8 @@
     <label for="password">Mot de passe</label>
     <input type="password" name="password" required>
 
-    <button> S'inscrire </button>
+    <button> Supprimer compte </button>
 
 </form>
     
-<?php require_once 'Views/foot.php'; ?>
-
+<?php require_once 'Views/foot.php'; ?> -->

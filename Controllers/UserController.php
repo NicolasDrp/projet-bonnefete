@@ -24,25 +24,51 @@ class UserController {
         echo '<a href="../user/login">Se connecter</a>';
     }
 
-    public function getLogin() {
+
+    // public function deleteRegister()
+    // {
+    //     $user = $_POST;
+    //     $this->userModel->deleteUser($user);
+
+    // }
+
+    public function getLogin()
+    {
         require_once 'Views/user/login.php';
     }
 
-    public function postLogin() {
+    public function postLogin()
+    {
         $this->userModel = new UserModel();
         $user = $this->userModel->getOneByEmail($_POST['email']);
         if ($user && password_verify($_POST['password'], $user->password_utilisateur)) {
             $_SESSION['user'] = $user;
             header('Location: ../post/index');
-        } else {
-            $errorMessage = 'Mot de passe ou Email incorrect ';
-            $loginLink = '<a href="../user/login">Réessayer</a>';
-            echo $errorMessage . $loginLink;
         }
     }
 
-    public function getLogout() {
+    public function getLogout()
+    {
         session_destroy();
         header('Location: ../user/login');
+    }
+
+    public function getCompteUser()
+    {
+        require_once 'Views/user/compteUser.php';
+    }
+
+    public function getModify($id_utilisateur)
+    {
+        $user = $this->userModel->getUserById($id_utilisateur);
+        require_once 'Views/user/modify.php';
+    }
+
+    public function getUserIndex()
+    {
+        echo ($_SESSION['user']->id_utilisateur);
+        $users = $this->userModel->getAllUser();
+        $user = null;
+        require_once 'Views/user/index.php';
     }
 }
