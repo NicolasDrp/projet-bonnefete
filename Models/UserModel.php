@@ -35,7 +35,7 @@ class UserModel
         'prenom' => $user['prenom'],
         'passwordUser' => $password,
       ]);
-      
+
       return "Bien Enregistré";
     } catch (\PDOException $e) {
       return 'Une erreur est survenue !';
@@ -64,7 +64,7 @@ class UserModel
       'email' => $email,
     ]);
     $user = $query->fetchObject();
-    
+
     return $user;
   }
 
@@ -76,12 +76,12 @@ class UserModel
    */
   public function getUserById($id_utilisateur)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur FROM utilisateur WHERE id_utilisateur = :id");
+    $query = $this->connection->getPdo()->prepare('SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur FROM utilisateur WHERE id_utilisateur = :id');
     $query->execute([
       'id' => $id_utilisateur,
     ]);
     $query->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\User');
-    
+
     return $query->fetch();
   }
 
@@ -93,13 +93,20 @@ class UserModel
    */
   public function modifyUser($user)
   {
-    $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET email_utilisateur = :email, nom_utilisateur = :nom, prenom_utilisateur = :prenom, bio_utilisateur = :bio WHERE id_utilisateur = :id');
+    $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET  email_utilisateur = :email, nom_utilisateur = :nom, prenom_utilisateur = :prenom, bio_utilisateur = :bio WHERE id_utilisateur = :id ');
     $query->execute([
       'email' => $user['email'],
       'nom' => $user['nom'],
       'prenom' => $user['prenom'],
       'bio' => $user['bio'],
       'id' => $_SESSION['user']->id_utilisateur,
-    ]); 
+    ]);
+  }
+
+  public function getAllUser()
+  {
+    $query = $this->connection->getPdo()->prepare("SELECT id_utilisateur,nom_utilisateur,prenom_utilisateur,bio_utilisateur FROM utlisateur");
+    $query->execute();
+    return $query->fetchAll(\PDO::FETCH_CLASS, "App\Models\User");
   }
 }
