@@ -2,4 +2,4 @@
 /vendor/
 /Database.php
 
-.env
+/.env
