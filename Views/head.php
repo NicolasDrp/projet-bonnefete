@@ -10,7 +10,7 @@
 </head>
 
 <body style="background-color: #F3F2F0;">
-    <nav class="navbar bg-success">
+    <nav class="navbar bg-success mb-5">
         <div class="container-fluid">
             <?php if (empty($_SESSION)) : ?>
                 <a href="../user/login" class="navbar-brand fs-3 fw-semibold text-light">BONNEFETE</a>
