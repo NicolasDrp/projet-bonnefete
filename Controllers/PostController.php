@@ -52,7 +52,8 @@ class PostController {
 
     public function getDetails($id){
         $post = $this->postModel->getPostById($id);
-        $commentaires = $this->commentaireModel->getAll($id);
+        $commentaires = $this->commentaireModel->getAllCommentaire($id);
+        $sousCommentaires = $this->commentaireModel->getAllSousCommentaire($id);
         require_once 'Views/posts/details.php';
     }
 }

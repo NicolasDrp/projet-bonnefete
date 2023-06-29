@@ -5,6 +5,7 @@ namespace App;
 require_once 'Controllers/UserController.php';
 require_once 'Controllers/PostController.php';
 require_once 'Controllers/CommentaireController.php';
+require_once 'Controllers/JaimeController.php';
 
 
 class Router {
