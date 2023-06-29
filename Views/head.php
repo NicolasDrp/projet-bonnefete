@@ -19,9 +19,9 @@
                     <a href="../user/login" class="btn btn-dark">Se connecter</a>
                 </div>
             <?php else : ?>
-                <a href="../post/index" class="navbar-brand fs-3 fw-semibold text-light">BONNEFETE</a>
+                <a href="../../../projet-bonnefete/post/index" class="navbar-brand fs-3 fw-semibold text-light">BONNEFETE</a>
                 <div>
-                    <a href="../user/logout" class="btn btn-dark">Se deconnecter</a>
+                    <a href="../../../projet-bonnefete/user/logout" class="btn btn-dark">Se deconnecter</a>
                 </div>
             <?php endif; ?>
         </div>
