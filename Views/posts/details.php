@@ -1,7 +1,7 @@
 <?php require_once 'Views/head.php'; ?>
 
 <?php if (empty($_SESSION)) :
-    header('Location: ../user/login');
+    header('Location: ../utilisateur/login');
 endif; ?>
 
 
@@ -12,10 +12,10 @@ endif; ?>
                 <img src="../../image/Profil_img.jpg" alt="photo de profil" style="width: 100%;">
             </div>
             <div>
-                <h3><?= $_SESSION['user']->nom_utilisateur . " " . $_SESSION['user']->prenom_utilisateur ?></h3>
+                <h3><?= $_SESSION['utilisateur']->nom_utilisateur . " " . $_SESSION['utilisateur']->prenom_utilisateur ?></h3>
             </div>
         </div>
-        <div><?= $_SESSION['user']->bio_utilisateur ?></div>
+        <div><?= $_SESSION['utilisateur']->bio_utilisateur ?></div>
         <div class="p-5">
             <img src="../../image/sapin-bonmarche.png" alt="logo bonnefete" style="width: 100%;">
         </div>
@@ -29,12 +29,12 @@ endif; ?>
         <ul class="list-group list-group-flush">
             <li class="list-group-item text-secondary"><?= $post->getDatePost() ?></li>
         </ul>
-        <?php if ($post->getIdUtilisateur() == $_SESSION['user']->id_utilisateur) { ?>
+        <?php if ($post->getIdUtilisateur() == $_SESSION['utilisateur']->id_utilisateur) { ?>
             <div class="card-body">
                 <a href="../update/<?= $post->getIdPost() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
                 <a href="../delete/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
             </div>
-        <?php } elseif ($_SESSION['user']->is_moderateur) { ?>
+        <?php } elseif ($_SESSION['utilisateur']->is_moderateur) { ?>
             <div class="card-body">
                 <a href="../delete/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
             </div>
@@ -49,7 +49,7 @@ endif; ?>
         </div>
 
         <!-- Formulaire d'ajout de commentaire -->
-        <?php if (!$_SESSION['user']->is_moderateur) { ?>
+        <?php if (!$_SESSION['utilisateur']->is_moderateur) { ?>
             <div class="card-body">
                 <form action="../../commentaire/create/<?= $post->getIdPost() ?>" method="post">
                     <div class="mb-1">
@@ -100,7 +100,7 @@ endif; ?>
                     <?php } ?>
                 <?php endforeach; ?>
                 <!-- Formulaire d'ajout de sous-commentaire -->
-                <?php if (!$_SESSION['user']->is_moderateur) { ?>
+                <?php if (!$_SESSION['utilisateur']->is_moderateur) { ?>
                     <div class="card-body">
                         <form action="../../commentaire/createSous/<?= $post->getIdPost() ?>/<?= $commentaire->getIdCommentaire() ?>" method="post">
                             <div class="mb-1">

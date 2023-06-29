@@ -1,6 +1,6 @@
 <?php require_once 'Views/head.php'; ?>
 
-<form action="../user/login" method="post"> 
+<form action="../utilisateur/login" method="post"> 
     <label for="email">Email</label>
     <input type="email" name="email" id="email" required>
 

@@ -62,7 +62,7 @@ Ce projet porte sur la réalisation d'un site de type réseau social pour la soc
 - Une fois le dépôt récupérer, placer le fichier "projet-bonnefete" dans Applications\MAMP\htdocs. 
 - Lancer votre serveur local (localhost sur Windows/Linux ou localhost:8889 sur MacOS) sur MAMP/XAMP. 
 - Ouvrer le fichier "projet-bonnefete" dans votre IDE.
-- Rendez-vous sur l'adresse "http://localhost:8888/projet-bonnefete/user/register" (par exemple) pour créer un compte utilisateur puis explorer les différentes fonctionnalités du site.
+- Rendez-vous sur l'adresse "http://localhost:8888/projet-bonnefete/utilisateur/register" (par exemple) pour créer un compte utilisateur puis explorer les différentes fonctionnalités du site.
 
 
     

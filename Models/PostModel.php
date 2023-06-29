@@ -27,7 +27,7 @@ class PostModel {
         $query = $this->connection->getPdo()->prepare('INSERT INTO post (contenu_post,date_post,id_utilisateur) VALUES (:contenu_post, now(), :id);');
         $query->execute([
             'contenu_post' => $post['contenu_post'],
-            'id' => $_SESSION['user']->id_utilisateur
+            'id' => $_SESSION['utilisateur']->id_utilisateur
         ]);
     }
 

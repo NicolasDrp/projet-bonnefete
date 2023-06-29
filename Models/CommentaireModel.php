@@ -36,7 +36,7 @@ class CommentaireModel {
         $query = $this->connection->getPdo()->prepare('INSERT INTO commentaire (contenu_commentaire,date_commentaire,id_utilisateur,id_post) VALUES (:contenu_commentaire, now(), :id, :id_post);');
         $query->execute([
             'contenu_commentaire' => $commentaire['contenu_commentaire'],
-            'id' => $_SESSION['user']->id_utilisateur,
+            'id' => $_SESSION['utilisateur']->id_utilisateur,
             'id_post' => $id
         ]);
     }
@@ -45,7 +45,7 @@ class CommentaireModel {
         $query = $this->connection->getPdo()->prepare('INSERT INTO commentaire (contenu_commentaire,date_commentaire,id_utilisateur,id_post,id_com) VALUES (:contenu_commentaire, now(), :id, :id_post, :id_com);');
         $query->execute([
             'contenu_commentaire' => $commentaire['contenu_commentaire'],
-            'id' => $_SESSION['user']->id_utilisateur,
+            'id' => $_SESSION['utilisateur']->id_utilisateur,
             'id_post' => $id,
             'id_com' => $id_com
         ]);

@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-require_once 'Models/User.php';
+require_once 'Models/Utilisateur.php';
 require_once 'Database.php';
 
 use App\Database;
 
-class UserModel {
+class UtilisateurModel {
   private $connection;
 
   public function __construct() {
@@ -17,21 +17,21 @@ class UserModel {
   /**
    * Crée un nouvel utilisateur dans la base de données.
    *
-   * @param array $user Les données de l'utilisateur.
+   * @param array $utilisateur Les données de l'utilisateur.
    * @return string Le message de succès ou le message d'erreur.
    */
-  public function createUser($user)
+  public function createUtilisateur($utilisateur)
   {
     // Hasher le mot de passe avant de le stocker dans la base de données
-    $password = password_hash($user['password'], PASSWORD_DEFAULT);
+    $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
 
     try {
-      $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, is_moderateur) VALUES (:email, :prenom, :nom, :passwordUser, "", 0)');
+      $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, is_moderateur) VALUES (:email, :prenom, :nom, :passwordUtilisateur, "", 0)');
       $query->execute([
-        'email' => $user['email'],
-        'nom' => $user['nom'],
-        'prenom' => $user['prenom'],
-        'passwordUser' => $password,
+        'email' => $utilisateur['email'],
+        'nom' => $utilisateur['nom'],
+        'prenom' => $utilisateur['prenom'],
+        'passwordUtilisateur' => $password,
       ]);
 
       return "Bien Enregistré";
@@ -40,11 +40,11 @@ class UserModel {
     }
   }
 
-  // public function deleteUser($user)
+  // public function deleteUtilisateur($utilisateur)
   // {
   //   $query = $this->connection->getPdo()->prepare('DELETE FROM utilisateur WHERE id_utilisateur = :id');
   //   $query->execute([
-  //     'id' => $user['id'],
+  //     'id' => $utilisateur['id'],
   //   ]);
   // }
 
@@ -61,9 +61,9 @@ class UserModel {
     $query->execute([
       'email' => $email,
     ]);
-    $user = $query->fetchObject();
+    $utilisateur = $query->fetchObject();
 
-    return $user;
+    return $utilisateur;
   }
 
   /**
@@ -72,13 +72,13 @@ class UserModel {
    * @param int $id_utilisateur L'ID de l'utilisateur.
    * @return object L'objet utilisateur.
    */
-  public function getUserById($id_utilisateur)
+  public function getUtilisateurById($id_utilisateur)
   {
     $query = $this->connection->getPdo()->prepare('SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, is_moderateur FROM utilisateur WHERE id_utilisateur = :id');
     $query->execute([
       'id' => $id_utilisateur,
     ]);
-    $query->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\User');
+    $query->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Utilisateur');
 
     return $query->fetch();
   }
@@ -86,25 +86,25 @@ class UserModel {
   /**
    * Modifie les informations d'un utilisateur dans la base de données.
    *
-   * @param array $user Les données mises à jour de l'utilisateur.
+   * @param array $utilisateur Les données mises à jour de l'utilisateur.
    * @return void
    */
-  public function modifyUser($user)
+  public function modifyUtilisateur($utilisateur)
   {
     $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET  email_utilisateur = :email, nom_utilisateur = :nom, prenom_utilisateur = :prenom, bio_utilisateur = :bio WHERE id_utilisateur = :id ');
     $query->execute([
-      'email' => $user['email'],
-      'nom' => $user['nom'],
-      'prenom' => $user['prenom'],
-      'bio' => $user['bio'],
-      'id' => $_SESSION['user']->id_utilisateur,
+      'email' => $utilisateur['email'],
+      'nom' => $utilisateur['nom'],
+      'prenom' => $utilisateur['prenom'],
+      'bio' => $utilisateur['bio'],
+      'id' => $_SESSION['utilisateur']->id_utilisateur,
     ]);
   }
 
-  public function getAllUser()
+  public function getAllUtilisateur()
   {
     $query = $this->connection->getPdo()->prepare("SELECT id_utilisateur,nom_utilisateur,prenom_utilisateur,bio_utilisateur FROM utlisateur");
     $query->execute();
-    return $query->fetchAll(\PDO::FETCH_CLASS, "App\Models\User");
+    return $query->fetchAll(\PDO::FETCH_CLASS, "App\Models\Utilisateur");
   }
 }

@@ -7,16 +7,16 @@
                 <img src="../image/Profil_img.jpg" alt="photo de profil" style="width: 100%;">
             </div>
             <div>
-                <h3><?= $_SESSION['user']->nom_utilisateur . " " . $_SESSION['user']->prenom_utilisateur ?></h3>
+                <h3><?= $_SESSION['utilisateur']->nom_utilisateur . " " . $_SESSION['utilisateur']->prenom_utilisateur ?></h3>
             </div>
         </div>
-        <div><?= $_SESSION['user']->bio_utilisateur ?></div>
+        <div><?= $_SESSION['utilisateur']->bio_utilisateur ?></div>
         <div class="p-5">
             <img src="../image/sapin-bonmarche.png" alt="logo bonnefete" style="width: 100%;">
         </div>
     </div>
     <div class="d-flex flex-column align-items-center">
-        <?php if (!$_SESSION['user']->is_moderateur) { ?>
+        <?php if (!$_SESSION['utilisateur']->is_moderateur) { ?>
             <form action="../post/create" method="post" style="width: 32rem;">
                 <div class="form-group mb-3">
                     <label for="contenu_post" class="form-label">Contenu de votre post</label>
@@ -27,21 +27,21 @@
         <?php } ?>
 
 
-        <?php foreach ($users as $user) : ?>
+        <?php foreach ($utilisateurs as $utilisateur) : ?>
             <div class="card mb-4" style="width: 32rem;">
                 <div class="card-body">
-                    <h5 class="card-title"><?= $user->nom_utilisateur . " " . $user->prenom_utilisateur ?></h5>
-                    <p class="card-text"><?= $user->getContenuUser() ?></p>
+                    <h5 class="card-title"><?= $utilisateur->nom_utilisateur . " " . $utilisateur->prenom_utilisateur ?></h5>
+                    <p class="card-text"><?= $utilisateur->getContenuUtilisateur() ?></p>
                 </div>
 
-                <?php if ($user->getIdUtilisateur() === $_SESSION['user']->id_utilisateur) { ?>
+                <?php if ($utilisateur->getIdUtilisateur() === $_SESSION['utilisateur']->id_utilisateur) { ?>
                     <div class="card-body">
-                        <a href="./modify/<?= $user->getIdUser() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
-                        <a href="./delete/<?= $user->getIdUser() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                        <a href="./modify/<?= $utilisateur->getIdUtilisateur() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
+                        <a href="./delete/<?= $utilisateur->getIdUtilisateur() ?>" class="text-danger text-decoration-none">Supprimer</a>
                     </div>
-                <?php } elseif ($_SESSION['user']->is_moderateur) { ?>
+                <?php } elseif ($_SESSION['utilisateur']->is_moderateur) { ?>
                     <div class="card-body">
-                        <a href="./delete/<?= $user->getIdUser() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                        <a href="./delete/<?= $utilisateur->getIdUtilisateur() ?>" class="text-danger text-decoration-none">Supprimer</a>
                     </div>
                 <?php } ?>
             </div>
