@@ -66,6 +66,3 @@ class UserController
         }
 }
 
-
-// $post = $this->postModel->getPostById($id);
-
