@@ -5,6 +5,16 @@
 endif; ?>
 
 
+<?php
+// foreach ($nomsJaime as $nomJaime) :
+//     var_dump($nomJaime);
+// endforeach;
+
+// var_dump($_SESSION['utilisateur']->id_utilisateur);
+var_dump($estAime->estAime);
+?>
+
+
 <div class="d-flex flex-row justify-content-between">
     <div class="d-flex flex-column align-items-center card" style="width: 20%; height: max-content;">
         <div class="d-flex flex-row justify-content-around align-items-center">
@@ -40,11 +50,18 @@ endif; ?>
             </div>
         <?php } ?>
 
-        <!-- Système de like -->
+        <!-- Système de j'aime -->
         <div class="card-body">
             <div>
                 <a href="#" class="text-primary text-decoration-none">J'aime</a>
                 <span><?= $nbrJaime->nbrJaime ?></span>
+            </div>
+            <div>
+                <?php if ($estAime->estAime) { ?>
+                    <a href="../../jaime/retirerJaime/<?= $post->getIdPost() ?>"><i class="fa-solid fa-heart fa-beat" style="color: #fa0000;"></i></a>
+                <?php } else { ?>
+                    <a href="../../jaime/ajouterJaime/<?= $post->getIdPost() ?>"><i class="fa-regular fa-heart fa-lg"></i></a>
+                <?php } ?>
             </div>
         </div>
 

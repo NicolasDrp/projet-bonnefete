@@ -61,6 +61,7 @@ class PostController {
         $commentaires = $this->commentaireModel->getAllCommentaire($id);
         $sousCommentaires = $this->commentaireModel->getAllSousCommentaire($id);
         $nbrJaime = $this->jaimeModel->getNbrJaime($id);
+        $estAime = $this->jaimeModel->estAime($id);
         $nomsJaime = $this->jaimeModel->getNomJaime($id);
         require_once 'Views/posts/details.php';
     }
