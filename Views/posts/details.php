@@ -101,7 +101,9 @@ foreach ($estAimeCommentaires as $est) {
                                 </div>
                             </div>
                             <div>
-                                <?php foreach ($estAimeCommentaires as $estAimeCommentaire) :
+                                <?php
+                                $estAime = 0;
+                                foreach ($estAimeCommentaires as $estAimeCommentaire) :
                                     // var_dump($estAimeCommentaire->getIdCommentaire());
                                     // var_dump($commentaire->getIdCommentaire());
                                     $estAime = 0;

@@ -34,7 +34,7 @@ class JaimeModel {
     }
 
     public function estAimePost($id_post) {
-        $query = $this->connection->getPdo()->prepare('SELECT COUNT(*) AS estAimePost FROM jaime WHERE id_post = :id_post AND id_utilisateur = :id;');
+        $query = $this->connection->getPdo()->prepare('SELECT COUNT(*) AS estAimePost FROM jaime WHERE id_post = :id_post AND id_utilisateur = :id AND id_commentaire IS NULL;');
         $query->execute([
             'id_post' => $id_post,
             'id' => $_SESSION['utilisateur']->id_utilisateur,
@@ -52,7 +52,7 @@ class JaimeModel {
     }
 
     public function retirerJaimePost($id_post) {
-        $query = $this->connection->getPdo()->prepare('DELETE FROM jaime WHERE id_post = :id and id_utilisateur = :id_utilisateur');
+        $query = $this->connection->getPdo()->prepare('DELETE FROM jaime WHERE id_post = :id and id_utilisateur = :id_utilisateur AND id_commentaire IS NULL');
         $query->execute([
             'id' => $id_post,
             'id_utilisateur' => $_SESSION['utilisateur']->id_utilisateur
