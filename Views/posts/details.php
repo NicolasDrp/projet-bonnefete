@@ -108,6 +108,7 @@ var_dump($estAime->estAime);
                                 </div>
                                 <div>
                                     <div>
+                                        <a href="../../commentaire/modifier/<?= $sousCommentaire->getIdCommentaire() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
                                         <a href="../../commentaire/delete/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-light text-decoration-none btn btn-sm btn-danger">Supprimer</a>
                                         <a href="#" class="text-primary text-decoration-none fs-6 ">J'aime</a>
                                         <span>5</span>
