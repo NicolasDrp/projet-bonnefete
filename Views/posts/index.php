@@ -22,7 +22,7 @@ endif; ?>
 
     <div class="d-flex flex-column align-items-center">
         <?php if (!$_SESSION['utilisateur']->is_moderateur) { ?>
-            <form action="../post/create" method="post" style="width: 32rem;">
+            <form action="../post/create" method="post" style="width: 40rem;">
                 <div class="form-group mb-3">
                     <label for="contenu_post" class="form-label">Contenu de votre post</label>
                     <textarea class="form-control" name="contenu_post" id="contenu_post" rows="3" minlength="1" maxlength="200" required></textarea>
@@ -33,7 +33,7 @@ endif; ?>
 
 
         <?php foreach ($posts as $post) : ?>
-            <div class="card mb-4" style="width: 32rem;">
+            <div class="card mb-4" style="width: 40rem;">
                 <a href="./details/<?= $post->getIdPost() ?>">
                     <div class="card-body">
                         <h5 class="card-title"><?= $post->nom_utilisateur . " " . $post->prenom_utilisateur ?></h5>

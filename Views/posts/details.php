@@ -5,16 +5,6 @@
 endif; ?>
 
 
-<?php
-// foreach ($nomsJaime as $nomJaime) :
-//     var_dump($nomJaime);
-// endforeach;
-
-var_dump($_SESSION['utilisateur']->id_utilisateur);
-var_dump($estAime->estAime);
-?>
-
-
 <div class="d-flex flex-row justify-content-between">
     <div class="d-flex flex-column align-items-center card" style="width: 20%; height: max-content;">
         <div class="d-flex flex-row justify-content-around align-items-center">
@@ -31,7 +21,7 @@ var_dump($estAime->estAime);
         </div>
     </div>
 
-    <div class="card mb-4" style="width: 32rem;">
+    <div class="card mb-4" style="width: 40rem;">
         <div class="card-body">
             <h5 class="card-title"><?= $post->nom_utilisateur . " " . $post->prenom_utilisateur ?></h5>
             <p class="card-text"><?= $post->getContenuPost() ?></p>
@@ -124,7 +114,7 @@ var_dump($estAime->estAime);
                     <div class="card-body">
                         <form action="../../commentaire/createSous/<?= $post->getIdPost() ?>/<?= $commentaire->getIdCommentaire() ?>" method="post">
                             <div class="mb-1">
-                                <textarea class="form-control" name="contenu_commentaire" id="contenu_commentaire" rows="1" placeholder="Ajouter un commentaire" minlength="1" maxlength="200" required></textarea>
+                                <textarea class="form-control" name="contenu_commentaire" id="contenu_commentaire" rows="1" placeholder="Répondre à ce commentaire" minlength="1" maxlength="200" required></textarea>
                             </div>
                             <button class="btn btn-primary btn-sm">Envoyer</button>
                         </form>
