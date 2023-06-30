@@ -16,8 +16,8 @@ class JaimeModel {
         $this->connection = new Database();
     }
 
-    public function getNbrJaime($id) {
-        $query = $this->connection->getPdo()->prepare("SELECT COUNT(*) as nbrJaime FROM jaime where id_post = :id;");
+    public function getNbrJaimePost($id) {
+        $query = $this->connection->getPdo()->prepare("SELECT COUNT(*) as nbrJaimePost FROM jaime where id_post = :id AND id_commentaire IS NULL;");
         $query->execute([
             'id' => $id
         ]);
@@ -33,8 +33,8 @@ class JaimeModel {
         return $query->fetchAll(PDO::FETCH_CLASS, "App\Models\Jaime");
     }
 
-    public function estAime($id_post) {
-        $query = $this->connection->getPdo()->prepare('SELECT COUNT(*) AS estAime FROM jaime WHERE id_post = :id_post AND id_utilisateur = :id;');
+    public function estAimePost($id_post) {
+        $query = $this->connection->getPdo()->prepare('SELECT COUNT(*) AS estAimePost FROM jaime WHERE id_post = :id_post AND id_utilisateur = :id;');
         $query->execute([
             'id_post' => $id_post,
             'id' => $_SESSION['utilisateur']->id_utilisateur,
@@ -43,18 +43,54 @@ class JaimeModel {
         return $query->fetch();
     }
 
-    public function ajouterjaime($id_post) {
+    public function ajouterJaimePost($id_post) {
         $query = $this->connection->getPdo()->prepare('INSERT INTO jaime (id_utilisateur, id_post) VALUES (:id_utilisateur,:id_post);');
         $query->execute([
             'id_utilisateur' => $_SESSION['utilisateur']->id_utilisateur,
-            'id_post' =>$id_post
+            'id_post' => $id_post
         ]);
     }
 
-    public function retirerJaime($id_post) {
+    public function retirerJaimePost($id_post) {
         $query = $this->connection->getPdo()->prepare('DELETE FROM jaime WHERE id_post = :id and id_utilisateur = :id_utilisateur');
         $query->execute([
             'id' => $id_post,
+            'id_utilisateur' => $_SESSION['utilisateur']->id_utilisateur
+        ]);
+    }
+
+    public function getNbrJaimeCommentaire($id) {
+        $query = $this->connection->getPdo()->prepare("SELECT id_commentaire,COUNT(*) as nbrJaimeCommentaire FROM jaime where id_post = :id AND id_commentaire IS NOT NULL GROUP BY id_commentaire;");
+        $query->execute([
+            'id' => $id
+        ]);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_CLASS, "App\Models\Jaime");
+    }
+
+    public function estAimeCommentaire($id_post) {
+        $query = $this->connection->getPdo()->prepare('SELECT id_commentaire,COUNT(*) AS estAimeCommentaire FROM jaime WHERE id_post = :id_post AND id_utilisateur = :id AND id_commentaire IS NOT NULL Group BY id_commentaire;');
+        $query->execute([
+            'id_post' => $id_post,
+            'id' => $_SESSION['utilisateur']->id_utilisateur,
+        ]);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_CLASS, "App\Models\Jaime");
+    }
+
+    public function ajouterJaimeCommentaire($id_commentaire, $id_post) {
+        $query = $this->connection->getPdo()->prepare('INSERT INTO jaime (id_utilisateur, id_commentaire,id_post) VALUES (:id_utilisateur,:id_com, :id_post);');
+        $query->execute([
+            'id_utilisateur' => $_SESSION['utilisateur']->id_utilisateur,
+            'id_com' => $id_commentaire,
+            'id_post' => $id_post
+        ]);
+    }
+
+    public function retirerJaimeCommentaire($id_commentaire) {
+        $query = $this->connection->getPdo()->prepare('DELETE FROM jaime WHERE id_commentaire = :id and id_utilisateur = :id_utilisateur');
+        $query->execute([
+            'id' => $id_commentaire,
             'id_utilisateur' => $_SESSION['utilisateur']->id_utilisateur
         ]);
     }

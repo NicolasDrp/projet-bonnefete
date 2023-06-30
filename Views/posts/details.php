@@ -4,6 +4,12 @@
     header('Location: ../../utilisateur/login');
 endif; ?>
 
+<?php
+foreach ($estAimeCommentaires as $est) {
+    var_dump($est);
+}
+?>
+
 
 <div class="d-flex flex-row justify-content-between">
     <div class="d-flex flex-column align-items-center card" style="width: 20%; height: max-content;">
@@ -44,13 +50,13 @@ endif; ?>
         <div class="card-body">
             <div>
                 <a href="#" class="text-primary text-decoration-none">J'aime</a>
-                <span><?= $nbrJaime->nbrJaime ?></span>
+                <span><?= $nbrJaimePost->nbrJaimePost ?></span>
             </div>
             <div>
-                <?php if ($estAime->estAime) { ?>
-                    <a href="../../jaime/retirerJaime/<?= $post->getIdPost() ?>"><i class="fa-solid fa-heart fa-beat" style="color: #fa0000;"></i></a>
+                <?php if ($estAimePost->estAimePost) { ?>
+                    <a href="../../jaime/retirerJaimePost/<?= $post->getIdPost() ?>"><i class="fa-solid fa-heart fa-beat" style="color: #fa0000;"></i></a>
                 <?php } else { ?>
-                    <a href="../../jaime/ajouterJaime/<?= $post->getIdPost() ?>"><i class="fa-regular fa-heart fa-lg"></i></a>
+                    <a href="../../jaime/ajouterJaimePost/<?= $post->getIdPost() ?>"><i class="fa-regular fa-heart fa-lg"></i></a>
                 <?php } ?>
             </div>
         </div>
@@ -81,8 +87,35 @@ endif; ?>
                             <a href="../../commentaire/modifier/<?= $commentaire->getIdCommentaire() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
                             <a href="../../commentaire/delete/<?= $commentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
                             <br>
-                            <a href="#" class="text-primary text-decoration-none ">J'aime</a>
-                            <span>5</span>
+                            <!-- Système de j'aime des commentaires -->
+                            <div>
+                                <div>
+                                    <a href="#" class="text-primary text-decoration-none">J'aime</a>
+
+                                    <?php foreach ($nbrJaimeCommentaire as $jaimeCommentaire) :
+                                        if ($jaimeCommentaire->getIdCommentaire() == $commentaire->getIdCommentaire()) { ?>
+                                            <span><?= $jaimeCommentaire->nbrJaimeCommentaire; ?></span>
+                                    <?php
+                                        }
+                                    endforeach; ?>
+                                </div>
+                            </div>
+                            <div>
+                                <?php foreach ($estAimeCommentaires as $estAimeCommentaire) :
+                                    // var_dump($estAimeCommentaire->getIdCommentaire());
+                                    // var_dump($commentaire->getIdCommentaire());
+                                    $estAime = 0;
+                                    if ($estAimeCommentaire->estAimeCommentaire && ($estAimeCommentaire->getIdCommentaire() == $commentaire->getIdCommentaire())) {
+                                        $estAime = 1;
+                                        break;
+                                    }
+                                endforeach; ?>
+                                <?php if ($estAime) { ?>
+                                    <a href="../../jaime/retirerJaimeCommentaire/<?= $commentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>"><i class="fa-solid fa-heart fa-beat" style="color: #fa0000;"></i></a>
+                                <?php } else { ?>
+                                    <a href="../../jaime/ajouterJaimeCommentaire/<?= $commentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>"><i class="fa-regular fa-heart fa-lg"></i></a>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                 </div>

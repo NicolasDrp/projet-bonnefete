@@ -60,8 +60,10 @@ class PostController {
         $post = $this->postModel->getPostById($id);
         $commentaires = $this->commentaireModel->getAllCommentaire($id);
         $sousCommentaires = $this->commentaireModel->getAllSousCommentaire($id);
-        $nbrJaime = $this->jaimeModel->getNbrJaime($id);
-        $estAime = $this->jaimeModel->estAime($id);
+        $nbrJaimePost = $this->jaimeModel->getNbrJaimePost($id);
+        $nbrJaimeCommentaire = $this->jaimeModel->getNbrJaimeCommentaire($id);
+        $estAimePost = $this->jaimeModel->estAimePost($id);
+        $estAimeCommentaires = $this->jaimeModel->estAimeCommentaire($id);
         $nomsJaime = $this->jaimeModel->getNomJaime($id);
         require_once 'Views/posts/details.php';
     }
