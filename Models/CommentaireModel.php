@@ -57,4 +57,22 @@ class CommentaireModel {
             'id' => $idCommentaire
         ]);
     }
+
+    public function modifierCommentaire($idCommentaire, $commentaire) {
+        $query = $this->connection->getPdo()->prepare('UPDATE commentaire SET contenu_commentaire = :contenu WHERE id_commentaire = :id');
+        $query->execute([
+            'id' => $idCommentaire,
+            'contenu' => $commentaire['contenu_commentaire']
+        ]);
+    }
+
+
+    public function commentaireParId($id) {
+        $query = $this->connection->getPdo()->prepare('SELECT id_commentaire, contenu_commentaire,id_post FROM commentaire WHERE id_commentaire = :id');
+        $query->execute([
+            'id' => $id
+        ]);
+        $query->setFetchMode(PDO::FETCH_CLASS, "App\Models\Commentaire");
+        return $query->fetch();
+    }
 }

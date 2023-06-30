@@ -1,7 +1,7 @@
 <?php require_once 'Views/head.php'; ?>
 
 <?php if (empty($_SESSION)) :
-    header('Location: ../utilisateur/login');
+    header('Location: ../../utilisateur/login');
 endif; ?>
 
 
@@ -10,7 +10,7 @@ endif; ?>
 //     var_dump($nomJaime);
 // endforeach;
 
-// var_dump($_SESSION['utilisateur']->id_utilisateur);
+var_dump($_SESSION['utilisateur']->id_utilisateur);
 var_dump($estAime->estAime);
 ?>
 
@@ -88,7 +88,9 @@ var_dump($estAime->estAime);
                     </div>
                     <div>
                         <div>
-                            <a href="../../commentaire/delete/<?= $commentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-light text-decoration-none btn btn-sm btn-danger">Supprimer</a>
+                            <a href="../../commentaire/modifier/<?= $commentaire->getIdCommentaire() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
+                            <a href="../../commentaire/delete/<?= $commentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                            <br>
                             <a href="#" class="text-primary text-decoration-none ">J'aime</a>
                             <span>5</span>
                         </div>
@@ -126,7 +128,7 @@ var_dump($estAime->estAime);
                             <button class="btn btn-primary btn-sm">Envoyer</button>
                         </form>
                     </div>
-
+                    <hr class="mt-0 mb-2">
                 <?php } ?>
             <?php endforeach; ?>
         </div>
