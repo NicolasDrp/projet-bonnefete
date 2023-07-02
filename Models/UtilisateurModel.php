@@ -89,7 +89,7 @@ class UtilisateurModel {
    * @param array $utilisateur Les données mises à jour de l'utilisateur.
    * @return void
    */
-  public function modifyUtilisateur($utilisateur)
+  public function majUtilisateur($utilisateur)
   {
     $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET  email_utilisateur = :email, nom_utilisateur = :nom, prenom_utilisateur = :prenom, bio_utilisateur = :bio WHERE id_utilisateur = :id ');
     $query->execute([

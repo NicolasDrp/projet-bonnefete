@@ -6,7 +6,7 @@
         <img src="../image/sapin-bonmarche.png" alt="logo bonnefete" class="w-75 m-auto">
     </div>
     <div class="w-50 bg-white p-5 d-flex flex-column align-items-center justify-content-center" style="height: 75vh;">
-        <form action="../utilisateur/login" method="post" style="width: 95%;">
+        <form action="../utilisateur/connexion" method="post" style="width: 95%;">
 
             <div class="mb-4"><label for="email" class="form-label">Adresse Email</label>
                 <input type="email" class="form-control" name="email" id="email" required>
@@ -23,7 +23,7 @@
             </div>
 
             <div class="mb-5 w-50 m-auto">
-                <a href="../utilisateur/register" class="btn btn-dark w-100 btn-lg">Creer un compte</a>
+                <a href="../utilisateur/enregistrer" class="btn btn-dark w-100 btn-lg">Creer un compte</a>
             </div>
         </form>
     </div>

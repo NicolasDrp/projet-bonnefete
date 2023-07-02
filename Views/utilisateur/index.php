@@ -36,7 +36,7 @@
 
                 <?php if ($utilisateur->getIdUtilisateur() === $_SESSION['utilisateur']->id_utilisateur) { ?>
                     <div class="card-body">
-                        <a href="./modify/<?= $utilisateur->getIdUtilisateur() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
+                        <a href="./maj/<?= $utilisateur->getIdUtilisateur() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
                         <a href="./supprimer/<?= $utilisateur->getIdUtilisateur() ?>" class="text-danger text-decoration-none">Supprimer</a>
                     </div>
                 <?php } elseif ($_SESSION['utilisateur']->is_moderateur) { ?>

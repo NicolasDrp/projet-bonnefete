@@ -1,7 +1,7 @@
 <?php require_once 'Views/head.php'; ?>
 
 <?php if (empty($_SESSION)) :
-    header('Location: ../utilisateur/login');
+    header('Location: ../utilisateur/connexion');
 endif; ?>
 
 <div class="d-flex flex-row justify-content-between">

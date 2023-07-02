@@ -13,31 +13,31 @@ class UtilisateurController {
         $this->utilisateurModel = new UtilisateurModel();
     }
 
-    public function getRegister() {
-        require_once 'Views/utilisateur/register.php';
+    public function getEnregistrer() {
+        require_once 'Views/utilisateur/enregistrer.php';
     }
 
-    public function postRegister() {
+    public function postEnregistrer() {
         $utilisateur = $_POST;
         $message = $this->utilisateurModel->creerUtilisateur($utilisateur);
         echo $message;
-        echo '<a href="../utilisateur/login">Se connecter</a>';
+        echo '<a href="../utilisateur/connexion">Se connecter</a>';
     }
 
 
-    // public function supprimerRegister()
+    // public function supprimerEnregistrer()
     // {
     //     $utilisateur = $_POST;
     //     $this->utilisateurModel->supprimerUtilisateur($utilisateur);
 
     // }
 
-    public function getLogin()
+    public function getConnexion()
     {
-        require_once 'Views/utilisateur/login.php';
+        require_once 'Views/utilisateur/connexion.php';
     }
 
-    public function postLogin()
+    public function postConnexion()
     {
         $this->utilisateurModel = new UtilisateurModel();
         $utilisateur = $this->utilisateurModel->getOneByEmail($_POST['email']);
@@ -50,7 +50,7 @@ class UtilisateurController {
     public function getLogout()
     {
         session_destroy();
-        header('Location: ../utilisateur/login');
+        header('Location: ../utilisateur/connexion');
     }
 
     public function getCompteUtilisateur()
@@ -58,10 +58,10 @@ class UtilisateurController {
         require_once 'Views/utilisateur/compteUtilisateur.php';
     }
 
-    public function getModify($id_utilisateur)
+    public function getMaj($id_utilisateur)
     {
         $utilisateur = $this->utilisateurModel->getUtilisateurById($id_utilisateur);
-        require_once 'Views/utilisateur/modify.php';
+        require_once 'Views/utilisateur/maj.php';
     }
 
     public function getUtilisateurIndex()

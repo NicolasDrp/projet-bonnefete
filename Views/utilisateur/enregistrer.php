@@ -4,7 +4,7 @@
 
 <div class="d-flex flex-row w-75 align-items-center justify-content-center m-auto">
     <div class="w-50 bg-white p-5 d-flex flex-column align-items-center justify-content-center" style="height: 75vh;">
-        <form action="../utilisateur/register" method="post" style="width: 95%;">
+        <form action="../utilisateur/enregistrer" method="post" style="width: 95%;">
 
             <div class="mb-4">
                 <label for="nom" class="form-label">Nom<span class="text-danger">*</span></label>

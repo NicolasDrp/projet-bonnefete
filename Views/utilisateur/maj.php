@@ -2,7 +2,7 @@
 
 
 <div class="d-flex flex-column align-items-center">
-    <form action=<?= !$utilisateur ? "../utilisateur/creer" : "../../utilisateur/modify/" . $id_utilisateur ?> method="post">
+    <form action=<?= !$utilisateur ? "../utilisateur/creer" : "../../utilisateur/maj/" . $id_utilisateur ?> method="post">
         <div class="form-group">
             <label for="nom">Nom</label>
             <input type="text" name="nom" id="nom" class="form-group" value="<?= $utilisateur ? $utilisateur->getName() : "" ?>">
