@@ -5,9 +5,11 @@
 endif; ?>
 
 <?php
-foreach ($estAimeCommentaires as $est) {
-    var_dump($est);
-}
+// foreach ($estAimeCommentaires as $est) {
+//     var_dump($est);
+// }
+
+var_dump($sousCommentaires);
 ?>
 
 
@@ -84,8 +86,12 @@ foreach ($estAimeCommentaires as $est) {
                     </div>
                     <div>
                         <div>
-                            <a href="../../commentaire/modifier/<?= $commentaire->getIdCommentaire() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
-                            <a href="../../commentaire/delete/<?= $commentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                            <?php if ($commentaire->getIdUtilisateur() == $_SESSION['utilisateur']->id_utilisateur) { ?>
+                                <a href="../../commentaire/modifier/<?= $commentaire->getIdCommentaire() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
+                                <a href="../../commentaire/delete/<?= $commentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                            <?php } elseif ($_SESSION['utilisateur']->is_moderateur) { ?>
+                                <a href="../../commentaire/delete/<?= $commentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                            <?php } ?>
                             <br>
                             <!-- Système de j'aime des commentaires -->
                             <div>
@@ -133,8 +139,19 @@ foreach ($estAimeCommentaires as $est) {
                                 </div>
                                 <div>
                                     <div>
-                                        <a href="../../commentaire/modifier/<?= $sousCommentaire->getIdCommentaire() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
-                                        <a href="../../commentaire/delete/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                                        <?php if ($sousCommentaire->getIdUtilisateur() == $_SESSION['utilisateur']->id_utilisateur) { ?>
+                                            <div class="card-body">
+                                                <a href="../../commentaire/modifier/<?= $sousCommentaire->getIdCommentaire() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
+                                                <a href="../../commentaire/delete/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                                            </div>
+                                        <?php } elseif ($_SESSION['utilisateur']->is_moderateur) { ?>
+                                            <div class="card-body">
+                                                <a href="../../commentaire/delete/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                                            </div>
+                                        <?php } ?>
+
+
+
                                         <a href="#" class="text-primary text-decoration-none fs-6 ">J'aime</a>
                                         <span>5</span>
                                     </div>
@@ -156,6 +173,7 @@ foreach ($estAimeCommentaires as $est) {
                     </div>
                     <hr class="mt-0 mb-2">
                 <?php } ?>
+                <hr>
             <?php endforeach; ?>
         </div>
     </div>
