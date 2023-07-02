@@ -88,7 +88,6 @@ endif; ?>
                             <?php } elseif ($_SESSION['utilisateur']->is_moderateur) { ?>
                                 <a href="../../commentaire/delete/<?= $commentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
                             <?php } ?>
-                            <br>
                             <!-- Système de j'aime des commentaires -->
                             <div>
                                 <div>
@@ -134,16 +133,11 @@ endif; ?>
                                 <div>
                                     <div>
                                         <?php if ($sousCommentaire->getIdUtilisateur() == $_SESSION['utilisateur']->id_utilisateur) { ?>
-                                            <div class="card-body">
-                                                <a href="../../commentaire/modifier/<?= $sousCommentaire->getIdCommentaire() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
-                                                <a href="../../commentaire/delete/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
-                                            </div>
+                                            <a href="../../commentaire/modifier/<?= $sousCommentaire->getIdCommentaire() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
+                                            <a href="../../commentaire/delete/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
                                         <?php } elseif ($_SESSION['utilisateur']->is_moderateur) { ?>
-                                            <div class="card-body">
-                                                <a href="../../commentaire/delete/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
-                                            </div>
+                                            <a href="../../commentaire/delete/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
                                         <?php } ?>
-                                        <br>
                                         <!-- Système de j'aime des sous commentaires -->
                                         <div>
                                             <div>
