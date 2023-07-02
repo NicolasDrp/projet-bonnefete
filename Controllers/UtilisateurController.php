@@ -70,6 +70,13 @@ class UtilisateurController {
         require_once 'Views/utilisateur/maj.php';
     }
 
+    public function postMaj($id) {
+        $utilisateur = $_POST;
+        var_dump($utilisateur);
+        $this->utilisateurModel->majUtilisateur($utilisateur);
+        header('Location: ../../utilisateur/details/' . $id);
+    }
+
     public function getUtilisateurIndex() {
         echo ($_SESSION['utilisateur']->id_utilisateur);
         $utilisateurs = $this->utilisateurModel->getAllUtilisateur();

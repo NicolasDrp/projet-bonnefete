@@ -1,9 +1,14 @@
 <?php require_once 'Views/head.php'; ?>
 
-
-<div style="width: 10%;" class="mb-5">
-    <img src="../../image/Profil_img.jpg" alt="photo de profil" style="width: 100%;border-radius: 15px;">
+<div class="d-flex flex-row mb-5 align-items-center">
+    <div style="width: 10%;" class="me-5">
+        <img src="../../image/Profil_img.jpg" alt="photo de profil" style="width: 100%;border-radius: 15px;">
+    </div>
+    <?php if ($utilisateur->getIdUtilisateur() == $_SESSION['utilisateur']->id_utilisateur) { ?>
+        <a href="../../utilisateur/maj/<?= $utilisateur->getIdUtilisateur() ?>" class="btn btn-secondary btn" style="height: min-content;">Modifier Mon Compte</a>
+    <?php } ?>
 </div>
+
 
 <div class="d-flex flex-row justify-content-between">
     <div class="d-flex flex-column align-items-center card" style="width: 20%; height: max-content;">

@@ -86,12 +86,16 @@ class UtilisateurModel {
    * @return void
    */
   public function majUtilisateur($utilisateur) {
-    $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET  email_utilisateur = :email, nom_utilisateur = :nom, prenom_utilisateur = :prenom, bio_utilisateur = :bio WHERE id_utilisateur = :id ');
+    // Hasher le mot de passe avant de le stocker dans la base de données
+    $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
+
+    $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET  email_utilisateur = :email, nom_utilisateur = :nom, prenom_utilisateur = :prenom, bio_utilisateur = :bio, password_utilisateur = :password WHERE id_utilisateur = :id ');
     $query->execute([
       'email' => $utilisateur['email'],
       'nom' => $utilisateur['nom'],
       'prenom' => $utilisateur['prenom'],
       'bio' => $utilisateur['bio'],
+      'password' => $password,
       'id' => $_SESSION['utilisateur']->id_utilisateur,
     ]);
   }
