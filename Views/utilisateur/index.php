@@ -17,7 +17,7 @@
     </div>
     <div class="d-flex flex-column align-items-center">
         <?php if (!$_SESSION['utilisateur']->is_moderateur) { ?>
-            <form action="../post/create" method="post" style="width: 32rem;">
+            <form action="../post/creer" method="post" style="width: 32rem;">
                 <div class="form-group mb-3">
                     <label for="contenu_post" class="form-label">Contenu de votre post</label>
                     <textarea class="form-control" name="contenu_post" id="contenu_post" rows="3" maxlength="200"></textarea>
@@ -37,11 +37,11 @@
                 <?php if ($utilisateur->getIdUtilisateur() === $_SESSION['utilisateur']->id_utilisateur) { ?>
                     <div class="card-body">
                         <a href="./modify/<?= $utilisateur->getIdUtilisateur() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
-                        <a href="./delete/<?= $utilisateur->getIdUtilisateur() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                        <a href="./supprimer/<?= $utilisateur->getIdUtilisateur() ?>" class="text-danger text-decoration-none">Supprimer</a>
                     </div>
                 <?php } elseif ($_SESSION['utilisateur']->is_moderateur) { ?>
                     <div class="card-body">
-                        <a href="./delete/<?= $utilisateur->getIdUtilisateur() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                        <a href="./supprimer/<?= $utilisateur->getIdUtilisateur() ?>" class="text-danger text-decoration-none">Supprimer</a>
                     </div>
                 <?php } ?>
             </div>

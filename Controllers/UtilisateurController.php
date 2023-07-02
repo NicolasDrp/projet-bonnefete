@@ -19,16 +19,16 @@ class UtilisateurController {
 
     public function postRegister() {
         $utilisateur = $_POST;
-        $message = $this->utilisateurModel->createUtilisateur($utilisateur);
+        $message = $this->utilisateurModel->creerUtilisateur($utilisateur);
         echo $message;
         echo '<a href="../utilisateur/login">Se connecter</a>';
     }
 
 
-    // public function deleteRegister()
+    // public function supprimerRegister()
     // {
     //     $utilisateur = $_POST;
-    //     $this->utilisateurModel->deleteUtilisateur($utilisateur);
+    //     $this->utilisateurModel->supprimerUtilisateur($utilisateur);
 
     // }
 

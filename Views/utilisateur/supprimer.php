@@ -1,6 +1,6 @@
 <!-- <?php require_once 'Views/head.php'; ?>
 
-<form action="../utilisateur/delete" method="post">
+<form action="../utilisateur/supprimer" method="post">
     <label for="nom">Nom</label>
     <input type="text" name="nom" id="nom" required>
 

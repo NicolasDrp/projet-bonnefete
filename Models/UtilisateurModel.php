@@ -20,7 +20,7 @@ class UtilisateurModel {
    * @param array $utilisateur Les données de l'utilisateur.
    * @return string Le message de succès ou le message d'erreur.
    */
-  public function createUtilisateur($utilisateur)
+  public function creerUtilisateur($utilisateur)
   {
     // Hasher le mot de passe avant de le stocker dans la base de données
     $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
@@ -40,7 +40,7 @@ class UtilisateurModel {
     }
   }
 
-  // public function deleteUtilisateur($utilisateur)
+  // public function supprimerUtilisateur($utilisateur)
   // {
   //   $query = $this->connection->getPdo()->prepare('DELETE FROM utilisateur WHERE id_utilisateur = :id');
   //   $query->execute([

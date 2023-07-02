@@ -29,30 +29,25 @@ class PostController {
         require_once 'Views/posts/index.php';
     }
 
-    // public function getCreate() {
-    //     $post = null;
-    //     require_once 'Views/posts/create.php';
-    // }
-
-    public function postCreate() {
+    public function postCreer() {
         $post = $_POST;
-        $this->postModel->createPost($post);
+        $this->postModel->creerPost($post);
         header('Location: ../post/index');
     }
 
-    public function getDelete($id) {
-        $this->postModel->delete($id);
+    public function getSupprimer($id) {
+        $this->postModel->supprimer($id);
         header('Location: ../../post/index');
     }
 
-    public function getUpdate($id) {
+    public function getMaj($id) {
         $post = $this->postModel->getPostById($id);
-        require_once 'Views/posts/create.php';
+        require_once 'Views/posts/creer.php';
     }
 
-    public function postUpdate($id) {
+    public function postMaj($id) {
         $post = $_POST;
-        $this->postModel->updatePost($id, $post);
+        $this->postModel->majPost($id, $post);
         header('Location: ../../post/index');
     }
 

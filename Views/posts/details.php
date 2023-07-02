@@ -35,12 +35,12 @@ endif; ?>
         </ul>
         <?php if ($post->getIdUtilisateur() == $_SESSION['utilisateur']->id_utilisateur) { ?>
             <div class="card-body">
-                <a href="../update/<?= $post->getIdPost() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
-                <a href="../delete/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                <a href="../maj/<?= $post->getIdPost() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
+                <a href="../supprimer/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
             </div>
         <?php } elseif ($_SESSION['utilisateur']->is_moderateur) { ?>
             <div class="card-body">
-                <a href="../delete/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                <a href="../supprimer/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
             </div>
         <?php } ?>
 
@@ -62,7 +62,7 @@ endif; ?>
         <!-- Formulaire d'ajout de commentaire -->
         <?php if (!$_SESSION['utilisateur']->is_moderateur) { ?>
             <div class="card-body">
-                <form action="../../commentaire/create/<?= $post->getIdPost() ?>" method="post">
+                <form action="../../commentaire/creer/<?= $post->getIdPost() ?>" method="post">
                     <div class="mb-1">
                         <textarea class="form-control" name="contenu_commentaire" id="contenu_commentaire" rows="1" placeholder="Ajouter un commentaire" minlength="1" maxlength="200" required></textarea>
                     </div>
@@ -84,9 +84,9 @@ endif; ?>
                         <div>
                             <?php if ($commentaire->getIdUtilisateur() == $_SESSION['utilisateur']->id_utilisateur) { ?>
                                 <a href="../../commentaire/modifier/<?= $commentaire->getIdCommentaire() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
-                                <a href="../../commentaire/delete/<?= $commentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                                <a href="../../commentaire/supprimer/<?= $commentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
                             <?php } elseif ($_SESSION['utilisateur']->is_moderateur) { ?>
-                                <a href="../../commentaire/delete/<?= $commentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                                <a href="../../commentaire/supprimer/<?= $commentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
                             <?php } ?>
                             <!-- Système de j'aime des commentaires -->
                             <div>
@@ -134,9 +134,9 @@ endif; ?>
                                     <div>
                                         <?php if ($sousCommentaire->getIdUtilisateur() == $_SESSION['utilisateur']->id_utilisateur) { ?>
                                             <a href="../../commentaire/modifier/<?= $sousCommentaire->getIdCommentaire() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
-                                            <a href="../../commentaire/delete/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                                            <a href="../../commentaire/supprimer/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
                                         <?php } elseif ($_SESSION['utilisateur']->is_moderateur) { ?>
-                                            <a href="../../commentaire/delete/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
+                                            <a href="../../commentaire/supprimer/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
                                         <?php } ?>
                                         <!-- Système de j'aime des sous commentaires -->
                                         <div>
@@ -177,7 +177,7 @@ endif; ?>
                 <!-- Formulaire d'ajout de sous-commentaire -->
                 <?php if (!$_SESSION['utilisateur']->is_moderateur) { ?>
                     <div class="card-body">
-                        <form action="../../commentaire/createSous/<?= $post->getIdPost() ?>/<?= $commentaire->getIdCommentaire() ?>" method="post">
+                        <form action="../../commentaire/creerSous/<?= $post->getIdPost() ?>/<?= $commentaire->getIdCommentaire() ?>" method="post">
                             <div class="mb-1">
                                 <textarea class="form-control" name="contenu_commentaire" id="contenu_commentaire" rows="1" placeholder="Répondre à ce commentaire" minlength="1" maxlength="200" required></textarea>
                             </div>

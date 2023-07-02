@@ -32,7 +32,7 @@ class CommentaireModel {
         return $query->fetchAll(PDO::FETCH_CLASS, "App\Models\Commentaire");
     }
 
-    public function createCommentaire($commentaire, $id) {
+    public function creerCommentaire($commentaire, $id) {
         $query = $this->connection->getPdo()->prepare('INSERT INTO commentaire (contenu_commentaire,date_commentaire,id_utilisateur,id_post) VALUES (:contenu_commentaire, now(), :id, :id_post);');
         $query->execute([
             'contenu_commentaire' => $commentaire['contenu_commentaire'],
@@ -41,7 +41,7 @@ class CommentaireModel {
         ]);
     }
 
-    public function createSousCommentaire($commentaire, $id, $id_com) {
+    public function creerSousCommentaire($commentaire, $id, $id_com) {
         $query = $this->connection->getPdo()->prepare('INSERT INTO commentaire (contenu_commentaire,date_commentaire,id_utilisateur,id_post,id_com) VALUES (:contenu_commentaire, now(), :id, :id_post, :id_com);');
         $query->execute([
             'contenu_commentaire' => $commentaire['contenu_commentaire'],
@@ -51,7 +51,7 @@ class CommentaireModel {
         ]);
     }
 
-    public function deleteCommentaire($idCommentaire) {
+    public function supprimerCommentaire($idCommentaire) {
         $query = $this->connection->getPdo()->prepare('DELETE FROM commentaire WHERE id_commentaire = :id;');
         $query->execute([
             'id' => $idCommentaire

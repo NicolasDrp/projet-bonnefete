@@ -14,20 +14,20 @@ class CommentaireController {
         $this->commentaireModel = new CommentaireModel();
     }
 
-    public function postCreate($id) {
+    public function postCreer($id) {
         $commentaire = $_POST;
-        $this->commentaireModel->createCommentaire($commentaire, $id);
+        $this->commentaireModel->creerCommentaire($commentaire, $id);
         header('Location: ../../post/details/' . $id);
     }
 
-    public function postCreateSous($id, $id_com) {
+    public function postCreerSous($id, $id_com) {
         $commentaire = $_POST;
-        $this->commentaireModel->createSousCommentaire($commentaire, $id, $id_com);
+        $this->commentaireModel->creerSousCommentaire($commentaire, $id, $id_com);
         header('Location: ../../../post/details/' . $id);
     }
 
-    public function getDelete($idCommentaire, $id_post) {
-        $this->commentaireModel->deleteCommentaire($idCommentaire);
+    public function getSupprimer($idCommentaire, $id_post) {
+        $this->commentaireModel->supprimerCommentaire($idCommentaire);
         header('Location: ../../../post/details/' . $id_post);
     }
 

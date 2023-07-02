@@ -23,7 +23,7 @@ class PostModel {
     }
 
 
-    public function createPost($post) {
+    public function creerPost($post) {
         $query = $this->connection->getPdo()->prepare('INSERT INTO post (contenu_post,date_post,id_utilisateur) VALUES (:contenu_post, now(), :id);');
         $query->execute([
             'contenu_post' => $post['contenu_post'],
@@ -31,14 +31,14 @@ class PostModel {
         ]);
     }
 
-    public function delete($id) {
+    public function supprimer($id) {
         $query = $this->connection->getPdo()->prepare('DELETE FROM post WHERE id_post = :id');
         $query->execute([
             'id' => $id
         ]);
     }
 
-    public function updatePost($id, $post) {
+    public function majPost($id, $post) {
         $query = $this->connection->getPdo()->prepare('UPDATE post SET contenu_post = :contenu WHERE id_post = :id');
         $query->execute([
             'id' => $id,
