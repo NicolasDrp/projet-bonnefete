@@ -77,7 +77,7 @@ endif; ?>
             <?php foreach ($commentaires as $commentaire) : ?>
                 <div class="d-flex flex-row justify-content-between">
                     <div>
-                        <strong class="fs-5"><?= $commentaire->nom_utilisateur . " " . $commentaire->prenom_utilisateur ?></strong>
+                        <a href="../../utilisateur/details/<?= $commentaire->getIdUtilisateur() ?>"><strong class="fs-5"><?= $commentaire->nom_utilisateur . " " . $commentaire->prenom_utilisateur ?></strong></a>
                         <span class="text-secondary"><?= $commentaire->getDateCommentaire(); ?></span>
                     </div>
                     <div>

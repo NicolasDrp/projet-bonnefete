@@ -20,13 +20,12 @@ class UtilisateurModel {
    * @param array $utilisateur Les données de l'utilisateur.
    * @return string Le message de succès ou le message d'erreur.
    */
-  public function creerUtilisateur($utilisateur)
-  {
+  public function creerUtilisateur($utilisateur) {
     // Hasher le mot de passe avant de le stocker dans la base de données
     $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
 
     try {
-      $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur) VALUES (:email, :prenom, :nom, :passwordUtilisateur, "", 0)');
+      $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur, est_super_admin) VALUES (:email, :prenom, :nom, :passwordUtilisateur, "", 0 ,0)');
       $query->execute([
         'email' => $utilisateur['email'],
         'nom' => $utilisateur['nom'],
@@ -55,8 +54,7 @@ class UtilisateurModel {
    * @param string $email L'email de l'utilisateur.
    * @return object L'objet utilisateur.
    */
-  public function getOneByEmail($email)
-  {
+  public function getOneByEmail($email) {
     $query = $this->connection->getPdo()->prepare("SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur FROM utilisateur WHERE email_utilisateur = :email");
     $query->execute([
       'email' => $email,
@@ -72,14 +70,12 @@ class UtilisateurModel {
    * @param int $id_utilisateur L'ID de l'utilisateur.
    * @return object L'objet utilisateur.
    */
-  public function getUtilisateurById($id_utilisateur)
-  {
-    $query = $this->connection->getPdo()->prepare('SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur FROM utilisateur WHERE id_utilisateur = :id');
+  public function getUtilisateurParId($id_utilisateur) {
+    $query = $this->connection->getPdo()->prepare('SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur, est_super_admin FROM utilisateur WHERE id_utilisateur = :id');
     $query->execute([
       'id' => $id_utilisateur,
     ]);
     $query->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Utilisateur');
-
     return $query->fetch();
   }
 
@@ -89,8 +85,7 @@ class UtilisateurModel {
    * @param array $utilisateur Les données mises à jour de l'utilisateur.
    * @return void
    */
-  public function majUtilisateur($utilisateur)
-  {
+  public function majUtilisateur($utilisateur) {
     $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET  email_utilisateur = :email, nom_utilisateur = :nom, prenom_utilisateur = :prenom, bio_utilisateur = :bio WHERE id_utilisateur = :id ');
     $query->execute([
       'email' => $utilisateur['email'],
@@ -101,8 +96,7 @@ class UtilisateurModel {
     ]);
   }
 
-  public function getAllUtilisateur()
-  {
+  public function getAllUtilisateur() {
     $query = $this->connection->getPdo()->prepare("SELECT id_utilisateur,nom_utilisateur,prenom_utilisateur,bio_utilisateur FROM utlisateur");
     $query->execute();
     return $query->fetchAll(\PDO::FETCH_CLASS, "App\Models\Utilisateur");

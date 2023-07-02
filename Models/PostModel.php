@@ -46,12 +46,21 @@ class PostModel {
         ]);
     }
 
-    public function getPostById($id) {
+    public function getPostParId($id) {
         $query = $this->connection->getPdo()->prepare('SELECT id_post,contenu_post,date_post,post.id_utilisateur,nom_utilisateur,prenom_utilisateur FROM post INNER JOIN utilisateur ON post.id_utilisateur = utilisateur.id_utilisateur WHERE id_post = :id');
         $query->execute([
             'id' => $id
         ]);
         $query->setFetchMode(PDO::FETCH_CLASS, "App\Models\Post");
         return $query->fetch();
+    }
+
+    public function getPostsUtilisateur($id) {
+        $query = $this->connection->getPdo()->prepare('SELECT id_post,contenu_post,date_post,id_utilisateur FROM post WHERE id_utilisateur = :id');
+        $query->execute([
+            'id' => $id
+        ]);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_CLASS, "App\Models\Post");
     }
 }

@@ -41,7 +41,7 @@ class PostController {
     }
 
     public function getMaj($id) {
-        $post = $this->postModel->getPostById($id);
+        $post = $this->postModel->getPostParId($id);
         require_once 'Views/posts/creer.php';
     }
 
@@ -52,7 +52,7 @@ class PostController {
     }
 
     public function getDetails($id){
-        $post = $this->postModel->getPostById($id);
+        $post = $this->postModel->getPostParId($id);
         $commentaires = $this->commentaireModel->getAllCommentaire($id);
         $sousCommentaires = $this->commentaireModel->getAllSousCommentaire($id);
         $nbrJaimePost = $this->jaimeModel->getNbrJaimePost($id);

@@ -3,14 +3,19 @@
 namespace App\Controllers;
 
 require_once 'Models/UtilisateurModel.php';
+require_once 'Models/PostModel.php';
 
 use App\Models\UtilisateurModel;
+use App\Models\PostModel;
+
 
 class UtilisateurController {
     protected $utilisateurModel;
+    protected $postModel;
 
     public function __construct() {
         $this->utilisateurModel = new UtilisateurModel();
+        $this->postModel = new PostModel();
     }
 
     public function getEnregistrer() {
@@ -32,13 +37,11 @@ class UtilisateurController {
 
     // }
 
-    public function getConnexion()
-    {
+    public function getConnexion() {
         require_once 'Views/utilisateur/connexion.php';
     }
 
-    public function postConnexion()
-    {
+    public function postConnexion() {
         $this->utilisateurModel = new UtilisateurModel();
         $utilisateur = $this->utilisateurModel->getOneByEmail($_POST['email']);
         if ($utilisateur && password_verify($_POST['password'], $utilisateur->password_utilisateur)) {
@@ -47,25 +50,27 @@ class UtilisateurController {
         }
     }
 
-    public function getLogout()
-    {
+    public function getLogout() {
         session_destroy();
         header('Location: ../utilisateur/connexion');
     }
 
-    public function getCompteUtilisateur()
-    {
+    public function getDetails($id) {
+        $utilisateur = $this->utilisateurModel->getUtilisateurParId($id);
+        $posts = $this->postModel->getPostsUtilisateur($id);
+        require_once 'Views/utilisateur/details.php';
+    }
+
+    public function getCompteUtilisateur() {
         require_once 'Views/utilisateur/compteUtilisateur.php';
     }
 
-    public function getMaj($id_utilisateur)
-    {
-        $utilisateur = $this->utilisateurModel->getUtilisateurById($id_utilisateur);
+    public function getMaj($id_utilisateur) {
+        $utilisateur = $this->utilisateurModel->getUtilisateurParId($id_utilisateur);
         require_once 'Views/utilisateur/maj.php';
     }
 
-    public function getUtilisateurIndex()
-    {
+    public function getUtilisateurIndex() {
         echo ($_SESSION['utilisateur']->id_utilisateur);
         $utilisateurs = $this->utilisateurModel->getAllUtilisateur();
         $utilisateur = null;
