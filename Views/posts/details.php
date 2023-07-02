@@ -5,11 +5,7 @@
 endif; ?>
 
 <?php
-// foreach ($estAimeCommentaires as $est) {
-//     var_dump($est);
-// }
 
-var_dump($sousCommentaires);
 ?>
 
 
@@ -101,7 +97,7 @@ var_dump($sousCommentaires);
                                     <?php foreach ($nbrJaimeCommentaire as $jaimeCommentaire) :
                                         if ($jaimeCommentaire->getIdCommentaire() == $commentaire->getIdCommentaire()) { ?>
                                             <span><?= $jaimeCommentaire->nbrJaimeCommentaire; ?></span>
-                                    <?php
+                                    <?php break;
                                         }
                                     endforeach; ?>
                                 </div>
@@ -110,8 +106,6 @@ var_dump($sousCommentaires);
                                 <?php
                                 $estAime = 0;
                                 foreach ($estAimeCommentaires as $estAimeCommentaire) :
-                                    // var_dump($estAimeCommentaire->getIdCommentaire());
-                                    // var_dump($commentaire->getIdCommentaire());
                                     $estAime = 0;
                                     if ($estAimeCommentaire->estAimeCommentaire && ($estAimeCommentaire->getIdCommentaire() == $commentaire->getIdCommentaire())) {
                                         $estAime = 1;
@@ -149,11 +143,36 @@ var_dump($sousCommentaires);
                                                 <a href="../../commentaire/delete/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
                                             </div>
                                         <?php } ?>
+                                        <br>
+                                        <!-- Système de j'aime des sous commentaires -->
+                                        <div>
+                                            <div>
+                                                <a href="#" class="text-primary text-decoration-none">J'aime</a>
 
-
-
-                                        <a href="#" class="text-primary text-decoration-none fs-6 ">J'aime</a>
-                                        <span>5</span>
+                                                <?php foreach ($nbrJaimeCommentaire as $jaimeCommentaire) :
+                                                    if ($jaimeCommentaire->getIdCommentaire() == $sousCommentaire->getIdCommentaire()) { ?>
+                                                        <span><?= $jaimeCommentaire->nbrJaimeCommentaire; ?></span>
+                                                <?php
+                                                    }
+                                                endforeach; ?>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <?php
+                                            $estAime = 0;
+                                            foreach ($estAimeCommentaires as $estAimeCommentaire) :
+                                                $estAime = 0;
+                                                if ($estAimeCommentaire->estAimeCommentaire && ($estAimeCommentaire->getIdCommentaire() == $sousCommentaire->getIdCommentaire())) {
+                                                    $estAime = 1;
+                                                    break;
+                                                }
+                                            endforeach; ?>
+                                            <?php if ($estAime) { ?>
+                                                <a href="../../jaime/retirerJaimeCommentaire/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>"><i class="fa-solid fa-heart fa-beat" style="color: #fa0000;"></i></a>
+                                            <?php } else { ?>
+                                                <a href="../../jaime/ajouterJaimeCommentaire/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>"><i class="fa-regular fa-heart fa-lg"></i></a>
+                                            <?php } ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
