@@ -26,7 +26,7 @@ class UtilisateurModel {
     $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
 
     try {
-      $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, is_moderateur) VALUES (:email, :prenom, :nom, :passwordUtilisateur, "", 0)');
+      $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur) VALUES (:email, :prenom, :nom, :passwordUtilisateur, "", 0)');
       $query->execute([
         'email' => $utilisateur['email'],
         'nom' => $utilisateur['nom'],
@@ -57,7 +57,7 @@ class UtilisateurModel {
    */
   public function getOneByEmail($email)
   {
-    $query = $this->connection->getPdo()->prepare("SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, is_moderateur FROM utilisateur WHERE email_utilisateur = :email");
+    $query = $this->connection->getPdo()->prepare("SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur FROM utilisateur WHERE email_utilisateur = :email");
     $query->execute([
       'email' => $email,
     ]);
@@ -74,7 +74,7 @@ class UtilisateurModel {
    */
   public function getUtilisateurById($id_utilisateur)
   {
-    $query = $this->connection->getPdo()->prepare('SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, is_moderateur FROM utilisateur WHERE id_utilisateur = :id');
+    $query = $this->connection->getPdo()->prepare('SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur FROM utilisateur WHERE id_utilisateur = :id');
     $query->execute([
       'id' => $id_utilisateur,
     ]);

@@ -21,7 +21,7 @@ endif; ?>
     </div>
 
     <div class="d-flex flex-column align-items-center">
-        <?php if (!$_SESSION['utilisateur']->is_moderateur) { ?>
+        <?php if (!$_SESSION['utilisateur']->est_moderateur) { ?>
             <form action="../post/creer" method="post" style="width: 40rem;">
                 <div class="form-group mb-3">
                     <label for="contenu_post" class="form-label">Contenu de votre post</label>
@@ -48,7 +48,7 @@ endif; ?>
                         <a href="./maj/<?= $post->getIdPost() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
                         <a href="./supprimer/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
                     </div>
-                <?php } elseif ($_SESSION['utilisateur']->is_moderateur) { ?>
+                <?php } elseif ($_SESSION['utilisateur']->est_moderateur) { ?>
                     <div class="card-body">
                         <a href="./supprimer/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
                     </div>

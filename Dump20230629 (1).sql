@@ -123,7 +123,7 @@ CREATE TABLE `utilisateur` (
   `nom_utilisateur` varchar(45) NOT NULL,
   `prenom_utilisateur` varchar(45) DEFAULT NULL,
   `bio_utilisateur` varchar(150) DEFAULT NULL,
-  `is_moderateur` tinyint DEFAULT NULL,
+  `est_moderateur` tinyint DEFAULT NULL,
   `is_super_admin` tinyint DEFAULT NULL,
   PRIMARY KEY (`id_utilisateur`),
   UNIQUE KEY `email_utilisateur_UNIQUE` (`email_utilisateur`)
