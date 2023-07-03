@@ -66,7 +66,7 @@ class UtilisateurModel {
    * @return object L'objet utilisateur.
    */
   public function getOneByEmail($email) {
-    $query = $this->connection->getPdo()->prepare("SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur FROM utilisateur WHERE email_utilisateur = :email");
+    $query = $this->connection->getPdo()->prepare("SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur, est_super_admin FROM utilisateur WHERE email_utilisateur = :email");
     $query->execute([
       'email' => $email,
     ]);

@@ -89,7 +89,7 @@ endif; ?>
                             <?php if ($commentaire->getIdUtilisateur() == $_SESSION['utilisateur']->id_utilisateur) { ?>
                                 <a href="../../commentaire/modifier/<?= $commentaire->getIdCommentaire() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
                                 <a href="../../commentaire/supprimer/<?= $commentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
-                            <?php } elseif ($_SESSION['utilisateur']->est_moderateur) { ?>
+                            <?php } elseif ($_SESSION['utilisateur']->est_moderateur || $_SESSION['utilisateur']->est_super_admin) { ?>
                                 <a href="../../commentaire/supprimer/<?= $commentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
                             <?php } ?>
                             <!-- Système de j'aime des commentaires -->
@@ -139,7 +139,7 @@ endif; ?>
                                         <?php if ($sousCommentaire->getIdUtilisateur() == $_SESSION['utilisateur']->id_utilisateur) { ?>
                                             <a href="../../commentaire/modifier/<?= $sousCommentaire->getIdCommentaire() ?>" class="text-primary text-decoration-none me-3">Modifier</a>
                                             <a href="../../commentaire/supprimer/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
-                                        <?php } elseif ($_SESSION['utilisateur']->est_moderateur) { ?>
+                                        <?php } elseif ($_SESSION['utilisateur']->est_moderateur || $_SESSION['utilisateur']->est_super_admin) { ?>
                                             <a href="../../commentaire/supprimer/<?= $sousCommentaire->getIdCommentaire() ?>/<?= $post->getIdPost() ?>" class="text-danger text-decoration-none">Supprimer</a>
                                         <?php } ?>
                                         <!-- Système de j'aime des sous commentaires -->
