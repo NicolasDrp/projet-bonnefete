@@ -8,6 +8,8 @@ class Post {
     private $contenu_post;
     private $date_post;
     private $id_utilisateur;
+    public $nom_utilisateur;
+    public $prenom_utilisateur;
 
     public function __construct() {
     }
