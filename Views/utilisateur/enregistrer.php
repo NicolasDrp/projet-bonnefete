@@ -1,4 +1,74 @@
 <?php require_once 'Views/head.php'; ?>
+<?php require "PHPMailer/PHPMailerAutoload.php"; ?>
+<?php
+use PDO;
+session_start();
+require_once 'Models/Database.php';
+if(isset($_POST['valider'])){
+    if(!empty($_POST['email_utilisateur'])){
+        $cle = rand(100000,900000);
+        $email = $_POST['email_utilisateur'];
+        $insererUtilisateur = $bdd->prepare('INSERT INTO utilisateur(email_utilisateur, cle_utilisateur) VALUES(?,?)');
+        $insererUtilisateur->execute(array($email, $cle));
+
+        $recupererUtilisateur = $bdd->prepare('SELECT id_utilisateur, nom_utilisateur, prenom_utilisateur, email_utilisateur FROM utilisateur WHERE email_utilisateur = ?');
+        $recupererUtilisateur->execute(array($email));
+        if($recupererUtilisateur->rowCount() > 0){
+            $utilisateurInfos = $recupererUtilisateur->fetch();
+            $_SESSION['id_utilisateur'] = $utilisateurInfos['id_utilisateur'];
+            
+
+
+function smtpmailer($to, $from, $from_name, $subject, $body)
+    {
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->SMTPAuth = true; 
+ 
+        $mail->SMTPSecure = 'ssl'; 
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 465;  
+        $mail->Username = 'bentwitter59222@gmail.com';
+        $mail->Password = 'ENTER YOUR EMAIL PASSWORD';   
+   
+   //   $path = 'reseller.pdf';
+   //   $mail->AddAttachment($path);
+   
+        $mail->IsHTML(true);
+        $mail->From="bentwitter59222@gmail.com";
+        $mail->FromName=$from_name;
+        $mail->Sender=$from;
+        $mail->AddReplyTo($from, $from_name);
+        $mail->Subject = $subject;
+        $mail->Body = $body;
+        $mail->AddAddress($to);
+        if(!$mail->Send())
+        {
+            $error ="Please try Later, Error Occured while Processing...";
+            return $error; 
+        }
+        else 
+        {
+            $error = "Thanks You !! Your email is sent.";  
+            return $error;
+        }
+    }
+    
+    $to   = $email;
+    $from = 'bentwitter59222@gmail.com';
+    $name = 'BONNEFÊTE';
+    $subj = 'Email de confirmation de compte';
+    // $msg = 'Mettre lien vers fichier de vérification php';
+    
+    $error=smtpmailer($to,$from, $name ,$subj, $msg);
+    
+      
+        }else{
+            echo 'Veuillez mettre un email valide';
+        }
+    }
+}
+?>
 
 
 
