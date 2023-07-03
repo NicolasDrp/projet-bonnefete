@@ -31,6 +31,57 @@ class PostModel {
         ]);
     }
 
+    public function creerPostImage($fichier, $post) {
+        $nameFile = $fichier['image']['name'];
+        $typeFile = $fichier['image']['type'];
+        $sizeFile = $fichier['image']['size'];
+        $tmpFile = $fichier['image']['tmp_name'];
+        $errFile = $fichier['image']['error'];
+
+        // Extensions
+        $extensions = ['png', 'jpg', 'jpeg', 'gif'];
+        // Type d'image
+        $type = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
+        // On récupère
+        $extension = explode('.', $nameFile);
+        // Max size
+        $max_size = 300000;
+
+
+        // On vérifie que le type est autorisés
+        if (in_array($typeFile, $type)) {
+            // On vérifie que il n'y a que deux extensions
+            if (count($extension) <= 2 && in_array(strtolower(end($extension)), $extensions)) {
+                // On vérifie le poids de l'image
+                if ($sizeFile < $max_size && $errFile == 0) {
+                    // On bouge l'image uploadé dans le dossier upload
+                    $idImage = uniqid() . '.' . strtolower(end($extension));
+                    if (move_uploaded_file($tmpFile, './image/' . $idImage)) {
+                        echo "This is uploaded!";
+                        $query = $this->connection->getPdo()->prepare('INSERT INTO post (contenu_post,date_post,id_utilisateur,id_image) VALUES (:contenu_post, now(), :id,:id_image);');
+                        $query->execute([
+                            'contenu_post' => $post['contenu_post'],
+                            'id' => $_SESSION['utilisateur']->id_utilisateur,
+                            'id_image' => $idImage
+                        ]);
+                    } else {
+                        echo "failed";
+                        echo "<a href='../post/index' > Retour à l'accueil </a>";
+                    }
+                } else {
+                    echo "Fichier trop lourd ou format incorrect";
+                    echo "<a href='../post/index' > Retour à l'accueil </a>";
+                }
+            } else {
+                echo "Extension failed";
+                echo "<a href='../post/index' > Retour à l'accueil </a>";
+            }
+        } else {
+            echo "Type non autorisé";
+            echo "<a href='../post/index' > Retour à l'accueil </a>";
+        }
+    }
+
     public function supprimer($id) {
         $query = $this->connection->getPdo()->prepare('DELETE FROM post WHERE id_post = :id');
         $query->execute([

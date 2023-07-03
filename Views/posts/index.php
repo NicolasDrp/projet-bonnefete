@@ -24,10 +24,13 @@ endif; ?>
 
     <div class="d-flex flex-column align-items-center">
         <?php if (!($_SESSION['utilisateur']->est_moderateur || $_SESSION['utilisateur']->est_super_admin)) { ?>
-            <form action="../post/creer" method="post" style="width: 40rem;">
+            <form action="../post/creer" method="post" style="width: 40rem;" enctype="multipart/form-data">
                 <div class="form-group mb-3">
                     <label for="contenu_post" class="form-label">Contenu de votre post</label>
                     <textarea class="form-control" name="contenu_post" id="contenu_post" rows="3" minlength="1" maxlength="200" required></textarea>
+                </div>
+                <div class="d-grid gap-2 col-6 mx-auto mt-5">
+                    <input type="file" class="form-control" name="image" id="" placeholder="">
                 </div>
                 <button class="btn btn-success btn-sm mb-3">Envoyer</button>
             </form>

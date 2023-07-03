@@ -30,9 +30,20 @@ class PostController {
     }
 
     public function postCreer() {
-        $post = $_POST;
-        $this->postModel->creerPost($post);
-        header('Location: ../post/index');
+
+        // var_dump($_FILES['image']);
+        if (!empty($_FILES['image'])) {
+            $fichier = $_FILES;
+            $post = $_POST;
+            $this->postModel->creerPostImage($fichier, $post);
+        } else {
+            $post = $_POST;
+            $this->postModel->creerPost($post);
+            header('Location: ../post/index');
+        }
+        // $post = $_POST;
+        // $this->postModel->creerPost($post);
+        // header('Location: ../post/index');
     }
 
     public function getSupprimer($id) {
@@ -51,7 +62,7 @@ class PostController {
         header('Location: ../../post/index');
     }
 
-    public function getDetails($id){
+    public function getDetails($id) {
         $post = $this->postModel->getPostParId($id);
         $commentaires = $this->commentaireModel->getAllCommentaire($id);
         $sousCommentaires = $this->commentaireModel->getAllSousCommentaire($id);
