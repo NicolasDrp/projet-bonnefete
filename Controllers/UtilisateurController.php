@@ -29,14 +29,6 @@ class UtilisateurController {
         echo '<a href="../utilisateur/connexion">Se connecter</a>';
     }
 
-
-    // public function supprimerEnregistrer()
-    // {
-    //     $utilisateur = $_POST;
-    //     $this->utilisateurModel->supprimerUtilisateur($utilisateur);
-
-    // }
-
     public function getConnexion() {
         require_once 'Views/utilisateur/connexion.php';
     }
@@ -75,6 +67,11 @@ class UtilisateurController {
         var_dump($utilisateur);
         $this->utilisateurModel->majUtilisateur($utilisateur);
         header('Location: ../../utilisateur/details/' . $id);
+    }
+
+    public function getSupprimer($id) {
+        $this->utilisateurModel->supprimerUtilisateur($id);
+        header('Location: ../../post/index');
     }
 
     public function getUtilisateurIndex() {

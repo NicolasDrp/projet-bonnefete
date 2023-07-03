@@ -6,7 +6,9 @@
     </div>
     <?php if ($utilisateur->getIdUtilisateur() == $_SESSION['utilisateur']->id_utilisateur) { ?>
         <a href="../../utilisateur/maj/<?= $utilisateur->getIdUtilisateur() ?>" class="btn btn-secondary btn" style="height: min-content;">Modifier Mon Compte</a>
-    <?php } ?>
+    <?php } elseif ($_SESSION['utilisateur']->est_moderateur) { ?>
+        <a href="../../utilisateur/supprimer/<?= $utilisateur->getIdUtilisateur() ?>" class="btn btn-secondary btn" style="height: min-content;">Supprimer l'utilisateur</a>
+    <?php  } ?>
 </div>
 
 

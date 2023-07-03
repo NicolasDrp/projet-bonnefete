@@ -39,13 +39,13 @@ class UtilisateurModel {
     }
   }
 
-  // public function supprimerUtilisateur($utilisateur)
-  // {
-  //   $query = $this->connection->getPdo()->prepare('DELETE FROM utilisateur WHERE id_utilisateur = :id');
-  //   $query->execute([
-  //     'id' => $utilisateur['id'],
-  //   ]);
-  // }
+  public function supprimerUtilisateur($id)
+  {
+    $query = $this->connection->getPdo()->prepare('DELETE FROM utilisateur WHERE id_utilisateur = :id');
+    $query->execute([
+      'id' => $id,
+    ]);
+  }
 
 
   /**
