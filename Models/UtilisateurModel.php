@@ -21,8 +21,18 @@ class UtilisateurModel {
    * @return string Le message de succès ou le message d'erreur.
    */
   public function creerUtilisateur($utilisateur) {
+    // Vérifier si le mot de passe est valide
+    if (!preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/', $utilisateur['password'])) {
+      return 'Mot de passe Incorrect, le mdp doit contenir au moins 8 caractères dont Chiffres, minuscules, majuscules et caractères speciaux.';
+    }
+
     // Hasher le mot de passe avant de le stocker dans la base de données
     $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
+
+    // Valider l'email
+    if (!filter_var($utilisateur['email'], FILTER_VALIDATE_EMAIL)) {
+      return "L'adresse e-mail n'est pas valide";
+    }
 
     try {
       $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur, est_super_admin) VALUES (:email, :prenom, :nom, :passwordUtilisateur, "", 0 ,0)');
@@ -97,8 +107,18 @@ class UtilisateurModel {
    * @return void
    */
   public function majUtilisateur($utilisateur) {
+    // Vérifier si le mot de passe est valide
+    if (!preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/', $utilisateur['password'])) {
+      return 'Mot de passe Incorrect, le mdp doit contenir au moins 8 caractères dont Chiffres, minuscules, majuscules et caractères speciaux.';
+    }
+
     // Hasher le mot de passe avant de le stocker dans la base de données
     $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
+
+    // Valider l'email
+    if (!filter_var($utilisateur['email'], FILTER_VALIDATE_EMAIL)) {
+      return "L'adresse e-mail n'est pas valide";
+    }
 
     $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET  email_utilisateur = :email, nom_utilisateur = :nom, prenom_utilisateur = :prenom, bio_utilisateur = :bio, password_utilisateur = :password WHERE id_utilisateur = :id; ');
     $query->execute([

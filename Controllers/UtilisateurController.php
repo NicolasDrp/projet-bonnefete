@@ -64,7 +64,7 @@ class UtilisateurController {
 
     public function postMaj($id) {
         $utilisateur = $_POST;
-        var_dump($utilisateur);
+        // var_dump($utilisateur);
         $this->utilisateurModel->majUtilisateur($utilisateur);
         header('Location: ../../utilisateur/details/' . $id);
     }
