@@ -39,14 +39,25 @@ class UtilisateurModel {
     }
   }
 
-  public function supprimerUtilisateur($id)
-  {
+  public function supprimerUtilisateur($id) {
     $query = $this->connection->getPdo()->prepare('DELETE FROM utilisateur WHERE id_utilisateur = :id');
     $query->execute([
       'id' => $id,
     ]);
   }
 
+  public function changerModerateur($id) {
+    $query = $this->connection->getPdo()->prepare('UPDATE utilisateur 
+    SET est_moderateur = (
+    CASE
+    WHEN est_moderateur>0 THEN  0
+    ELSE 1
+    END)
+    WHERE id_utilisateur = :id;');
+    $query->execute([
+      'id' => $id,
+    ]);
+  }
 
   /**
    * Récupère un utilisateur de la base de données en fonction de son email.
@@ -89,7 +100,7 @@ class UtilisateurModel {
     // Hasher le mot de passe avant de le stocker dans la base de données
     $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
 
-    $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET  email_utilisateur = :email, nom_utilisateur = :nom, prenom_utilisateur = :prenom, bio_utilisateur = :bio, password_utilisateur = :password WHERE id_utilisateur = :id ');
+    $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET  email_utilisateur = :email, nom_utilisateur = :nom, prenom_utilisateur = :prenom, bio_utilisateur = :bio, password_utilisateur = :password WHERE id_utilisateur = :id; ');
     $query->execute([
       'email' => $utilisateur['email'],
       'nom' => $utilisateur['nom'],

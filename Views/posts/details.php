@@ -16,7 +16,9 @@ endif; ?>
                 <img src="../../image/Profil_img.jpg" alt="photo de profil" style="width: 100%;">
             </div>
             <div>
-                <h3><?= $_SESSION['utilisateur']->nom_utilisateur . " " . $_SESSION['utilisateur']->prenom_utilisateur ?></h3>
+                <a href="../../utilisateur/details/<?= $_SESSION['utilisateur']->id_utilisateur ?>">
+                    <h3><?= $_SESSION['utilisateur']->nom_utilisateur . " " . $_SESSION['utilisateur']->prenom_utilisateur ?></h3>
+                </a>
             </div>
         </div>
         <div><?= $_SESSION['utilisateur']->bio_utilisateur ?></div>
@@ -27,7 +29,9 @@ endif; ?>
 
     <div class="card mb-4" style="width: 40rem;">
         <div class="card-body">
-            <h5 class="card-title"><?= $post->nom_utilisateur . " " . $post->prenom_utilisateur ?></h5>
+            <a href="../../utilisateur/details/<?= $post->getIdUtilisateur() ?>">
+                <h5 class="card-title"><?= $post->nom_utilisateur . " " . $post->prenom_utilisateur ?></h5>
+            </a>
             <p class="card-text"><?= $post->getContenuPost() ?></p>
         </div>
         <ul class="list-group list-group-flush">
@@ -127,7 +131,7 @@ endif; ?>
                         <div class="d-flex flex-column justify-content-between ps-5">
                             <div class="d-flex flex-row justify-content-between">
                                 <div>
-                                    <strong><?= $sousCommentaire->nom_utilisateur . " " . $sousCommentaire->prenom_utilisateur ?></strong>
+                                    <a href="../../utilisateur/details/<?= $sousCommentaire->getIdUtilisateur() ?>"><strong><?= $sousCommentaire->nom_utilisateur . " " . $sousCommentaire->prenom_utilisateur ?></strong></a>
                                     <span class="text-secondary fs-6"><?= $sousCommentaire->getDateCommentaire(); ?></span>
                                 </div>
                                 <div>

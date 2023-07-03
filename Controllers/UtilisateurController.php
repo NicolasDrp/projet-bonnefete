@@ -74,6 +74,11 @@ class UtilisateurController {
         header('Location: ../../post/index');
     }
 
+    public function getChangerModerateur($id) {
+        $this->utilisateurModel->changerModerateur($id);
+        header('Location: ../../utilisateur/details/' . $id);
+    }
+
     public function getUtilisateurIndex() {
         echo ($_SESSION['utilisateur']->id_utilisateur);
         $utilisateurs = $this->utilisateurModel->getAllUtilisateur();

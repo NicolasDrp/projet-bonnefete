@@ -6,9 +6,15 @@
     </div>
     <?php if ($utilisateur->getIdUtilisateur() == $_SESSION['utilisateur']->id_utilisateur) { ?>
         <a href="../../utilisateur/maj/<?= $utilisateur->getIdUtilisateur() ?>" class="btn btn-secondary btn" style="height: min-content;">Modifier Mon Compte</a>
-    <?php } elseif ($_SESSION['utilisateur']->est_moderateur) { ?>
+    <?php } elseif (($_SESSION['utilisateur']->est_moderateur || $_SESSION['utilisateur']->est_super_admin) && !$utilisateur->isEstSuperAdmin()) { ?>
         <a href="../../utilisateur/supprimer/<?= $utilisateur->getIdUtilisateur() ?>" class="btn btn-secondary btn" style="height: min-content;">Supprimer l'utilisateur</a>
     <?php  } ?>
+    <?php
+    if (($_SESSION['utilisateur']->est_moderateur || $_SESSION['utilisateur']->est_super_admin) && !$utilisateur->isEstModerateur()) { ?>
+        <a href="../../utilisateur/changerModerateur/<?= $utilisateur->getIdUtilisateur() ?>" class="btn btn-secondary btn" style="height: min-content;">Passer Moderateur</a>
+    <?php } elseif (($_SESSION['utilisateur']->est_moderateur || $_SESSION['utilisateur']->est_super_admin) && $utilisateur->isEstModerateur()) { ?>
+        <a href="../../utilisateur/changerModerateur/<?= $utilisateur->getIdUtilisateur() ?>" class="btn btn-secondary btn" style="height: min-content;">Retirer Moderateur</a>
+    <?php } ?>
 </div>
 
 
