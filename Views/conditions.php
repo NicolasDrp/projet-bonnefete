@@ -1,3 +1,5 @@
+
+
 <h1>CONDITIONS D'UTILISATION</h1>
 
 
@@ -8,7 +10,7 @@ En visitant notre site et/ou en achetant quelque chose auprès de notre entrepri
 Veuillez lire attentivement les présentes Conditions d'utilisation avant d'accéder à notre site web et de l'utiliser. En accédant à une quelconque partie du Site ou en l'utilisant, vous acceptez d'être lié(e) par les présentes Conditions d'utilisation. Si vous n'acceptez pas la totalité des modalités et conditions du présent accord, vous ne pourrez peut-être pas accéder au site web ou utiliser ses services. Si les présentes Conditions d'utilisation sont considérées comme une offre, leur acceptation se limite expressément à elles.
 
 Chacun des nouveaux outils ou fonctionnalités qui sont ajoutés à la présente boutique est également assujetti aux Conditions d'utilisation. Vous pouvez consulter la version la plus récente des Conditions d'utilisation à tout moment sur cette page. Nous nous réservons le droit de mettre à jour, modifier ou remplacer n'importe quelle partie des présentes Conditions d'utilisation en publiant lesdites mises à jour et/ou modifications sur notre site web. Il vous incombe de vérifier cette page de temps à autre pour voir si des changements y ont été apportés. En continuant à accéder au site web ou à l'utiliser après la publication des modifications, vous acceptez celles-ci.
-Notre boutique est hébergée sur Shopify Inc. Cette société nous fournit la plateforme e-commerce en ligne qui nous permet de vous vendre nos produits et services.
+Notre boutique est hébergée sur Shopify Inc. Cette société nous fournit la plateforme e-commerce en ligne qui nous permet de vous vendre nos produits et services. </p>
 
 SECTION 1 – CONDITIONS D'UTILISATION DE LA BOUTIQUE EN LIGNE
 
