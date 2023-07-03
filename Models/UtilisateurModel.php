@@ -25,7 +25,7 @@ class UtilisateurModel {
     $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
 
     try {
-      $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur, est_super_admin) VALUES (:email, :prenom, :nom, :passwordUtilisateur, "", 0 ,0)');
+      $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur, est_super_admin) VALUES (:email, UPPER(:prenom), UPPER(:nom), :passwordUtilisateur, "", 0 ,0)');
       $query->execute([
         'email' => $utilisateur['email'],
         'nom' => $utilisateur['nom'],
@@ -35,7 +35,7 @@ class UtilisateurModel {
 
       return "Bien Enregistré";
     } catch (\PDOException $e) {
-      return 'Une erreur est survenue !';
+      return $e;
     }
   }
 
@@ -100,7 +100,7 @@ class UtilisateurModel {
     // Hasher le mot de passe avant de le stocker dans la base de données
     $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
 
-    $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET  email_utilisateur = :email, nom_utilisateur = :nom, prenom_utilisateur = :prenom, bio_utilisateur = :bio, password_utilisateur = :password WHERE id_utilisateur = :id; ');
+    $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET  email_utilisateur = :email, nom_utilisateur = UPPER(:nom), prenom_utilisateur = UPPER(:prenom), bio_utilisateur = :bio, password_utilisateur = :password WHERE id_utilisateur = :id; ');
     $query->execute([
       'email' => $utilisateur['email'],
       'nom' => $utilisateur['nom'],
