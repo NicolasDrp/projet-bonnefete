@@ -20,6 +20,9 @@
                 </div>
             <?php else : ?>
                 <a href="../../../projet-bonnefete/post/index" class="navbar-brand fs-3 fw-semibold text-light">BONNEFETE</a>
+                <?php if ($_SESSION['utilisateur']->est_moderateur || $_SESSION['utilisateur']->est_super_admin) { ?>
+                    <a href="../../../projet-bonnefete/utilisateur/utilisateurs" class="btn btn-light">Liste des utilisateurs</a>
+                <?php  } ?>
                 <div>
                     <a href="../../../projet-bonnefete/utilisateur/logout" class="btn btn-dark">Se deconnecter</a>
                 </div>

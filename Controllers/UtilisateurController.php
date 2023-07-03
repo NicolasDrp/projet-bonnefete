@@ -79,10 +79,8 @@ class UtilisateurController {
         header('Location: ../../utilisateur/details/' . $id);
     }
 
-    public function getUtilisateurIndex() {
-        echo ($_SESSION['utilisateur']->id_utilisateur);
+    public function getUtilisateurs() {
         $utilisateurs = $this->utilisateurModel->getAllUtilisateur();
-        $utilisateur = null;
         require_once 'Views/utilisateur/index.php';
     }
 }

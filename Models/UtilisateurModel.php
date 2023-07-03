@@ -112,7 +112,7 @@ class UtilisateurModel {
   }
 
   public function getAllUtilisateur() {
-    $query = $this->connection->getPdo()->prepare("SELECT id_utilisateur,nom_utilisateur,prenom_utilisateur,bio_utilisateur FROM utlisateur");
+    $query = $this->connection->getPdo()->prepare("SELECT id_utilisateur,nom_utilisateur,prenom_utilisateur,est_moderateur,est_super_admin FROM utilisateur ORDER BY est_super_admin DESC,est_moderateur DESC");
     $query->execute();
     return $query->fetchAll(\PDO::FETCH_CLASS, "App\Models\Utilisateur");
   }
