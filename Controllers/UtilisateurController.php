@@ -100,6 +100,6 @@ class UtilisateurController
 
     public function getEmailVerification()
     {
-        require_once 'Views/utilisateur/email-verficiation.php';
+        require_once 'Views/utilisateur/emailVerification.php';
     }
 }

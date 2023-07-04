@@ -7,13 +7,14 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
-if (isset($_POST['enregistrer'])) {
+if (isset($_POST['inscription'])) {
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
     $mail = new PHPMailer(true);
+    
 
     try {
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Activer la sortie de débogage détaillée
@@ -26,7 +27,7 @@ if (isset($_POST['enregistrer'])) {
 
         $mail->Username   = 'bentwitter59222@gmail.com';                     // Nom d'utilisateur SMTP
 
-        $mail->Password   = 'mot de passe';                               // Mot de passe SMTP
+        $mail->Password   = 'mdpmail';                               // Mot de passe SMTP, il faut le vrai mdp de la boite mail pour que ça fonctionne 
 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            // Activer le chiffrement SSL/TLS implicite
 
@@ -38,7 +39,7 @@ if (isset($_POST['enregistrer'])) {
 
         $mail->isHTML(true);                                  // Définir le format de l'email sur HTML
 
-        $codeDeVerification = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+        $codeDeVerification = substr(number_format(time() * rand(), 0, '', ''), 0, 6); // Génère un code aléatoire de 6 chiffres
 
         $mail->Subject = 'Email de verification';
         $mail->Body = 'Voici votre code de vérification :  <b> ' . $codeDeVerification . ' !</b>';
@@ -46,7 +47,7 @@ if (isset($_POST['enregistrer'])) {
         $mail->send();
 
         echo 'Le message a été envoyé';
-// 
+        // 
         $mdpCrypter = password_hash($password, PASSWORD_DEFAULT);
 
         $bdd = mysqli_connect('localhost:8889', 'root', 'root', 'bonnefete');
@@ -55,7 +56,7 @@ if (isset($_POST['enregistrer'])) {
 
         mysqli_query($bdd, $sql);
 
-        header('Location: email-verficiation.php?email=' . $email);
+        header('Location: emailVerification.php?email=' . $email);
 
         exit();
     } catch (Exception $e) {
@@ -89,9 +90,9 @@ if (isset($_POST['enregistrer'])) {
             </div>
 
             <div class="mb-5 w-50 m-auto">
-                <button class="btn btn-success w-100 btn-lg">
-                    S'inscrire
-                </button>
+                <input type="submit" name="inscription" value="S'inscrire" class="btn btn-success w-100 btn-lg">
+
+
             </div>
         </form>
     </div>
@@ -100,18 +101,6 @@ if (isset($_POST['enregistrer'])) {
         <img src="../image/sapin-bonmarche.png" alt="logo bonnefete" class="w-75 m-auto">
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
