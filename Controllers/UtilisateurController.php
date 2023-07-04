@@ -84,9 +84,13 @@ class UtilisateurController {
         require_once 'Views/utilisateur/index.php';
     }
     
-    // public function getConditions() {
-    //     require_once 'Views/utilisateur/conditions.php';
-    // }
+    public function getConditions() {
+        require_once 'Views/utilisateur/conditions.php';
+    }
+
+    public function getMail() {
+        require_once 'Views/utilisateur/mail.php';
+    }
 }
 
 

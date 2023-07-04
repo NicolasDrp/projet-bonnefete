@@ -1,73 +1,69 @@
 <?php require_once 'Views/head.php'; ?>
-<?php require "PHPMailer/PHPMailerAutoload.php"; ?>
-<?php
+<?php 
+// Import des classes de PHPMailer dans l'espace de nom global
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-    if(isset($_POST['valider'])){
-    if(!empty($_POST['email_utilisateur'])){
-            $email = $_POST['email_utilisateur'];
-            $insererUtilisateur = $bdd->prepare('INSERT INTO utilisateur(email_utilisateur) VALUES(?)');
-            $insererUtilisateur->execute(array($email));
+require 'vendor/autoload.php';
 
-            $recupererUtilisateur = $bdd->prepare('SELECT id_utilisateur, nom_utilisateur, prenom_utilisateur, email_utilisateur FROM utilisateur WHERE email_utilisateur = ?');
-            $recupererUtilisateur->execute(array($email));
-            if($recupererUtilisateur->rowCount() > 0){
-                $utilisateurInfos = $recupererUtilisateur->fetch();
-                $_SESSION['id_utilisateur'] = $utilisateurInfos['id_utilisateur'];
-                
+    if(isset($_POST['enregistrer'])){
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $email = $_POST['email'];
+        $mdp = $_POST['mdp'];
 
-                    // Les variables ont des noms anglais car nous les avons importés avec PHPMailer ! 
-    function smtpmailer($to, $from, $from_name, $subject, $body)
-        {
-            $mail = new PHPMailer();
-            $mail->IsSMTP();
-            $mail->SMTPAuth = true; 
-    
-            $mail->SMTPSecure = 'ssl'; 
-            $mail->Host = 'smtp.gmail.com';
-            $mail->Port = 465;  
-            $mail->Username = 'bentwitter59222@gmail.com';
-            $mail->Password = 'ENTER YOUR EMAIL PASSWORD';   
-    
-    //   $path = 'reseller.pdf';
-    //   $mail->AddAttachment($path);
-    
-            $mail->IsHTML(true);
-            $mail->From="bentwitter59222@gmail.com";
-            $mail->FromName=$from_name;
-            $mail->Sender=$from;
-            $mail->AddReplyTo($from, $from_name);
-            $mail->Subject = $subject;
-            $mail->Body = $body;
-            $mail->AddAddress($to);
-            if(!$mail->Send())
-            {
-                $error ="Veuillez réessayer plus tard, une erreur s'est produite lors du traitement...";
-                return $error; 
-            }
-            else 
-            {
-                $error = "Merci ! Votre email a été envoyé.";  
-                return $error;
-            }
+        $mail = new PHPMailer(true);
+
+        try {
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Activer la sortie de débogage détaillée
+
+            $mail->isSMTP();                                            // Envoi via SMTP
+
+            $mail->Host       = 'smtp.gmail.com';                     // Définir le serveur SMTP à utiliser
+
+            $mail->SMTPAuth   = true;                                   // Activer l'authentification SMTP
+
+            $mail->Username   = 'bentwitter59222@gmail.com';                     // Nom d'utilisateur SMTP
+
+            $mail->Password   = 'mdp';                               // Mot de passe SMTP
+
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            // Activer le chiffrement SSL/TLS implicite
+
+            $mail->Port       = 465;                                    // Port TCP à utiliser ; utilisez 587 si vous avez défini `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            $mail->setFrom('bentwitter59222@gmail.com', 'bonnefete-teuf.com');
+
+            $mail->addAddress($email, $nom);     // Ajouter un destinataire
+
+            $mail->isHTML(true);                                  // Définir le format de l'email sur HTML
+
+            $codeDeVerification = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+
+            $mail->Subject = 'Email de verification';
+            $mail->Body = 'Voici votre code de vérification :  <b> '.$codeDeVerification.' !</b>';
+
+            $mail->send();
+
+            echo 'Le message a été envoyé';
+
+            $mdpCrypter = password_hash($mdp, PASSWORD_DEFAULT);
+
+            $bdd = mysqli_connect('localhost:8889', 'root', 'root', 'bonnefete');
+
+            $sql = "INSERT INTO utilisateur (nom, prenom, email, mdp, codeDeVerification) VALUES ('$nom', '$prenom', '$email', '$mdpCrypter', '$codeDeVerification')";
+
+            mysqli_query($bdd, $sql);
+
+            header('Location: email-verficiation.php?email=' . $email);
+
+            exit();
+
+        } catch (Exception $e) {
+            echo "Le message n'a pas pu être envoyé. Erreur de l'expéditeur : {$mail->ErrorInfo}";
         }
-        
-        $to   = $email;
-        $from = 'bentwitter59222@gmail.com';
-        $name = 'BONNEFÊTE';
-        $subj = 'Email de confirmation de compte';
-        $msg = 'Views/utilisateur/verification.php?id_utilisateur='.$utilisateurInfos['id_utilisateur'].'';
-        
-        $error=smtpmailer($to,$from, $name ,$subj, $msg);
-        
-        
-            }else{
-                echo 'Veuillez mettre un email valide';
-            }
     }
-}
 ?>
-
-
 
 <div class="d-flex flex-row w-75 align-items-center justify-content-center m-auto">
     <div class="w-50 bg-white p-5 d-flex flex-column align-items-center justify-content-center" style="height: 75vh;">
