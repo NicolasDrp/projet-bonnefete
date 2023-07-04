@@ -75,13 +75,13 @@ class UtilisateurController {
 
     public function postMaj($id) {
         $utilisateur = $_POST;
-        var_dump($utilisateur);
         $this->utilisateurModel->majUtilisateur($utilisateur);
         header('Location: ../../utilisateur/details/' . $id);
     }
 
     public function getSupprimer($id) {
         $this->utilisateurModel->supprimerUtilisateur($id);
+        $this->logModel->creerLog("Viens de supprimer un utilisateur", NULL);
         header('Location: ../../post/index');
     }
 

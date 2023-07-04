@@ -17,7 +17,7 @@ class LogModel {
     }
 
     public function recupererLogs() {
-        $query = $this->connection->getPdo()->prepare("SELECT id_log,action,id_utilisateur,id_post,date_log FROM log;");
+        $query = $this->connection->getPdo()->prepare("SELECT id_log,action,id_utilisateur,id_post,date_log FROM log ORDER BY date_log DESC;");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_CLASS, "App\Models\Log");
     }

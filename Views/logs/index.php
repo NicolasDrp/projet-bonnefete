@@ -1,8 +1,5 @@
 <?php require_once 'Views/head.php'; ?>
 
-<?php
-var_dump($logs);
-?>
 
 <ul class="list-group">
     <?php foreach ($logs as $log) {

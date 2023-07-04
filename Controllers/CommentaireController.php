@@ -33,6 +33,7 @@ class CommentaireController {
 
     public function getSupprimer($idCommentaire, $id_post) {
         $this->commentaireModel->supprimerCommentaire($idCommentaire);
+        $this->logModel->creerLog('Viens de supprimer un commentaire sous le post', $id_post);
         header('Location: ../../../post/details/' . $id_post);
     }
 
@@ -45,6 +46,7 @@ class CommentaireController {
         $commentaire = $_POST;
         $id_post = $commentaire['id_post'];
         $this->commentaireModel->modifierCommentaire($id, $commentaire);
+        $this->logModel->creerLog('Viens de mettre à jour un commentaire sous le post', $id);
         header('Location: ../../../projet-bonnefete/post/details/' . $id_post);
     }
 }

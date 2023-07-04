@@ -54,13 +54,13 @@ class PostController {
 
     public function getMaj($id) {
         $post = $this->postModel->getPostParId($id);
-        $this->logModel->creerLog('Viens de mettre à jour un post', $id);
         require_once 'Views/posts/creer.php';
     }
 
     public function postMaj($id) {
         $post = $_POST;
         $this->postModel->majPost($id, $post);
+        $this->logModel->creerLog('Viens de mettre à jour un post', $id);
         header('Location: ../../post/index');
     }
 
