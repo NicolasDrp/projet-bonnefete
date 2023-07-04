@@ -17,7 +17,7 @@ class PostModel {
     }
 
     public function getAllPost() {
-        $query = $this->connection->getPdo()->prepare("SELECT id_post,contenu_post,date_post,post.id_utilisateur,nom_utilisateur,prenom_utilisateur FROM post INNER JOIN utilisateur ON post.id_utilisateur = utilisateur.id_utilisateur;");
+        $query = $this->connection->getPdo()->prepare("SELECT id_post,contenu_post,date_post,post.id_utilisateur,nom_utilisateur,prenom_utilisateur,id_image FROM post INNER JOIN utilisateur ON post.id_utilisateur = utilisateur.id_utilisateur;");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_CLASS, "App\Models\Post");
     }
@@ -45,7 +45,7 @@ class PostModel {
         // On récupère
         $extension = explode('.', $nameFile);
         // Max size
-        $max_size = 300000;
+        $max_size = 1000000;
 
 
         // On vérifie que le type est autorisés

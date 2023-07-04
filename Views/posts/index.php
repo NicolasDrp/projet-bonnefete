@@ -39,6 +39,9 @@ endif; ?>
 
         <?php foreach ($posts as $post) : ?>
             <div class="card mb-4" style="width: 40rem;">
+                <?php if ($post->getIdImage()) { ?>
+                    <img class="card-img-top" src="../image/<?= $post->getIdImage() ?>" alt="Image du post">
+                <?php } ?>
                 <a href="./details/<?= $post->getIdPost() ?>" class="text-decoration-none text-dark">
                     <div class="card-body">
                         <h5 class="card-title"><?= $post->nom_utilisateur . " " . $post->prenom_utilisateur ?></h5>

@@ -8,6 +8,7 @@ class Post {
     private $contenu_post;
     private $date_post;
     private $id_utilisateur;
+    private $id_image;
 
     public function __construct() {
     }
@@ -42,5 +43,13 @@ class Post {
 
     public function setIdUtilisateur($idUtilisateur) {
         $this->id_utilisateur = $idUtilisateur;
+    }
+
+    public function getIdImage(){
+        return $this->id_image;
+    }
+
+    public function setIdImage($idImage){
+        $this->id_image = $idImage;
     }
 }
