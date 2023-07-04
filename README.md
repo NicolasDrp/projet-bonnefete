@@ -55,6 +55,8 @@ Ce projet porte sur la réalisation d'un site de type réseau social pour la soc
 - Installer composer sur votre ordinateur via le termina de commande en utilisant : 
 ```bash
   composer install
+  composer require twbs/bootstrap
+  composer require phpmailer/phpmailer
 ```
 
 ## Utilisation 
@@ -90,6 +92,9 @@ Ce projet porte sur la réalisation d'un site de type réseau social pour la soc
 
 ![Composer](https://img.shields.io/badge/Composer-2.1.3-blue)
 
+![PHPMailer](https://img.shields.io/badge/PHPMailer-6.3.0-blue.svg)
+
+
 
 ## License
 
@@ -107,6 +112,8 @@ Ce projet porte sur la réalisation d'un site de type réseau social pour la soc
 
 [XAMPP](https://www.apachefriends.org/fr/index.html)
 
+[PHPMailer](https://github.com/PHPMailer/PHPMailer)
+ 
 
 ## Crédits :
 - DRAPIER Nicolas
