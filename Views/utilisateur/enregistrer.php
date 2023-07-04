@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
 if (isset($_POST['inscription'])) {
     $nom = $_POST['nom'];
@@ -27,7 +27,7 @@ if (isset($_POST['inscription'])) {
 
         $mail->Username   = 'bentwitter59222@gmail.com';                     // Nom d'utilisateur SMTP
 
-        $mail->Password   = 'mdpmail';                               // Mot de passe SMTP, il faut le vrai mdp de la boite mail pour que ça fonctionne 
+        $mail->Password   = 'mdpdumailusername';                               // Mot de passe SMTP, il faut le vrai mdp de la boite mail pour que ça fonctionne 
 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            // Activer le chiffrement SSL/TLS implicite
 

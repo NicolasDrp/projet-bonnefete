@@ -105,4 +105,10 @@ class UtilisateurModel {
     $query->execute();
     return $query->fetchAll(\PDO::FETCH_CLASS, "App\Models\Utilisateur");
   }
+
+  public function getEmailVerifier() {
+    $query = $this->connection->getPdo()->prepare("SELECT email_utilisateur FROM utilisateur WHERE email_verifier_si IS NOT NULL");
+    $query->execute();
+    return $query->fetchAll(\PDO::FETCH_CLASS, "App\Models\Utilisateur");
+  }
 }

@@ -102,4 +102,14 @@ class UtilisateurController
     {
         require_once 'Views/utilisateur/emailVerification.php';
     }
+    
+    public function postEmailVerification() {
+        $email = $_POST['email'];
+        $utilisateur = $this->utilisateurModel->getOneByEmail($email);
+        if ($utilisateur) {
+            echo 'true';
+        } else {
+            echo 'false';
+        }
+    }
 }

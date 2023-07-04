@@ -62,4 +62,5 @@ class PostController {
         $nomsJaime = $this->jaimeModel->getNomJaime($id);
         require_once 'Views/posts/details.php';
     }
+
 }
