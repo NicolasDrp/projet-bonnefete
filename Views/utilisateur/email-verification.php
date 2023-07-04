@@ -16,3 +16,9 @@ if(isset($_POST['email_verifier'])){
         exit();
 }
 ?>
+
+<form method="post">
+    <input type="hidden" name="email" value="<?php echo $_GET['email']; ?>" required>
+    <input type="text" name="codeDeVerification" placeholder="Entrer le code de vérification" required>
+    <input type="submit" name="email_verifier" value="Email Verifier">
+</form>
