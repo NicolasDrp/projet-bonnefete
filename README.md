@@ -55,8 +55,6 @@ Ce projet porte sur la réalisation d'un site de type réseau social pour la soc
 - Installer composer sur votre ordinateur via le termina de commande en utilisant : 
 ```bash
   composer install
-  composer require twbs/bootstrap
-  composer require phpmailer/phpmailer
 ```
 
 ## Utilisation 
