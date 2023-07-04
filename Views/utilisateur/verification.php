@@ -11,7 +11,10 @@ if(isset($_GET['id_utilisateur']) AND !empty($_GET['id_utilisateur'])){
             if($utilisateurActif == 0){
                 $utilisateurActif = $bdd->prepare('UPDATE utilisateur SET utilisateurActif = 1 WHERE id_utilisateur = ?');
                                                                             // utilisateurActif n'existe pas encore en BDD 
-                $utilisateurActif->execute(array($getIdUtilisateur));
+                $utilisateurActif->execute(array(1, $getIdUtilisateur));
+                $_SESSION['id_utilisateur'] = $recupererUtilisateur['id_utilisateur'];
+                header('Location: index.php');
+                
                 echo "Votre compte a bien été activé !";
             } else {
                 echo "Votre compte a déjà été activé !";

@@ -9,6 +9,7 @@ class Commentaire {
     private $id_post;
     private $id_com;
     private $date_commentaire;
+    
 
     public function __construct() {
     }
