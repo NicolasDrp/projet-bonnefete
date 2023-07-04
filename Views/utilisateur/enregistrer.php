@@ -2,8 +2,8 @@
 
 
 
-<div class="d-flex flex-row w-75 align-items-center justify-content-center m-auto">
-    <div class="w-50 bg-white p-5 d-flex flex-column align-items-center justify-content-center" style="height: 75vh;">
+<div class="d-flex flex-row align-items-center justify-content-center m-auto" id="form-connexion">
+    <div class="bg-white p-5 d-flex flex-column align-items-center justify-content-center" style="height: 75vh;flex: 50%;">
         <form action="../utilisateur/enregistrer" method="post" style="width: 95%;">
 
             <div class="mb-4">
@@ -33,7 +33,7 @@
             </div>
         </form>
     </div>
-    <div class="w-50 d-flex flex-column align-items-end">
+    <div class="d-flex flex-column align-items-end d-none d-xl-flex" style="flex: 50%;">
         <h2 style="font-size: 4rem;">Creer un compte</h2>
         <img src="../image/sapin-bonmarche.png" alt="logo bonnefete" class="w-75 m-auto">
     </div>

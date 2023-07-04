@@ -1,0 +1,9 @@
+#form-connexion{
+    width: 75%;
+}
+
+@media (max-width: 1200px){
+    #form-connexion{
+        width: 100%;
+    }
+}

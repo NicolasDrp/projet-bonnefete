@@ -1,6 +1,6 @@
 <?php require_once 'Views/head.php'; ?>
 
-<div class="d-flex flex-row mb-5 align-items-center">
+<div class="d-flex flex-row mb-3 mb-lg-5 mb align-items-center">
     <div style="width: 10%;" class="me-5">
         <img src="../../image/Profil_img.jpg" alt="photo de profil" style="width: 100%;border-radius: 15px;">
     </div>
@@ -20,24 +20,28 @@
         <?php } ?>
     </div>
 </div>
+<div class="d-block d-xl-none mb-3">
+    <h3><?= $utilisateur->getNomUtilisateur() . " " . $utilisateur->getPrenomUtilisateur() ?></h3>
+    <div class="w-100 p-1"><?= $utilisateur->getBioUtilisateur() ?></div>
+</div>
 
 
 <div class="d-flex flex-row justify-content-between">
-    <div class="d-flex flex-column align-items-center card" style="width: 20%; height: max-content;">
+    <div class="d-flex flex-column align-items-center card d-none d-sm-block" style="width: 20%; height: max-content;">
         <div class="d-flex flex-row justify-content-around align-items-center">
             <div>
                 <h3><?= $utilisateur->getNomUtilisateur() . " " . $utilisateur->getPrenomUtilisateur() ?></h3>
             </div>
         </div>
-        <div><?= $utilisateur->getBioUtilisateur() ?></div>
+        <div class="w-100 p-2"><?= $utilisateur->getBioUtilisateur() ?></div>
         <div class="p-5">
             <img src="../../image/sapin-bonmarche.png" alt="logo bonnefete" style="width: 100%;">
         </div>
     </div>
 
-    <div class="d-flex flex-column align-items-center">
+    <div class="d-flex flex-column align-items-center m-auto m-xl-0" style="width: 40rem;">
         <?php foreach ($posts as $post) : ?>
-            <div class="card mb-4" style="width: 40rem;">
+            <div class="card mb-4 w-100">
                 <a href="../../post/details/<?= $post->getIdPost() ?>" class="text-decoration-none text-dark">
                     <div class="card-body">
                         <h5 class="card-title"><?= $utilisateur->getNomUtilisateur() . " " . $utilisateur->getPrenomUtilisateur() ?></h5>
@@ -60,7 +64,7 @@
             </div>
         <?php endforeach; ?>
     </div>
-    <div class="w-25"></div>
+    <div class="w-25 d-none d-xl-block"></div>
 </div>
 
 

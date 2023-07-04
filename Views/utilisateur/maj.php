@@ -3,7 +3,6 @@
 
 <div class="d-flex flex-column align-items-center">
     <form action="<?php "../../utilisateur/maj/ . $id_utilisateur" ?>" method="post">
-    <a href="<?php "../../utilisateur/maj/ . $id_utilisateur" ?>"> test</a>
 
         <label for="nom">Nom</label>
         <input type="text" name="nom" id="nom" class="form-control" value="<?= $utilisateur->getPrenomUtilisateur() ?>">

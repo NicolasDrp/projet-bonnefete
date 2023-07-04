@@ -30,7 +30,7 @@ class PostController {
     }
 
     public function postCreer() {
-        if (!empty($_FILES['image'])) {
+        if (!empty($_FILES['image']) && $_FILES['image']['error'] != 4) {
             $fichier = $_FILES;
             $post = $_POST;
             $this->postModel->creerPostImage($fichier, $post);

@@ -5,7 +5,7 @@
 endif; ?>
 
 <div class="d-flex flex-row justify-content-between">
-    <div class="d-flex flex-column align-items-center card" style="width: 20%; height: max-content;">
+    <div class="d-flex flex-column align-items-center card d-none d-lg-block" style="width: 20%; height: max-content;">
         <div class="d-flex flex-row justify-content-around align-items-center">
             <div class="w-25">
                 <img src="../image/Profil_img.jpg" alt="photo de profil" style="width: 100%;">
@@ -16,15 +16,15 @@ endif; ?>
                 </a>
             </div>
         </div>
-        <div><?= $_SESSION['utilisateur']->bio_utilisateur ?></div>
+        <div class="w-100 p-2"><?= $_SESSION['utilisateur']->bio_utilisateur ?></div>
         <div class="p-5">
             <img src="../image/sapin-bonmarche.png" alt="logo bonnefete" style="width: 100%;">
         </div>
     </div>
 
-    <div class="d-flex flex-column align-items-center">
+    <div class="d-flex flex-column align-items-center m-auto" style="width: 40rem;" >
         <?php if (!($_SESSION['utilisateur']->est_moderateur || $_SESSION['utilisateur']->est_super_admin)) { ?>
-            <form action="../post/creer" method="post" style="width: 40rem;" enctype="multipart/form-data">
+            <form action="../post/creer" method="post" class="w-100" enctype="multipart/form-data">
                 <div class="form-group mb-3">
                     <label for="contenu_post" class="form-label">Contenu de votre post</label>
                     <textarea class="form-control" name="contenu_post" id="contenu_post" rows="3" minlength="1" maxlength="200" required></textarea>
@@ -38,7 +38,7 @@ endif; ?>
 
 
         <?php foreach ($posts as $post) : ?>
-            <div class="card mb-4" style="width: 40rem;">
+            <div class="card mb-4 w-100">
 
                 <a href="./details/<?= $post->getIdPost() ?>" class="text-decoration-none text-dark">
                     <div class="card-body">
@@ -65,7 +65,7 @@ endif; ?>
             </div>
         <?php endforeach; ?>
     </div>
-    <div class="w-25"></div>
+    <div class="w-25 d-none d-xl-block"></div>
 </div>
 
 

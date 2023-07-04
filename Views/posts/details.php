@@ -10,7 +10,7 @@ endif; ?>
 
 
 <div class="d-flex flex-row justify-content-between">
-    <div class="d-flex flex-column align-items-center card" style="width: 20%; height: max-content;">
+    <div class="d-flex flex-column align-items-center card d-none d-xl-block" style="width: 20%; height: max-content;">
         <div class="d-flex flex-row justify-content-around align-items-center">
             <div class="w-25">
                 <img src="../../image/Profil_img.jpg" alt="photo de profil" style="width: 100%;">
@@ -21,13 +21,13 @@ endif; ?>
                 </a>
             </div>
         </div>
-        <div><?= $_SESSION['utilisateur']->bio_utilisateur ?></div>
+        <div class="w-100 p-2"><?= $_SESSION['utilisateur']->bio_utilisateur ?></div>
         <div class="p-5">
             <img src="../../image/sapin-bonmarche.png" alt="logo bonnefete" style="width: 100%;">
         </div>
     </div>
 
-    <div class="card mb-4" style="width: 40rem;">
+    <div class="card mb-4 m-auto m-xl-0" style="width: 40rem;">
         <div class="card-body">
             <a href="../../utilisateur/details/<?= $post->getIdUtilisateur() ?>">
                 <h5 class="card-title"><?= $post->nom_utilisateur . " " . $post->prenom_utilisateur ?></h5>
@@ -197,7 +197,7 @@ endif; ?>
             <?php endforeach; ?>
         </div>
     </div>
-    <div class="w-25"></div>
+    <div class="w-25 d-none d-xl-block"></div>
 </div>
 
 

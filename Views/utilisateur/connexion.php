@@ -1,11 +1,12 @@
 <?php require_once 'Views/head.php'; ?>
 
-<div class="d-flex flex-row w-75 align-items-center justify-content-center m-auto">
-    <div class="w-50">
+<div class="d-flex flex-row align-items-center justify-content-center m-auto" id="form-connexion" >
+    <div class="d-none d-xl-block" style="flex: 50%;">
         <h2 style="font-size: 4rem;">Se Connecter</h2>
         <img src="../image/sapin-bonmarche.png" alt="logo bonnefete" class="w-75 m-auto">
     </div>
-    <div class="w-50 bg-white p-5 d-flex flex-column align-items-center justify-content-center" style="height: 75vh;">
+    <div class="bg-white p-0 p-xl-5 d-flex flex-column align-items-center justify-content-center" style="height: 75vh; flex: 50%;">
+        <h2 style="font-size: 4rem;" class="d-xl-none d-block">Se Connecter</h2>
         <form action="../utilisateur/connexion" method="post" style="width: 95%;">
 
             <div class="mb-4"><label for="email" class="form-label">Adresse Email</label>
