@@ -30,7 +30,7 @@ endif; ?>
                     <textarea class="form-control" name="contenu_post" id="contenu_post" rows="3" minlength="1" maxlength="200" required></textarea>
                 </div>
                 <div class="d-grid gap-2 col-6 mx-auto mt-5">
-                    <input type="file" class="form-control" name="image" id="" placeholder="">
+                    <input type="file" class="form-control" name="image">
                 </div>
                 <button class="btn btn-success btn-sm mb-3">Envoyer</button>
             </form>

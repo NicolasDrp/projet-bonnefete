@@ -58,7 +58,17 @@ class PostController {
     }
 
     public function postMaj($id) {
-        $post = $_POST;
+        if (!empty($_FILES['image']) && $_FILES['image']['error'] != 4) {
+            $fichier = $_FILES;
+            $post = $_POST;
+            $this->postModel->majPostImage($id,$fichier, $post);
+        } else {
+            $post = $_POST;
+            $this->postModel->majPost($id, $post);
+            header('Location: ../post/index');
+        }
+
+
         $this->postModel->majPost($id, $post);
         $this->logModel->creerLog('Viens de mettre à jour un post', $id);
         header('Location: ../../post/index');
