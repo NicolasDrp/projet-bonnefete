@@ -31,6 +31,9 @@ class UtilisateurController {
         $message = $this->utilisateurModel->creerUtilisateur($utilisateur);
         echo $message;
         echo '<a href="../utilisateur/connexion">Se connecter</a>';
+        if ($message == 'Bien Enregistré') {
+            $this->logModel->creerLogInscription("Un utilisateur viens de s'inscrire", NULL);
+        }
     }
 
     public function getConnexion() {

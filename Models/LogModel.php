@@ -30,4 +30,11 @@ class LogModel {
             'id_post' => $id_post
         ]);
     }
+
+    public function creerLogInscription($action) {
+        $query = $this->connection->getPdo()->prepare('INSERT INTO log (action,date_log) VALUES (:action, now());');
+        $query->execute([
+            'action' => $action
+        ]);
+    }
 }

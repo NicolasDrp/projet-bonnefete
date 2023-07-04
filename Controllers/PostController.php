@@ -47,8 +47,8 @@ class PostController {
     }
 
     public function getSupprimer($id) {
-        $this->logModel->creerLog('Viens de supprimer un post', $id);
         $this->postModel->supprimer($id);
+        $this->logModel->creerLog('Viens de supprimer un post', $id);
         header('Location: ../../post/index');
     }
 
