@@ -1,5 +1,6 @@
 <?php require_once 'Views/head.php'; ?>
 
+<a href="../log/index" class="btn btn-success mb-2">Voir les Logs</a>
 <table class="table w-100">
     <thead>
         <tr>

@@ -4,18 +4,22 @@ namespace App\Controllers;
 
 require_once 'Models/UtilisateurModel.php';
 require_once 'Models/PostModel.php';
+require_once 'Models/LogModel.php';
 
 use App\Models\UtilisateurModel;
 use App\Models\PostModel;
+use App\Models\LogModel;
 
 
 class UtilisateurController {
     protected $utilisateurModel;
     protected $postModel;
+    protected $logModel;
 
     public function __construct() {
         $this->utilisateurModel = new UtilisateurModel();
         $this->postModel = new PostModel();
+        $this->logModel = new LogModel();
     }
 
     public function getEnregistrer() {
@@ -38,7 +42,11 @@ class UtilisateurController {
         $utilisateur = $this->utilisateurModel->getOneByEmail($_POST['email']);
         if ($utilisateur && password_verify($_POST['password'], $utilisateur->password_utilisateur)) {
             $_SESSION['utilisateur'] = $utilisateur;
+            $this->logModel->creerLog('Viens de se connecter', NULL);
             header('Location: ../post/index');
+        } else {
+            echo 'Mot de passe ou Identifiants incorrect';
+            echo '<a href="../utilisateur/connexion">Se connecter</a>';
         }
     }
 

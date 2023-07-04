@@ -5,22 +5,26 @@ namespace App\Controllers;
 require_once 'Models/PostModel.php';
 require_once 'Models/CommentaireModel.php';
 require_once 'Models/JaimeModel.php';
+require_once 'Models/LogModel.php';
 
 
 use App\Models\PostModel;
 use App\Models\CommentaireModel;
 use App\Models\JaimeModel;
+use App\Models\LogModel;
 
 
 class PostController {
     protected $postModel;
     protected $commentaireModel;
     protected $jaimeModel;
+    protected $logModel;
 
     public function __construct() {
         $this->postModel = new PostModel();
         $this->commentaireModel = new CommentaireModel();
         $this->jaimeModel = new JaimeModel();
+        $this->logModel = new LogModel();
     }
 
     public function getIndex() {
@@ -39,15 +43,18 @@ class PostController {
             $this->postModel->creerPost($post);
             header('Location: ../post/index');
         }
+        $this->logModel->creerLog('Viens de publier un post', NULL);
     }
 
     public function getSupprimer($id) {
+        $this->logModel->creerLog('Viens de supprimer un post', $id);
         $this->postModel->supprimer($id);
         header('Location: ../../post/index');
     }
 
     public function getMaj($id) {
         $post = $this->postModel->getPostParId($id);
+        $this->logModel->creerLog('Viens de mettre à jour un post', $id);
         require_once 'Views/posts/creer.php';
     }
 
