@@ -32,40 +32,41 @@ class PostModel {
     }
 
     public function creerPostImage($fichier, $post) {
-        $nameFile = $fichier['image']['name'];
-        $typeFile = $fichier['image']['type'];
-        $sizeFile = $fichier['image']['size'];
-        $tmpFile = $fichier['image']['tmp_name'];
-        $errFile = $fichier['image']['error'];
+        $nomFichier = $fichier['image']['name'];
+        $typeFichier = $fichier['image']['type'];
+        $tailleFichier = $fichier['image']['size'];
+        $tmpFichier = $fichier['image']['tmp_name'];
+        $errFichier = $fichier['image']['error'];
 
         // Extensions
         $extensions = ['png', 'jpg', 'jpeg', 'gif'];
         // Type d'image
         $type = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
         // On récupère
-        $extension = explode('.', $nameFile);
+        $extension = explode('.', $nomFichier);
         // Max size
-        $max_size = 1000000;
+        $taille_max = 1000000;
 
 
         // On vérifie que le type est autorisés
-        if (in_array($typeFile, $type)) {
+        if (in_array($typeFichier, $type)) {
             // On vérifie que il n'y a que deux extensions
             if (count($extension) <= 2 && in_array(strtolower(end($extension)), $extensions)) {
                 // On vérifie le poids de l'image
-                if ($sizeFile < $max_size && $errFile == 0) {
+                if ($tailleFichier < $taille_max && $errFichier == 0) {
                     // On bouge l'image uploadé dans le dossier upload
                     $idImage = uniqid() . '.' . strtolower(end($extension));
-                    if (move_uploaded_file($tmpFile, './image/' . $idImage)) {
-                        echo "This is uploaded!";
+                    if (move_uploaded_file($tmpFichier, './image/' . $idImage)) {
+                        echo "Post Envoyé !";
                         $query = $this->connection->getPdo()->prepare('INSERT INTO post (contenu_post,date_post,id_utilisateur,id_image) VALUES (:contenu_post, now(), :id,:id_image);');
                         $query->execute([
                             'contenu_post' => $post['contenu_post'],
                             'id' => $_SESSION['utilisateur']->id_utilisateur,
                             'id_image' => $idImage
                         ]);
+                        echo "<a href='../post/index' > Retour à l'accueil </a>";
                     } else {
-                        echo "failed";
+                        echo "Une erreur est survenue";
                         echo "<a href='../post/index' > Retour à l'accueil </a>";
                     }
                 } else {
@@ -73,7 +74,7 @@ class PostModel {
                     echo "<a href='../post/index' > Retour à l'accueil </a>";
                 }
             } else {
-                echo "Extension failed";
+                echo "Extension échoué";
                 echo "<a href='../post/index' > Retour à l'accueil </a>";
             }
         } else {
@@ -98,7 +99,7 @@ class PostModel {
     }
 
     public function getPostParId($id) {
-        $query = $this->connection->getPdo()->prepare('SELECT id_post,contenu_post,date_post,post.id_utilisateur,nom_utilisateur,prenom_utilisateur FROM post INNER JOIN utilisateur ON post.id_utilisateur = utilisateur.id_utilisateur WHERE id_post = :id');
+        $query = $this->connection->getPdo()->prepare('SELECT id_post,contenu_post,date_post,post.id_utilisateur,nom_utilisateur,prenom_utilisateur,id_image FROM post INNER JOIN utilisateur ON post.id_utilisateur = utilisateur.id_utilisateur WHERE id_post = :id');
         $query->execute([
             'id' => $id
         ]);

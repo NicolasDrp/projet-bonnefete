@@ -30,8 +30,6 @@ class PostController {
     }
 
     public function postCreer() {
-
-        // var_dump($_FILES['image']);
         if (!empty($_FILES['image'])) {
             $fichier = $_FILES;
             $post = $_POST;
@@ -41,9 +39,6 @@ class PostController {
             $this->postModel->creerPost($post);
             header('Location: ../post/index');
         }
-        // $post = $_POST;
-        // $this->postModel->creerPost($post);
-        // header('Location: ../post/index');
     }
 
     public function getSupprimer($id) {

@@ -32,6 +32,9 @@ endif; ?>
             <a href="../../utilisateur/details/<?= $post->getIdUtilisateur() ?>">
                 <h5 class="card-title"><?= $post->nom_utilisateur . " " . $post->prenom_utilisateur ?></h5>
             </a>
+            <?php if ($post->getIdImage()) { ?>
+                <img class="card-img-top" src="../../image/<?= $post->getIdImage() ?>" alt="Image du post">
+            <?php } ?>
             <p class="card-text"><?= $post->getContenuPost() ?></p>
         </div>
         <ul class="list-group list-group-flush">
