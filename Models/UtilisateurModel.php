@@ -98,7 +98,10 @@ class UtilisateurModel {
    */
   public function majUtilisateur($utilisateur) {
     // Hasher le mot de passe avant de le stocker dans la base de données
-    $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
+    $password = $utilisateur['password'];
+    if (!(substr($utilisateur['password'], 0, 7) == "$2y$10$")) {
+      $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
+    }
 
     $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET  email_utilisateur = :email, nom_utilisateur = UPPER(:nom), prenom_utilisateur = UPPER(:prenom), bio_utilisateur = :bio, password_utilisateur = :password WHERE id_utilisateur = :id; ');
     $query->execute([
