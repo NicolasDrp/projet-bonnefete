@@ -16,13 +16,22 @@ class PostModel {
         $this->connection = new Database();
     }
 
+    /**
+     * Récupère tous les posts.
+     *
+     * @return array Les posts récupérés.
+     */
     public function getAllPost() {
         $query = $this->connection->getPdo()->prepare("SELECT id_post,contenu_post,date_post,post.id_utilisateur,nom_utilisateur,prenom_utilisateur,id_image FROM post INNER JOIN utilisateur ON post.id_utilisateur = utilisateur.id_utilisateur;");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_CLASS, "App\Models\Post");
     }
 
-
+    /**
+     * Crée un nouveau post.
+     *
+     * @param array $post Les données du post.
+     */
     public function creerPost($post) {
         $query = $this->connection->getPdo()->prepare('INSERT INTO post (contenu_post,date_post,id_utilisateur) VALUES (:contenu_post, now(), :id);');
         $query->execute([
@@ -31,6 +40,12 @@ class PostModel {
         ]);
     }
 
+    /**
+     * Crée un nouveau post avec une image.
+     *
+     * @param array $fichier Les données du fichier image.
+     * @param array $post Les données du post.
+     */
     public function creerPostImage($fichier, $post) {
         $nomFichier = $fichier['image']['name'];
         $typeFichier = $fichier['image']['type'];
@@ -83,6 +98,11 @@ class PostModel {
         }
     }
 
+    /**
+     * Supprime un post.
+     *
+     * @param int $id L'identifiant du post à supprimer.
+     */
     public function supprimer($id) {
         $query = $this->connection->getPdo()->prepare('DELETE FROM post WHERE id_post = :id');
         $query->execute([
@@ -90,6 +110,12 @@ class PostModel {
         ]);
     }
 
+    /**
+     * Met à jour un post.
+     *
+     * @param int $id L'identifiant du post à mettre à jour.
+     * @param array $post Les données du post mis à jour.
+     */
     public function majPost($id, $post) {
         $query = $this->connection->getPdo()->prepare('UPDATE post SET contenu_post = :contenu WHERE id_post = :id');
         $query->execute([
@@ -98,6 +124,14 @@ class PostModel {
         ]);
     }
 
+
+    /**
+     * Met à jour un post avec une image.
+     *
+     * @param int $id_post L'identifiant du post à mettre à jour.
+     * @param array $fichier Les données du fichier image.
+     * @param array $post Les données du post mis à jour.
+     */
     public function majPostImage($id_post, $fichier, $post) {
         $nomFichier = $fichier['image']['name'];
         $typeFichier = $fichier['image']['type'];
@@ -150,6 +184,12 @@ class PostModel {
         }
     }
 
+    /**
+     * Récupère un post par son identifiant.
+     *
+     * @param int $id L'identifiant du post.
+     * @return Post Le post récupéré.
+     */
     public function getPostParId($id) {
         $query = $this->connection->getPdo()->prepare('SELECT id_post,contenu_post,date_post,post.id_utilisateur,nom_utilisateur,prenom_utilisateur,id_image FROM post INNER JOIN utilisateur ON post.id_utilisateur = utilisateur.id_utilisateur WHERE id_post = :id');
         $query->execute([
@@ -159,6 +199,12 @@ class PostModel {
         return $query->fetch();
     }
 
+    /**
+     * Récupère les posts d'un utilisateur.
+     *
+     * @param int $id L'identifiant de l'utilisateur.
+     * @return array Les posts de l'utilisateur.
+     */
     public function getPostsUtilisateur($id) {
         $query = $this->connection->getPdo()->prepare('SELECT id_post,contenu_post,date_post,id_utilisateur FROM post WHERE id_utilisateur = :id');
         $query->execute([
