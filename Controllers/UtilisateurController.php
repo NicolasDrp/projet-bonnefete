@@ -78,6 +78,7 @@ class UtilisateurController {
         $this->utilisateurModel->majUtilisateur($utilisateur);
         $utilisateurSession = $this->utilisateurModel->getOneByEmail($utilisateur['email']);
         $_SESSION['utilisateur'] = $utilisateurSession;
+        $this->logModel->creerLog('Viens de mettre son profil à jour', NULL);
         header('Location: ../../utilisateur/details/' . $id);
     }
 
