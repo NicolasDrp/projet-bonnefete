@@ -1,31 +1,5 @@
 <?php require_once 'Views/head.php'; ?>
 
-<?php var_dump($_SESSION['utilisateur']) ?>
-
-<div class="d-flex flex-row mb-3 mb-lg-5 mb align-items-center">
-    <div style="width: 10%;" class="me-5">
-        <img src="../../image/Profil_img.jpg" alt="photo de profil" style="width: 100%;border-radius: 15px;">
-    </div>
-    <div class="me-2"><?php if ($utilisateur->getIdUtilisateur() == $_SESSION['utilisateur']->id_utilisateur) { ?>
-            <a href="../../utilisateur/maj/<?= $utilisateur->getIdUtilisateur() ?>" class="btn btn-secondary btn" style="height: min-content;">Modifier Mon Compte</a>
-        <?php } elseif ($_SESSION['utilisateur']->est_super_admin && !$utilisateur->isEstSuperAdmin()) { ?>
-            <a href="../../utilisateur/supprimer/<?= $utilisateur->getIdUtilisateur() ?>" class="btn btn-secondary btn" style="height: min-content;">Supprimer l'utilisateur</a>
-        <?php  } elseif (($_SESSION['utilisateur']->est_moderateur || $_SESSION['utilisateur']->est_super_admin) && !$utilisateur->isEstSuperAdmin() && !$utilisateur->isEstModerateur()) { ?>
-            <a href="../../utilisateur/supprimer/<?= $utilisateur->getIdUtilisateur() ?>" class="btn btn-secondary btn" style="height: min-content;">Supprimer l'utilisateur</a>
-        <?php  } ?>
-    </div>
-    <div> <?php
-            if ($_SESSION['utilisateur']->est_super_admin && !$utilisateur->isEstModerateur()) { ?>
-            <a href="../../utilisateur/changerModerateur/<?= $utilisateur->getIdUtilisateur() ?>" class="btn btn-secondary btn" style="height: min-content;">Passer Moderateur</a>
-        <?php } elseif ($_SESSION['utilisateur']->est_super_admin && $utilisateur->isEstModerateur()) { ?>
-            <a href="../../utilisateur/changerModerateur/<?= $utilisateur->getIdUtilisateur() ?>" class="btn btn-secondary btn" style="height: min-content;">Retirer Moderateur</a>
-        <?php } ?>
-    </div>
-</div>
-<div class="d-block d-xl-none mb-3">
-    <h3><?= $utilisateur->getNomUtilisateur() . " " . $utilisateur->getPrenomUtilisateur() ?></h3>
-    <div class="w-100 p-1"><?= $utilisateur->getBioUtilisateur() ?></div>
-</div>
 <?php if (empty($_SESSION)) :
     header('Location: ../../utilisateur/connexion');
 endif; ?>
