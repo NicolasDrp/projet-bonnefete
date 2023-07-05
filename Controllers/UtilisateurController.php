@@ -76,6 +76,7 @@ class UtilisateurController {
     public function postMaj($id) {
         $utilisateur = $_POST;
         $this->utilisateurModel->majUtilisateur($utilisateur);
+        $this->logModel->creerLog('Viens de mettre son profil à jour', NULL);
         header('Location: ../../utilisateur/details/' . $id);
     }
 
