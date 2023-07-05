@@ -60,6 +60,9 @@ if ($utilisateur == false) {
                     <a href="../../post/details/<?= $post->getIdPost() ?>" class="text-decoration-none text-dark">
                         <div class="card-body">
                             <h5 class="card-title"><?= $utilisateur->getNomUtilisateur() . " " . $utilisateur->getPrenomUtilisateur() ?></h5>
+                            <?php if ($post->getIdImage()) { ?>
+                                <img class="card-img-top" src="../../image/<?= $post->getIdImage() ?>" alt="Image du post">
+                            <?php } ?>
                             <p class="card-text"><?= $post->getContenuPost() ?></p>
                         </div>
                     </a>

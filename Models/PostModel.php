@@ -206,7 +206,7 @@ class PostModel {
      * @return array Les posts de l'utilisateur.
      */
     public function getPostsUtilisateur($id) {
-        $query = $this->connection->getPdo()->prepare('SELECT id_post,contenu_post,date_post,id_utilisateur FROM post WHERE id_utilisateur = :id');
+        $query = $this->connection->getPdo()->prepare('SELECT id_post,contenu_post,date_post,id_utilisateur,id_image FROM post WHERE id_utilisateur = :id');
         $query->execute([
             'id' => $id
         ]);
