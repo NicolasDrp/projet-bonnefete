@@ -76,6 +76,8 @@ class UtilisateurController {
     public function postMaj($id) {
         $utilisateur = $_POST;
         $this->utilisateurModel->majUtilisateur($utilisateur);
+        $utilisateurSession = $this->utilisateurModel->getOneByEmail($utilisateur['email']);
+        $_SESSION['utilisateur'] = $utilisateurSession;
         header('Location: ../../utilisateur/details/' . $id);
     }
 

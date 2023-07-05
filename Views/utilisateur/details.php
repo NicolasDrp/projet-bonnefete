@@ -1,5 +1,7 @@
 <?php require_once 'Views/head.php'; ?>
 
+<?php var_dump($_SESSION['utilisateur']) ?>
+
 <div class="d-flex flex-row mb-3 mb-lg-5 mb align-items-center">
     <div style="width: 10%;" class="me-5">
         <img src="../../image/Profil_img.jpg" alt="photo de profil" style="width: 100%;border-radius: 15px;">
