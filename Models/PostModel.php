@@ -22,7 +22,7 @@ class PostModel {
      * @return array Les posts récupérés.
      */
     public function getAllPost() {
-        $query = $this->connection->getPdo()->prepare("SELECT id_post,contenu_post,date_post,post.id_utilisateur,nom_utilisateur,prenom_utilisateur,id_image FROM post INNER JOIN utilisateur ON post.id_utilisateur = utilisateur.id_utilisateur;");
+        $query = $this->connection->getPdo()->prepare("SELECT id_post,contenu_post,date_post,post.id_utilisateur,nom_utilisateur,prenom_utilisateur,id_image FROM post INNER JOIN utilisateur ON post.id_utilisateur = utilisateur.id_utilisateur ORDER BY date_post DESC;");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_CLASS, "App\Models\Post");
     }
@@ -206,7 +206,7 @@ class PostModel {
      * @return array Les posts de l'utilisateur.
      */
     public function getPostsUtilisateur($id) {
-        $query = $this->connection->getPdo()->prepare('SELECT id_post,contenu_post,date_post,id_utilisateur,id_image FROM post WHERE id_utilisateur = :id');
+        $query = $this->connection->getPdo()->prepare('SELECT id_post,contenu_post,date_post,id_utilisateur,id_image FROM post WHERE id_utilisateur = :id ORDER BY date_post DESC');
         $query->execute([
             'id' => $id
         ]);
