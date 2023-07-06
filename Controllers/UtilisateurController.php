@@ -38,7 +38,16 @@ class UtilisateurController {
         // Si l'enregistrement s'est bien passé, ajouter une entrée de log pour enregistrer l'action
         if ($message == 'Bien Enregistré') {
             $this->logModel->creerLogInscription("Un utilisateur vient de s'inscrire", NULL);
+            $utilisateurMail = $this->utilisateurModel->getOneByEmail($utilisateur['email']);
+            $this->utilisateurModel->envoieMailConfirmation($utilisateurMail);
         }
+    }
+
+    public function getVerifier($id) {
+        // Appeler la méthode pour vérifier un nouvel utilisateur dans le modèle UtilisateurModel
+        $message = $this->utilisateurModel->verifierUtilisateur($id);
+        echo $message;
+        echo '<a href="../../utilisateur/connexion">Se connecter</a>';
     }
 
     public function getConnexion() {
@@ -52,12 +61,18 @@ class UtilisateurController {
         $utilisateur = $this->utilisateurModel->getOneByEmail($_POST['email']);
         // Vérifier si le mot de passe correspond à celui enregistré dans la base de données en utilisant la fonction password_verify()
         if ($utilisateur && password_verify($_POST['password'], $utilisateur->password_utilisateur)) {
-            // Stocker l'utilisateur dans la session
-            $_SESSION['utilisateur'] = $utilisateur;
-            // Ajouter une entrée de log pour enregistrer l'action
-            $this->logModel->creerLog('Vient de se connecter', NULL);
-            // Rediriger vers la page d'index des posts
-            header('Location: ../post/index');
+            //Si l'utilisateur n'est pas vérifie , empecher la connexion
+            if ($utilisateur->est_verifie) {
+                // Stocker l'utilisateur dans la session
+                $_SESSION['utilisateur'] = $utilisateur;
+                // Ajouter une entrée de log pour enregistrer l'action
+                $this->logModel->creerLog('Vient de se connecter', NULL);
+                // Rediriger vers la page d'index des posts
+                header('Location: ../post/index');
+            } else {
+                echo "Vous n'avez pas vérifier votre compte, si vous ne voyez pas le mail regardez dans vos spam";
+                echo '  <a href="../utilisateur/connexion">Retour à la connexion</a>';
+            }
         } else {
             echo 'Mot de passe ou Identifiants incorrect';
             echo '<a href="../utilisateur/connexion">Se connecter</a>';

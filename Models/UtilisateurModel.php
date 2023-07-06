@@ -5,7 +5,14 @@ namespace App\Models;
 require_once 'Models/Utilisateur.php';
 require_once 'Database.php';
 
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 use App\Database;
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
 
 class UtilisateurModel {
   private $connection;
@@ -25,7 +32,7 @@ class UtilisateurModel {
     $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
 
     try {
-      $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur, est_super_admin) VALUES (:email, UPPER(:prenom), UPPER(:nom), :passwordUtilisateur, "", 0 ,0)');
+      $query = $this->connection->getPdo()->prepare('INSERT INTO utilisateur (email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur, est_super_admin,est_verifie) VALUES (:email, UPPER(:prenom), UPPER(:nom), :passwordUtilisateur, "", 0 ,0, 0)');
       $query->execute([
         'email' => $utilisateur['email'],
         'nom' => $utilisateur['nom'],
@@ -36,6 +43,58 @@ class UtilisateurModel {
       return "Bien Enregistré";
     } catch (\PDOException $e) {
       return $e;
+    }
+  }
+
+  public function verifierUtilisateur($id) {
+    try {
+      $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET est_verifie = 1 WHERE id_utilisateur = :id;');
+      $query->execute([
+        'id' => $id
+      ]);
+      return "Votre compte a bien été vérifié , vous pouvez maintenant vous connecter";
+    } catch (\PDOException $e) {
+      return $e;
+    }
+  }
+
+  public function envoieMailConfirmation($utilisateurMail) {
+
+    var_dump($utilisateurMail);
+    // Create an instance; passing `true` enables exceptions
+    $mail = new PHPMailer(true);
+
+    try {
+      //Server settings
+      // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+      $mail->isSMTP();                                            //Send using SMTP
+      $mail->Host       = 'smtp-mail.outlook.com';                     //Set the SMTP server to send through
+      $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+      $mail->Username   = 'adressmail.com';                     //SMTP username
+      $mail->Password   = 'mdp';                               //SMTP password
+      $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
+      $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+      //Recipients
+      $mail->setFrom('adressmail.com', 'Bonnefete');
+      $mail->addAddress($utilisateurMail->email_utilisateur, 'Joe User');     //Add a recipient
+      $mail->addReplyTo('adressmail.com', 'Information');
+
+      //Attachments
+      $mail->addAttachment('image\sapin-bonmarche.png', 'Logo.jpg');         //Add attachments
+
+      //Content
+      $mail->isHTML(true);                                  //Set email format to HTML
+      $mail->Subject = 'Confirmation de votre adresse mail';
+      $mail->Body    = 'Bonjour ' . $utilisateurMail->nom_utilisateur . ' ' . $utilisateurMail->prenom_utilisateur . ', bienvenue sur Bonefete <br>
+    Veuillez <a href="http://localhost/projet-bonnefete/utilisateur/verifier/' . $utilisateurMail->id_utilisateur . '">confirmer</a> votre adresse mail';
+      $mail->AltBody = 'Bonjour nom prenom, bienvenue sur Bonefete <br>
+    Veuillez confirmer votre adresse mail';
+
+      $mail->send();
+      echo 'Message has been sent';
+    } catch (Exception $e) {
+      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
   }
 
@@ -66,7 +125,7 @@ class UtilisateurModel {
    * @return object L'objet utilisateur.
    */
   public function getOneByEmail($email) {
-    $query = $this->connection->getPdo()->prepare("SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur, est_super_admin FROM utilisateur WHERE email_utilisateur = :email");
+    $query = $this->connection->getPdo()->prepare("SELECT id_utilisateur,email_utilisateur, nom_utilisateur, prenom_utilisateur, password_utilisateur, bio_utilisateur, est_moderateur, est_super_admin,est_verifie FROM utilisateur WHERE email_utilisateur = :email");
     $query->execute([
       'email' => $email,
     ]);

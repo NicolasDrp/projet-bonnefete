@@ -13,6 +13,7 @@ class Utilisateur {
     protected string $bio_utilisateur;
     protected bool $est_moderateur;
     protected bool $est_super_admin;
+    protected bool $est_verifie;
 
     // getters et setters de la classe Utilisateur
 
@@ -158,5 +159,23 @@ class Utilisateur {
      */
     public function setEstSuperAdmin(bool $est_super_admin): void {
         $this->est_super_admin = $est_super_admin;
+    }
+
+    /**
+     * Vérifie si l'utilisateur est verifié.
+     *
+     * @return bool True si l'utilisateur est verifié, sinon False.
+     */
+    public function isEstVerifie(): bool {
+        return $this->est_verifie;
+    }
+
+    /**
+     * Définit si l'utilisateur est vérifié.
+     *
+     * @param bool $est_super_admin True si l'utilisateur est vérifié, sinon False.
+     */
+    public function setEstVerifie(bool $est_verifie): void {
+        $this->est_verifie = $est_verifie;
     }
 }
