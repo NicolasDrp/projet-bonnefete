@@ -18,6 +18,7 @@ Ce projet porte sur la réalisation d'un site de type réseau social pour la soc
 - Un utilisateur doit s'inscrire avant de se connecter, il ne peut pas choisir son rôle. 
 - Un modérateur ne doit pouvoir modifier que le rôle de l'utilisateur, il ne peut pas modifier le rôle d'un super-administrateur.
 - Un super-administrateur ne peut pas en supprimer un autre.
+- Un utilisateur sera "Inscrit" si son email n'est pas vérifié, sinon il sera "Vérifié".
 
 ## Pages / fonctionnalités  :
 - Page inscription.
@@ -52,7 +53,7 @@ Ce projet porte sur la réalisation d'un site de type réseau social pour la soc
   git clone https://github.com/NicolasDrp/projet-bonnefete
 ```
 
-- Installer composer sur votre ordinateur via le termina de commande en utilisant : 
+- Installer composer sur votre ordinateur via le terminal de commande en utilisant : 
 ```bash
   composer install
 ```
