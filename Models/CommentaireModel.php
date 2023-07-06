@@ -108,7 +108,7 @@ class CommentaireModel {
      * @return Commentaire|false Le commentaire correspondant ou False s'il n'existe pas.
      */
     public function commentaireParId($id) {
-        $query = $this->connection->getPdo()->prepare('SELECT id_commentaire, contenu_commentaire, id_post FROM commentaire WHERE id_commentaire = :id');
+        $query = $this->connection->getPdo()->prepare('SELECT id_commentaire, contenu_commentaire, id_post, id_utilisateur FROM commentaire WHERE id_commentaire = :id');
         $query->execute([
             'id' => $id
         ]);
