@@ -32,6 +32,12 @@ class UtilisateurModel {
    * @return string Le message de succès ou le message d'erreur.
    */
   public function creerUtilisateur($utilisateur) {
+
+    // Vérifier si le mot de passe est valide
+    if (!preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/', $utilisateur['password'])) {
+      return 'Mot de passe Incorrect, le mdp doit contenir au moins 8 caractères dont Chiffres, minuscules, majuscules et caractères speciaux.';
+    }
+
     // Hasher le mot de passe avant de le stocker dans la base de données
     $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
 
@@ -162,7 +168,12 @@ class UtilisateurModel {
     // Hasher le mot de passe avant de le stocker dans la base de données
     $password = $utilisateur['password'];
     if (!(substr($utilisateur['password'], 0, 7) == "$2y$10$")) {
-      $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
+      // Vérifier si le mot de passe est valide
+      if (!preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/', $utilisateur['password'])) {
+        return 'Mot de passe Incorrect, le mdp doit contenir au moins 8 caractères dont Chiffres, minuscules, majuscules et caractères speciaux.';
+      } else {
+        $password = password_hash($utilisateur['password'], PASSWORD_DEFAULT);
+      }
     }
 
     $query = $this->connection->getPdo()->prepare('UPDATE utilisateur SET  email_utilisateur = :email, nom_utilisateur = UPPER(:nom), prenom_utilisateur = UPPER(:prenom), bio_utilisateur = :bio, password_utilisateur = :password WHERE id_utilisateur = :id; ');

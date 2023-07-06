@@ -47,6 +47,8 @@ class UtilisateurController {
                 echo $messageMail;
                 echo '   <a href="../utilisateur/connexion">Se connecter</a>';
             }
+        } elseif ($message == "Mot de passe Incorrect, le mdp doit contenir au moins 8 caractères dont Chiffres, minuscules, majuscules et caractères speciaux.") {
+            echo 'Mot de passe Incorrect, le mdp doit contenir au moins 8 caractères dont Chiffres, minuscules, majuscules et caractères speciaux.';
         } else {
             echo "Une erreur est survenu, l'adresse email est peut être deja lié à un autre compte";
             echo '   <a href="../utilisateur/enregistrer">Inscription</a>';
@@ -124,15 +126,21 @@ class UtilisateurController {
         // Récupérer les nouvelles informations de l'utilisateur à partir de la requête POST
         $utilisateur = $_POST;
         // Appeler la méthode pour mettre à jour l'utilisateur dans le modèle UtilisateurModel
-        $this->utilisateurModel->majUtilisateur($utilisateur);
-        // Récupérer l'utilisateur mis à jour à partir du modèle UtilisateurModel
-        $utilisateurSession = $this->utilisateurModel->getOneByEmail($utilisateur['email']);
-        // Mettre à jour l'utilisateur dans la session
-        $_SESSION['utilisateur'] = $utilisateurSession;
-        // Ajouter une entrée de log pour enregistrer l'action
-        $this->logModel->creerLog('Vient de mettre son profil à jour', NULL);
-        // Rediriger vers la page des détails de l'utilisateur
-        header('Location: ../../utilisateur/details/' . $id);
+        $message = $this->utilisateurModel->majUtilisateur($utilisateur);
+
+        if ($message == "Mot de passe Incorrect, le mdp doit contenir au moins 8 caractères dont Chiffres, minuscules, majuscules et caractères speciaux.") {
+            echo $message;
+            echo '   <a href="../../utilisateur/maj/' . $id . '" >Retour au formulaire de modification</a>';
+        } else {
+            // Récupérer l'utilisateur mis à jour à partir du modèle UtilisateurModel
+            $utilisateurSession = $this->utilisateurModel->getOneByEmail($utilisateur['email']);
+            // Mettre à jour l'utilisateur dans la session
+            $_SESSION['utilisateur'] = $utilisateurSession;
+            // Ajouter une entrée de log pour enregistrer l'action
+            $this->logModel->creerLog('Vient de mettre son profil à jour', NULL);
+            // Rediriger vers la page des détails de l'utilisateur
+            header('Location: ../../utilisateur/details/' . $id);
+        }
     }
 
     public function getSupprimer($id) {

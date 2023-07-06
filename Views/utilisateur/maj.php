@@ -18,7 +18,7 @@
         <input type="email" name="email" id="email" class="form-control" value="<?= $utilisateur->getEmailUtilisateur() ?>">
 
         <label for="password">Mot de passe</label>
-        <input type="password" name="password" id="password" class="form-control" value="<?= $utilisateur->getPasswordUtilisateur() ?>">
+        <input type="password" name="password" id="password" class="form-control" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}" value="<?= $utilisateur->getPasswordUtilisateur() ?>">
 
         <button class="btn btn-primary">Mettre à jour</button>
     </form>

@@ -23,7 +23,7 @@
 
             <div class="mb-4">
                 <label for="password" class="form-label">Mot de passe<span class="text-danger">*</span></label>
-                <input type="password" class="form-control" name="password" required>
+                <input type="password" class="form-control" name="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}" required>
             </div>
 
             <div class="mb-5 w-50 m-auto">
