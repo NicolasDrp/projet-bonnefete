@@ -8,7 +8,7 @@ Ce projet porte sur la réalisation d'un site de type réseau social pour la soc
 ## Objectifs :
 
 - Permettre la connexion des utilisateurs.
-- Publication de post de 200 caractères maximum.
+- Publication de post de 200 caractères maximum (avec la possibilité de mettre une image).
 - Permettre aux utilisateurs d'avoir une sessions avec leurs informations.
 - Les utilisateurs peuvent modifier leurs informations (email, mot de passe, nom d'utilisateur).
 - Les utilisateurs doivent aussi pouvoir voir ses posts, les modifier et/ou les supprimer.
