@@ -57,6 +57,12 @@ Ce projet porte sur la réalisation d'un site de type réseau social pour la soc
   composer install
 ```
 
+- Importer Bootstrap et PHPMailer au projet :
+```bash
+  composer require twbs/bootstrap
+  composer require phpmailer/phpmailer
+```
+
 ## Utilisation 
 
 - Une fois le dépôt récupérer, placer le fichier "projet-bonnefete" dans Applications\MAMP\htdocs. 
