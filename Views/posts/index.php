@@ -11,7 +11,7 @@ endif; ?>
                 <img src="../image/Profil_img.jpg" alt="photo de profil" style="width: 100%;">
             </div>
             <div>
-                <a href="../utilisateur/details/<?= $_SESSION['utilisateur']->id_utilisateur ?>">
+                <a href="../utilisateur/details/<?= $_SESSION['utilisateur']->id_utilisateur ?>" class="text-decoration-none text-black">
                     <h3><?= $_SESSION['utilisateur']->nom_utilisateur . " " . $_SESSION['utilisateur']->prenom_utilisateur ?></h3>
                 </a>
             </div>

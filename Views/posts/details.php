@@ -25,7 +25,7 @@ if ($post == false) {
                     <img src="../../image/Profil_img.jpg" alt="photo de profil" style="width: 100%;">
                 </div>
                 <div>
-                    <a href="../../utilisateur/details/<?= $_SESSION['utilisateur']->id_utilisateur ?>">
+                    <a href="../../utilisateur/details/<?= $_SESSION['utilisateur']->id_utilisateur ?>" class="text-decoration-none text-black">
                         <h3><?= $_SESSION['utilisateur']->nom_utilisateur . " " . $_SESSION['utilisateur']->prenom_utilisateur ?></h3>
                     </a>
                 </div>
@@ -38,7 +38,7 @@ if ($post == false) {
 
         <div class="card mb-4 m-auto m-xl-0" style="width: 40rem;">
             <div class="card-body">
-                <a href="../../utilisateur/details/<?= $post->getIdUtilisateur() ?>">
+                <a href="../../utilisateur/details/<?= $post->getIdUtilisateur() ?>" class="text-decoration-none text-primary">
                     <h5 class="card-title"><?= $post->nom_utilisateur . " " . $post->prenom_utilisateur ?></h5>
                 </a>
                 <?php if ($post->getIdImage()) { ?>
@@ -93,7 +93,7 @@ if ($post == false) {
                 <?php foreach ($commentaires as $commentaire) : ?>
                     <div class="d-flex flex-row justify-content-between">
                         <div>
-                            <a href="../../utilisateur/details/<?= $commentaire->getIdUtilisateur() ?>"><strong class="fs-5"><?= $commentaire->nom_utilisateur . " " . $commentaire->prenom_utilisateur ?></strong></a>
+                            <a href="../../utilisateur/details/<?= $commentaire->getIdUtilisateur() ?>" class="text-decoration-none text-primary"><strong class="fs-5"><?= $commentaire->nom_utilisateur . " " . $commentaire->prenom_utilisateur ?></strong></a>
                             <span class="text-secondary"><?= $commentaire->getDateCommentaire(); ?></span>
                         </div>
                         <div>
@@ -143,7 +143,7 @@ if ($post == false) {
                             <div class="d-flex flex-column justify-content-between ps-5">
                                 <div class="d-flex flex-row justify-content-between">
                                     <div>
-                                        <a href="../../utilisateur/details/<?= $sousCommentaire->getIdUtilisateur() ?>"><strong><?= $sousCommentaire->nom_utilisateur . " " . $sousCommentaire->prenom_utilisateur ?></strong></a>
+                                        <a href="../../utilisateur/details/<?= $sousCommentaire->getIdUtilisateur() ?>" class="text-decoration-none text-primary"><strong><?= $sousCommentaire->nom_utilisateur . " " . $sousCommentaire->prenom_utilisateur ?></strong></a>
                                         <span class="text-secondary fs-6"><?= $sousCommentaire->getDateCommentaire(); ?></span>
                                     </div>
                                     <div>
