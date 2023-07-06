@@ -47,6 +47,9 @@ class UtilisateurController {
                 echo $messageMail;
                 echo '   <a href="../utilisateur/connexion">Se connecter</a>';
             }
+        } else {
+            echo "Une erreur est survenu, l'adresse email est peut être deja lié à un autre compte";
+            echo '   <a href="../utilisateur/enregistrer">Inscription</a>';
         }
     }
 
