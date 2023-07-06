@@ -95,9 +95,8 @@ class UtilisateurModel {
       //Content
       $mail->isHTML(true);                                  //Set email format to HTML
       $mail->Subject = 'Confirmation de votre adresse mail';
-      $mail->Body    = 'Bonjour ' . $utilisateurMail->nom_utilisateur . ' ' . $utilisateurMail->prenom_utilisateur . ', bienvenue sur Bonefete <br>
-    Veuillez <a href="http://localhost/projet-bonnefete/utilisateur/verifier/' . $utilisateurMail->id_utilisateur . '">confirmer</a> votre adresse mail';
-      $mail->AltBody = 'Bonjour nom prenom, bienvenue sur Bonefete <br>
+      $mail->Body = 'Bonjour ' . $utilisateurMail->nom_utilisateur . ' ' . $utilisateurMail->prenom_utilisateur . ', <span style="color: green;">bienvenue sur Bonnefete</span> <br> Veuillez <a href="http://localhost/projet-bonnefete/utilisateur/verifier/' . $utilisateurMail->id_utilisateur . '" style="color: blue; text-decoration: underline;">confirmer</a> votre adresse mail';
+      $mail->AltBody = 'Bonjour ' . $utilisateurMail->nom_utilisateur . ' ' . $utilisateurMail->prenom_utilisateur . ', bienvenue sur Bonnefete <br>
     Veuillez confirmer votre adresse mail';
 
       $mail->send();
