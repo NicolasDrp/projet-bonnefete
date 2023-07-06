@@ -45,6 +45,7 @@ if (isset($_POST['inscription'])) {
     $mail->Body = 'Voici votre code de vérification :  <b> ' . $codeDeVerification . ' !</b>';
 
     $mail->send();
+  
 
     echo 'Le message a été envoyé';
     // 

@@ -1,4 +1,4 @@
-<footer class="text-center mt-4 fs-3">&copy;Bonnefête 1998|2023 Paris <a href="./conditions.php">Conditions</a> </footer>
+<footer class="text-center mt-4 fs-3">&copy;Bonnefête 1998|2023 Paris <a href="./conditions">Conditions</a> </footer>
 
 <style>
     a {

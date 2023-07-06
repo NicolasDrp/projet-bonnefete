@@ -20,24 +20,32 @@ class UtilisateurController
         $this->postModel = new PostModel();
     }
 
+    // Affiche la page enregistrer
     public function getEnregistrer()
     {
         require_once 'Views/utilisateur/enregistrer.php';
     }
 
+    // Traite les données à l'enregisrement d'un utilisateur
     public function postEnregistrer()
     {
         $utilisateur = $_POST;
         $message = $this->utilisateurModel->creerUtilisateur($utilisateur);
         echo $message;
-        echo '<a href="../utilisateur/connexion">Se connecter</a>';
+        echo '<div class="container">
+            <div class="row d-flex flex-row align-items-center justify-content-center">
+            <a href="../utilisateur/connexion"><button class="btn btn-success btn-lg w-100"> Se connecter </button> </a>
+            </div>
+            </div>                ';
     }
 
+    // Affiche la page connexion
     public function getConnexion()
     {
         require_once 'Views/utilisateur/connexion.php';
     }
 
+    // Traitre les données à la connexion d'un utilisateur
     public function postConnexion()
     {
         $this->utilisateurModel = new UtilisateurModel();
@@ -48,12 +56,14 @@ class UtilisateurController
         }
     }
 
+    // Déconnecte l'utilisateur et le renvoie vers la page de connexion
     public function getLogout()
     {
         session_destroy();
         header('Location: ../utilisateur/connexion');
     }
 
+    // Affiche les détails d'un utilisateur par rapport à son ID
     public function getDetails($id)
     {
         $utilisateur = $this->utilisateurModel->getUtilisateurParId($id);
@@ -61,17 +71,20 @@ class UtilisateurController
         require_once 'Views/utilisateur/details.php';
     }
 
+    // Affiche la page de compte utilisateur
     public function getCompteUtilisateur()
     {
         require_once 'Views/utilisateur/compteUtilisateur.php';
     }
 
+    // Affiche la page de modification d'un utilisateur
     public function getMaj($id_utilisateur)
     {
         $utilisateur = $this->utilisateurModel->getUtilisateurParId($id_utilisateur);
         require_once 'Views/utilisateur/maj.php';
     }
 
+    // Traite les données de modification d'un utilisateur
     public function postMaj($id)
     {
         $utilisateur = $_POST;
@@ -80,6 +93,7 @@ class UtilisateurController
         header('Location: ../../utilisateur/details/' . $id);
     }
 
+    // Affiche de la liste de tous les utilisateurs
     public function getUtilisateurIndex()
     {
         echo ($_SESSION['utilisateur']->id_utilisateur);
@@ -88,21 +102,25 @@ class UtilisateurController
         require_once 'Views/utilisateur/index.php';
     }
 
+    // Affiche les conditions d'utilisation
     public function getConditions()
     {
-        require_once 'Views/utilisateur/conditions.php';
+        require_once 'Views/conditions.php';
     }
 
+    // Affiche l'envoie du mail de confirmation
     public function getMail()
     {
         require_once 'Views/utilisateur/mail.php';
     }
 
+    // Affiche la page de vérification de l'email
     public function getEmailVerification()
     {
         require_once 'Views/utilisateur/emailVerification.php';
     }
     
+    // Traite les données de vérification de l'email
     public function postEmailVerification() {
         $email = $_POST['email'];
         $utilisateur = $this->utilisateurModel->getOneByEmail($email);
@@ -112,4 +130,6 @@ class UtilisateurController
             echo 'false';
         }
     }
+
+    
 }
