@@ -2,7 +2,6 @@
 
 namespace App;
 
-
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Dotenv\Dotenv;
@@ -17,7 +16,7 @@ class Database {
 
 
     public function __construct() {
-        $this->pdo = new PDO($_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
+        $this->pdo = new PDO($_ENV['BDD_HOST'] . ";dbname=" . $_ENV['BDD_NOM'], $_ENV['BDD_UTILISATEUR'], $_ENV['BDD_MDP']);
     }
 
     public function getPdo() {

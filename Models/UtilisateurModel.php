@@ -10,6 +10,10 @@ require_once 'Database.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use App\Database;
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable('../projet-bonnefete');
+$dotenv->load();
 
 //Load Composer's autoloader
 require 'vendor/autoload.php';
@@ -60,7 +64,6 @@ class UtilisateurModel {
 
   public function envoieMailConfirmation($utilisateurMail) {
 
-    var_dump($utilisateurMail);
     // Create an instance; passing `true` enables exceptions
     $mail = new PHPMailer(true);
 
@@ -70,15 +73,15 @@ class UtilisateurModel {
       $mail->isSMTP();                                            //Send using SMTP
       $mail->Host       = 'smtp-mail.outlook.com';                     //Set the SMTP server to send through
       $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-      $mail->Username   = 'adressmail.com';                     //SMTP username
-      $mail->Password   = 'mdp';                               //SMTP password
+      $mail->Username   = $_ENV['MAIL'];                     //SMTP username
+      $mail->Password   = $_ENV['MAIL_MDP'];                               //SMTP password
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
       $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
       //Recipients
-      $mail->setFrom('adressmail.com', 'Bonnefete');
-      $mail->addAddress($utilisateurMail->email_utilisateur, 'Joe User');     //Add a recipient
-      $mail->addReplyTo('adressmail.com', 'Information');
+      $mail->setFrom($_ENV['MAIL'], 'Bonnefete');
+      $mail->addAddress($utilisateurMail->email_utilisateur, $utilisateurMail->nom_utilisateur . ' ' . $utilisateurMail->prenom_utilisateur);     //Add a recipient
+      $mail->addReplyTo($_ENV['MAIL'], 'Information');
 
       //Attachments
       $mail->addAttachment('image\sapin-bonmarche.png', 'Logo.jpg');         //Add attachments
