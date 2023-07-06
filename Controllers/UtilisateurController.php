@@ -90,7 +90,7 @@ class UtilisateurController {
             }
         } else {
             echo 'Mot de passe ou Identifiants incorrect';
-            echo '<a href="../utilisateur/connexion">Se connecter</a>';
+            echo '   <a href="../utilisateur/connexion">Se connecter</a>';
         }
     }
 
