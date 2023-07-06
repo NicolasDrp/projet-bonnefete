@@ -42,6 +42,20 @@ class LogModel {
     }
 
     /**
+     * Crée un nouveau log pour une action spécifiée sur un post.
+     *
+     * @param string $action L'action effectuée.
+     * @param int $id_post L'identifiant du post.
+     */
+    public function creerLogVerification($action, $id_utilisateur) {
+        $query = $this->connection->getPdo()->prepare('INSERT INTO log (action,id_utilisateur,date_log) VALUES (:action,:id_utilisateur, now());');
+        $query->execute([
+            'action' => $action,
+            'id_utilisateur' => $id_utilisateur
+        ]);
+    }
+
+    /**
      * Crée un nouveau log pour une action d'inscription.
      *
      * @param string $action L'action d'inscription.

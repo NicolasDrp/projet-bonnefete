@@ -7,7 +7,9 @@
         if (!$log->getIdPost()) { ?>
             <li class="list-group-item">
                 <span class="text-secondary"><?= $log->getDateLog() ?></span> ->
-                <a href="../utilisateur/details/<?= $log->getIdUtilisateur() ?>" class="text-primary text-decoration-none"> L'utilisateur Id <?= $log->getIdUtilisateur() ?></a>
+                <?php if ($log->getIdUtilisateur()) { ?>
+                    <a href="../utilisateur/details/<?= $log->getIdUtilisateur() ?>" class="text-primary text-decoration-none"> L'utilisateur Id <?= $log->getIdUtilisateur() ?></a>
+                <?php  } ?>
                 <?= " " . $log->getAction() ?>
             </li>
         <?php } else { ?>

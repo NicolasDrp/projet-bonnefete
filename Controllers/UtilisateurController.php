@@ -47,6 +47,9 @@ class UtilisateurController {
         // Appeler la méthode pour vérifier un nouvel utilisateur dans le modèle UtilisateurModel
         $message = $this->utilisateurModel->verifierUtilisateur($id);
         echo $message;
+        if ($message == "Votre compte a bien été vérifié , vous pouvez maintenant vous connecter") {
+            $this->logModel->creerLogVerification("Vient de vérifier son compte", $id);
+        }
         echo '<a href="../../utilisateur/connexion">Se connecter</a>';
     }
 
