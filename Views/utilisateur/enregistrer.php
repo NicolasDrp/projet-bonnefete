@@ -50,7 +50,7 @@ if (isset($_POST['inscription'])) {
         // 
         $mdpCrypter = password_hash($password, PASSWORD_DEFAULT);
 
-        $bdd = mysqli_connect('localhost:8889', 'root', 'root', 'bonnefete');
+        $bdd = mysqli_connect('localhost:8889', 'adminbf', 'bfadmin', 'bonnefete');
 
         $sql = "INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, email_utilisateur, password_utilisateur, code_de_verification) VALUES ('$nom', '$prenom', '$email', '$mdpCrypter', '$codeDeVerification')";
 

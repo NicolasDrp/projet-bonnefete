@@ -4,7 +4,7 @@ if (isset($_POST['email_verifier'])){
     $email = $_POST['email'];
     $codeDeVerification = $_POST['code'];
 
-    $bdd = mysqli_connect('localhost:8889', 'root', 'root', 'bonnefete');
+    $bdd = mysqli_connect('localhost:8889', 'adminbf', 'bfadmin', 'bonnefete');
     // Il faut rajouter email_verfifier_si dans la table utilisateur et code_de_verification en BDD !
     $sql = 'UPDATE utilisateur SET email_verifier_si = NOW() WHERE email_utilisateur = "' . $email . '" AND code_de_verification = "' . $codeDeVerification . '"';
     $resultat = mysqli_query($bdd, $sql);
