@@ -95,9 +95,9 @@ class UtilisateurModel {
     Veuillez confirmer votre adresse mail';
 
       $mail->send();
-      echo 'Message has been sent';
+      return "Un mail de confirmation a été envoyé";
     } catch (Exception $e) {
-      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+      return "Le Mail n'a pas pu être envoyé. Mailer Error: {$mail->ErrorInfo}";
     }
   }
 

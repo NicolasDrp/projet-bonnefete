@@ -33,13 +33,20 @@ class UtilisateurController {
         $utilisateur = $_POST;
         // Appeler la méthode pour créer un nouvel utilisateur dans le modèle UtilisateurModel
         $message = $this->utilisateurModel->creerUtilisateur($utilisateur);
-        echo $message;
-        echo '<a href="../utilisateur/connexion">Se connecter</a>';
         // Si l'enregistrement s'est bien passé, ajouter une entrée de log pour enregistrer l'action
         if ($message == 'Bien Enregistré') {
-            $this->logModel->creerLogInscription("Un utilisateur vient de s'inscrire", NULL);
             $utilisateurMail = $this->utilisateurModel->getOneByEmail($utilisateur['email']);
-            $this->utilisateurModel->envoieMailConfirmation($utilisateurMail);
+            $messageMail = $this->utilisateurModel->envoieMailConfirmation($utilisateurMail);
+            if ($messageMail == "Un mail de confirmation a été envoyé") {
+                $this->logModel->creerLogInscription("Un utilisateur vient de s'inscrire", NULL);
+                echo $messageMail;
+                echo '   <a href="../utilisateur/connexion">Se connecter</a>';
+            } else {
+                // Supprimer l'utilisateur par son identifiant à partir du modèle UtilisateurModel
+                $this->utilisateurModel->supprimerUtilisateur($utilisateurMail->id_utilisateur);
+                echo $messageMail;
+                echo '   <a href="../utilisateur/connexion">Se connecter</a>';
+            }
         }
     }
 
