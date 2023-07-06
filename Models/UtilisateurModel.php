@@ -95,7 +95,30 @@ class UtilisateurModel {
       //Content
       $mail->isHTML(true);                                  //Set email format to HTML
       $mail->Subject = 'Confirmation de votre adresse mail';
-      $mail->Body = 'Bonjour ' . $utilisateurMail->nom_utilisateur . ' ' . $utilisateurMail->prenom_utilisateur . ', <span style="color: green;">bienvenue sur Bonnefete</span> <br> Veuillez <a href="http://localhost/projet-bonnefete/utilisateur/verifier/' . $utilisateurMail->id_utilisateur . '" style="color: blue; text-decoration: underline;">confirmer</a> votre adresse mail';
+      $mail->Body = '<html>
+      <head>
+          <style>
+              body {
+                  font-family: Arial, sans-serif;
+                  color: #333333;
+              }
+              .welcome-message {
+                  font-size: 18px;
+                  color: green;
+              }
+              .confirm-link {
+                  color: blue;
+                  text-decoration: underline;
+              }
+          </style>
+      </head>
+      <body>
+          <p>Bonjour ' . $utilisateurMail->nom_utilisateur . ' ' . $utilisateurMail->prenom_utilisateur . ',</p>
+          <p class="welcome-message">Bienvenue sur Bonnefete !</p>
+          <p>Veuillez <a href="http://localhost/projet-bonnefete/utilisateur/verifier/' . $utilisateurMail->id_utilisateur . '" class="confirm-link">confirmer</a> votre adresse mail.</p>
+          <img src="https://bonmarche.mg/wp-content/uploads/2022/12/sapin-bonmarche-258x300.png" alt="logo bonnefete">
+      </body>
+      </html>';
       $mail->AltBody = 'Bonjour ' . $utilisateurMail->nom_utilisateur . ' ' . $utilisateurMail->prenom_utilisateur . ', bienvenue sur Bonnefete <br>
     Veuillez confirmer votre adresse mail';
 
