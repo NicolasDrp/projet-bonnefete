@@ -49,6 +49,7 @@ class UtilisateurController {
             }
         } elseif ($message == "Mot de passe Incorrect, le mdp doit contenir au moins 8 caractères dont Chiffres, minuscules, majuscules et caractères speciaux.") {
             echo 'Mot de passe Incorrect, le mdp doit contenir au moins 8 caractères dont Chiffres, minuscules, majuscules et caractères speciaux.';
+            echo '   <a href="../utilisateur/enregistrer">Inscription</a>';
         } else {
             echo "Une erreur est survenu, l'adresse email est peut être deja lié à un autre compte";
             echo '   <a href="../utilisateur/enregistrer">Inscription</a>';
