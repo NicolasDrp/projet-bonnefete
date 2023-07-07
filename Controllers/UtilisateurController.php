@@ -143,6 +143,11 @@ class UtilisateurController {
         }
     }
 
+    // Affiche les conditions d'utilisation
+    public function getConditions() {
+        require_once 'Views/conditions.php';
+    }
+
     public function getSupprimer($id) {
         // Supprimer l'utilisateur par son identifiant à partir du modèle UtilisateurModel
         $this->utilisateurModel->supprimerUtilisateur($id);
